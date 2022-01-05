@@ -1,0 +1,12 @@
+name: ${project.name}
+version: ${project.version}
+description: ${project.description}
+author: ${project.author}
+api-version: '1.18'
+main: com.gmail.willramanand.RamSkills.RamSkills
+depend:
+softdepend:
+commands:
+  skills:
+    description: Base command for RamSkills.
+permissions:

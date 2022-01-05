@@ -1,0 +1,12 @@
+name: RamSkills
+version: 1.0.0-SNAPSHOT
+description: This plugin adds skills and abilities to your Spigot server.
+author: ${project.author}
+api-version: '1.18'
+main: com.gmail.willramanand.RamSkills.RamSkills
+depend:
+softdepend:
+commands:
+  skills:
+    description: Base command for RamSkills.
+permissions:
