@@ -23,7 +23,7 @@ public class SkillBossBar implements Listener {
     private final Map<Player, Map<Skill, BossBar>> bossBars;
     private final Map<Player, Map<Skill, Integer>> currentActions;
     private final Map<Player, Map<Skill, Integer>> checkCurrentActions;
-    private long stayTime = 200L;
+    private long stayTime = 60L;
     private Map<Skill, BarColor> colors;
     private BarStyle barStyle = BarStyle.SEGMENTED_6;
     private final RamSkills plugin;

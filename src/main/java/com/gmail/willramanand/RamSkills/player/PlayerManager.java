@@ -55,7 +55,7 @@ public class PlayerManager {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
                     if (skillPlayer != null && !skillPlayer.isSaving()) {
-                        plugin.getConfigManager().save(skillPlayer.getPlayer(), false);
+                        plugin.getPlayerConfig().save(skillPlayer.getPlayer(), false);
                     }
                 }
             }

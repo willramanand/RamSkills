@@ -28,6 +28,7 @@ public class CommandManager implements TabExecutor {
         this.commands.add(new HelpCommand(plugin));
         this.commands.add(new VersionCommand(plugin));
         this.commands.add(new BossBarCommand(plugin));
+        this.commands.add(new XpCommand(plugin));
     }
 
     @Override

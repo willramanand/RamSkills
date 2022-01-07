@@ -1,10 +1,11 @@
 package com.gmail.willramanand.RamSkills.commands;
 
 public enum Commands {
-    MAIN("skills"),
+    MAIN("rskills"),
     BOSSBAR("bossbar"),
     VERSION("version"),
     HELP("help"),
+    XP("xp")
 
     ;
 

@@ -16,12 +16,12 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void join(PlayerJoinEvent event) {
-        plugin.getConfigManager().setup(event.getPlayer());
-        plugin.getConfigManager().load(event.getPlayer());
+        plugin.getPlayerConfig().setup(event.getPlayer());
+        plugin.getPlayerConfig().load(event.getPlayer());
     }
 
     @EventHandler
     public void leave(PlayerQuitEvent event) {
-        plugin.getConfigManager().save(event.getPlayer(), false);
+        plugin.getPlayerConfig().save(event.getPlayer(), false);
     }
 }

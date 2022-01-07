@@ -5,8 +5,8 @@ author: ${project.author}
 api-version: '1.18'
 main: com.gmail.willramanand.RamSkills.RamSkills
 depend:
-softdepend:
+softdepend: [Vault]
 commands:
-  skills:
+  rskills:
     description: Base command for RamSkills.
 permissions:

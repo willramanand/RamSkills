@@ -1,4 +1,4 @@
 xp_requirements:
-  expression: 'multiplier * (level - 2) ^ 0.8 + base'
+  expression: "multiplier * (level - 2) ^ 0.8 + base"
   multiplier: 50.0
   base: 100.0

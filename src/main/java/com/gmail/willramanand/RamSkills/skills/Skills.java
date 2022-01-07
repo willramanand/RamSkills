@@ -6,15 +6,16 @@ public enum Skills implements Skill {
     AGILITY("Agility", "This skill deals with movement.", BarColor.GREEN),
     ALCHEMY("Alchemy", "This skill deals with brewing of potions.", BarColor.PURPLE),
     ARCHERY("Archery", "This skill deals with the use of bows.", BarColor.RED),
-    DEFENSE("Defense", "This skill deals with taking damage.", BarColor.RED),
     COOKING("Cooking", "This skill deals with the cooking of food.", BarColor.GREEN),
+    DEFENSE("Defense", "This skill deals with taking damage.", BarColor.RED),
     ENCHANTING("Enchanting", "This skill deals with the enchanting of items.", BarColor.PURPLE),
-    EXCAVATION("Excavation", "This skill deals with digging.", BarColor.GREEN),
+    EXCAVATION("Excavation", "This skill deals with digging.", BarColor.BLUE),
     FARMING("Farming", "This skill deals with the harvesting of crops.", BarColor.GREEN),
     FIGHTING("Fighting", "This skill deals with the killing of creatures.", BarColor.RED),
     FISHING("Fishing", "This skill deals with fishing.", BarColor.GREEN),
-    MINING("Mining", "This skill deals with the breaking of stones and ores.", BarColor.GREEN),
-    WOODCUTTING("Woodcutting", "This skill deals with the chopping of trees.", BarColor.GREEN),
+    MINING("Mining", "This skill deals with the breaking of stones and ores.", BarColor.BLUE),
+    SORCERY("Sorcery", "This skill deals with mana usage and abilities.", BarColor.PURPLE),
+    WOODCUTTING("Woodcutting", "This skill deals with the chopping of trees.", BarColor.BLUE),
 
     ;
 

@@ -17,6 +17,7 @@ public class SkillPlayer {
 
     private final Map<Skill, Integer> skillsLvl;
     private final Map<Skill, Double> skillsXp;
+    private final Map<Skill, Double> skillsXpModifers;
 
     private boolean saving;
     private boolean shouldSave;
@@ -29,6 +30,7 @@ public class SkillPlayer {
         this.shouldSave = true;
         this.skillsLvl = new HashMap<>();
         this.skillsXp = new HashMap<>();
+        this.skillsXpModifers = new HashMap<>();
     }
 
     public Player getPlayer() {
@@ -39,7 +41,8 @@ public class SkillPlayer {
         return uuid;
     }
 
-    public void setSkillsLevel(Skill skill, int lvl) {
+    public void setSkillLevel(Skill skill, int lvl) {
+        updateXPModifier(skill, lvl);
         this.skillsLvl.put(skill, lvl);
     }
 
@@ -47,7 +50,7 @@ public class SkillPlayer {
         return skillsLvl.getOrDefault(skill, 1);
     }
 
-    public void setSkillsXp(Skill skill, double xp) {
+    public void setSkillXp(Skill skill, double xp) {
         this.skillsXp.put(skill, xp);
     }
 
@@ -55,7 +58,9 @@ public class SkillPlayer {
         return skillsXp.getOrDefault(skill, 0.0);
     }
 
-    public void addSkillXp(Skill skill, double amount) {skillsXp.merge(skill, amount, Double::sum);}
+    public void addSkillXp(Skill skill, double amount) {
+        skillsXp.merge(skill, amount, Double::sum);
+    }
 
     public boolean isSaving() {
         return saving;
@@ -71,6 +76,15 @@ public class SkillPlayer {
 
     public void setShouldSave(boolean shouldSave) {
         this.shouldSave = shouldSave;
+    }
+
+    public void updateXPModifier(Skill skill, int level) {
+        double modifier = 1 + (level * 0.02);
+        this.skillsXpModifers.put(skill, modifier);
+    }
+
+    public double getXpModifier(Skill skill) {
+        return this.skillsXpModifers.get(skill);
     }
 
 }
