@@ -24,6 +24,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void leave(PlayerQuitEvent event) {
         plugin.getPlayerConfig().save(event.getPlayer(), false);
+        plugin.getActionBar().resetActionBar(event.getPlayer());
     }
 
     @EventHandler

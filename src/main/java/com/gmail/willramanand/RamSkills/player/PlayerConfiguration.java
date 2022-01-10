@@ -45,6 +45,8 @@ public class PlayerConfiguration {
                         skillPlayer.setSkillLevel(skill, 1);
                         skillPlayer.setSkillXp(skill, 0.0);
                     }
+                    String path = "mana.amount";
+                    config.set(path, 0.0);
                     plugin.getPlayerManager().addPlayerData(skillPlayer);
                     try {
                         config.save(file);
@@ -72,6 +74,9 @@ public class PlayerConfiguration {
                 skillPlayer.setSkillLevel(skill, skillLvl);
                 skillPlayer.setSkillXp(skill, skillXp);
             }
+            String path = "mana.amount";
+            double mana = config.getDouble(path);
+            skillPlayer.updateMana(mana);
             plugin.getPlayerManager().addPlayerData(skillPlayer);
             PlayerDataLoadEvent playerDataLoadEvent = new PlayerDataLoadEvent(skillPlayer);
             Bukkit.getPluginManager().callEvent(playerDataLoadEvent);
@@ -98,6 +103,8 @@ public class PlayerConfiguration {
                     config.set(path + "lvl", skillPlayer.getSkillLevel(skill));
                     config.set(path + "xp", skillPlayer.getSkillXp(skill));
                 }
+                String path = "mana.amount";
+                config.set(path, skillPlayer.getMana());
                 config.save(file);
                 if (isShutdown) {
                     plugin.getPlayerManager().removePlayerData(player.getUniqueId());

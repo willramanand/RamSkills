@@ -4,7 +4,8 @@ public enum Commands {
     MAIN("rskills"),
     VERSION("version"),
     HELP("help"),
-    XP("xp")
+    XP("xp"),
+    MANA("manatest"),
 
     ;
 

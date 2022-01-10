@@ -2,6 +2,7 @@ package com.gmail.willramanand.RamSkills.player;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.skills.Skill;
+import com.gmail.willramanand.RamSkills.skills.Skills;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -14,6 +15,13 @@ public class SkillPlayer {
 
     private final Player player;
     private final UUID uuid;
+
+    private final double baseMana;
+    private final double manaPerLevel;
+    private double currentMana;
+
+    private final double baseManaRegen;
+    private final double manaRegenPerLevel;
 
     private final Map<Skill, Integer> skillsLvl;
     private final Map<Skill, Double> skillsXp;
@@ -31,6 +39,11 @@ public class SkillPlayer {
         this.skillsLvl = new HashMap<>();
         this.skillsXp = new HashMap<>();
         this.skillsXpModifers = new HashMap<>();
+        baseMana = 100;
+        manaPerLevel = 20;
+        currentMana = 0;
+        baseManaRegen = 2;
+        manaRegenPerLevel = 0.25;
     }
 
     public Player getPlayer() {
@@ -85,6 +98,23 @@ public class SkillPlayer {
 
     public double getXpModifier(Skill skill) {
         return this.skillsXpModifers.get(skill);
+    }
+
+    public double getMaxMana() {
+        return baseMana + ((this.skillsLvl.get(Skills.SORCERY) - 1) * manaPerLevel);
+    }
+
+    public double getMana() {
+        return currentMana;
+    }
+
+    public double updateMana(double amount) {
+        currentMana = Math.min(currentMana + amount, getMaxMana());
+        return currentMana;
+    }
+
+    public double getManaRegen() {
+        return baseManaRegen + ((this.skillsLvl.get(Skills.SORCERY) - 1) * manaRegenPerLevel);
     }
 
 }

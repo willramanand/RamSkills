@@ -25,8 +25,8 @@ public class HelpCommand extends SubCommand {
 
         commands.forEach(command ->{
                 String commandAlias = command.name();
-                for (String alias: command.aliases()) {
-                    if (command.aliases() != null) {
+                if (command.aliases() != null) {
+                    for (String alias : command.aliases()) {
                         commandAlias += "&6,&b" + alias;
                     }
                 }
@@ -53,12 +53,12 @@ public class HelpCommand extends SubCommand {
 
     @Override
     public List<String> getPrimaryArguments() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public List<String> getSecondaryArguments(String[] args) {
-        return null;
+        return new ArrayList<>();
     }
 
 }

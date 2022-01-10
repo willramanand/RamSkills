@@ -28,6 +28,7 @@ public class CommandManager implements TabExecutor {
         this.commands.add(new HelpCommand(plugin));
         this.commands.add(new VersionCommand(plugin));
         this.commands.add(new XpCommand(plugin));
+        this.commands.add(new ManaTestCommand(plugin));
     }
 
     @Override
@@ -79,9 +80,11 @@ public class CommandManager implements TabExecutor {
 
             List<String> aliases = subCommand.aliases();
 
-            for (String alias : aliases) {
-                if (name.equalsIgnoreCase(alias)) {
-                    return subCommand;
+            if (aliases != null) {
+                for (String alias : aliases) {
+                    if (name.equalsIgnoreCase(alias)) {
+                        return subCommand;
+                    }
                 }
             }
         }

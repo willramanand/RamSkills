@@ -2,6 +2,7 @@ package com.gmail.willramanand.RamSkills;
 
 import com.gmail.willramanand.RamSkills.commands.CommandManager;
 import com.gmail.willramanand.RamSkills.leveler.Leveler;
+import com.gmail.willramanand.RamSkills.mana.ManaManager;
 import com.gmail.willramanand.RamSkills.player.PlayerConfiguration;
 import com.gmail.willramanand.RamSkills.listeners.PlayerListener;
 import com.gmail.willramanand.RamSkills.player.PlayerManager;
@@ -13,9 +14,11 @@ import com.gmail.willramanand.RamSkills.skills.excavation.ExcavationLeveler;
 import com.gmail.willramanand.RamSkills.skills.farming.FarmingLeveler;
 import com.gmail.willramanand.RamSkills.skills.combat.CombatLeveler;
 import com.gmail.willramanand.RamSkills.skills.mining.MiningLeveler;
+import com.gmail.willramanand.RamSkills.skills.sorcery.SorceryLeveler;
 import com.gmail.willramanand.RamSkills.skills.woodcutting.WoodcuttingLeveler;
 import com.gmail.willramanand.RamSkills.source.SourceManager;
 import com.gmail.willramanand.RamSkills.source.SourceRegistry;
+import com.gmail.willramanand.RamSkills.ui.ActionBar;
 import com.gmail.willramanand.RamSkills.ui.SkillBossBar;
 import com.gmail.willramanand.RamSkills.utils.ColorUtils;
 import net.milkbowl.vault.economy.Economy;
@@ -44,10 +47,12 @@ public class RamSkills extends JavaPlugin {
     private SourceManager sourceManager;
 
     private Leveler leveler;
-
-
+    private SorceryLeveler sorceryLeveler;
 
     private SkillBossBar bossBar;
+    private ActionBar actionBar;
+
+    private ManaManager manaManager;
 
     @Override
     public void onEnable() {
@@ -68,6 +73,9 @@ public class RamSkills extends JavaPlugin {
         sourceManager = new SourceManager(this);
         leveler = new Leveler(this);
         bossBar = new SkillBossBar(this);
+        actionBar = new ActionBar(this);
+        manaManager = new ManaManager(this);
+        sorceryLeveler = new SorceryLeveler(this);
 
         // Config
         this.getConfig().options().copyDefaults(true);
@@ -82,6 +90,8 @@ public class RamSkills extends JavaPlugin {
         // Load Modules
         sourceManager.loadSources();
         bossBar.load();
+        actionBar.startUpdateActionBar();
+        manaManager.regenMana();
         leveler.loadLevelReqs();
 
         startTime = System.currentTimeMillis() - startTime;
@@ -154,5 +164,9 @@ public class RamSkills extends JavaPlugin {
 
     public Leveler getLeveler() { return leveler; }
 
+    public SorceryLeveler getSorceryLeveler() { return sorceryLeveler; }
+
     public SkillBossBar getBossBar() { return bossBar; }
+
+    public ActionBar getActionBar() { return actionBar; }
 }
