@@ -7,12 +7,14 @@ import com.gmail.willramanand.RamSkills.player.PlayerConfiguration;
 import com.gmail.willramanand.RamSkills.listeners.PlayerListener;
 import com.gmail.willramanand.RamSkills.player.PlayerManager;
 import com.gmail.willramanand.RamSkills.skills.agility.AgilityLeveler;
+import com.gmail.willramanand.RamSkills.skills.alchemy.AlchemyLeveler;
 import com.gmail.willramanand.RamSkills.skills.cooking.CookingLeveler;
 import com.gmail.willramanand.RamSkills.skills.defense.DefenseLeveler;
 import com.gmail.willramanand.RamSkills.skills.enchanting.EnchantingLeveler;
 import com.gmail.willramanand.RamSkills.skills.excavation.ExcavationLeveler;
 import com.gmail.willramanand.RamSkills.skills.farming.FarmingLeveler;
 import com.gmail.willramanand.RamSkills.skills.combat.CombatLeveler;
+import com.gmail.willramanand.RamSkills.skills.fishing.FishingLeveler;
 import com.gmail.willramanand.RamSkills.skills.mining.MiningLeveler;
 import com.gmail.willramanand.RamSkills.skills.sorcery.SorceryLeveler;
 import com.gmail.willramanand.RamSkills.skills.woodcutting.WoodcuttingLeveler;
@@ -126,6 +128,8 @@ public class RamSkills extends JavaPlugin {
         pm.registerEvents(new DefenseLeveler(this), this);
         pm.registerEvents(new FarmingLeveler(this), this);
         pm.registerEvents(new AgilityLeveler(this), this);
+        pm.registerEvents(new FishingLeveler(this), this);
+        pm.registerEvents(new AlchemyLeveler(this), this);
 
     }
 
