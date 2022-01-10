@@ -13,7 +13,7 @@ public enum MiningSource implements Source {
     COAL_ORE,
     IRON_ORE,
     NETHER_QUARTZ_ORE,
-    REDSTONE_ORE(true),
+    REDSTONE_ORE,
     GOLD_ORE,
     LAPIS_ORE,
     DIAMOND_ORE,

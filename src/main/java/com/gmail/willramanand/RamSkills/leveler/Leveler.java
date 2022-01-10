@@ -5,7 +5,6 @@ import com.gmail.willramanand.RamSkills.events.SkillLevelUpEvent;
 import com.gmail.willramanand.RamSkills.events.XpGainEvent;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.skills.Skill;
-import com.gmail.willramanand.RamSkills.utils.Formatter;
 import com.gmail.willramanand.RamSkills.utils.TextUtil;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -79,8 +78,6 @@ public class Leveler {
             //Adds xp
             double modifier = skillPlayer.getXpModifier(skill);
             skillPlayer.addSkillXp(skill, modifier * event.getAmount());
-            player.sendMessage("Modifier: " + modifier);
-            player.sendMessage("XP earned: " + modifier * event.getAmount());
             //Check if player leveled up
             checkLevelUp(player, skill);
             //Sends action bar message
@@ -169,7 +166,7 @@ public class Leveler {
                 TextUtil.replace("&6{old} ➜ {new}"
                         , "{old}", String.valueOf(level - 1)
                         , "{new}", String.valueOf(level))
-                , 5, 100, 5);
+                , 5, 75, 5);
     }
 
     private void playSound(Player player) {

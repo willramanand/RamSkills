@@ -1,10 +1,10 @@
-package com.gmail.willramanand.RamSkills.skills.archery;
+package com.gmail.willramanand.RamSkills.skills.combat;
 
 import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.skills.Skills;
 import com.gmail.willramanand.RamSkills.source.Source;
 
-public enum ArcherySource implements Source {
+public enum CombatSource implements Source {
     PLAYER,
     BAT,
     CAT,
@@ -36,6 +36,7 @@ public enum ArcherySource implements Source {
     DOLPHIN,
     ENDERMAN,
     IRON_GOLEM,
+    LLAMA,
     TRADER_LLAMA("llama"),
     PIGLIN,
     PANDA,
@@ -77,14 +78,13 @@ public enum ArcherySource implements Source {
     AXOLOTL,
     GLOW_SQUID,
     GOAT;
+    ;
 
     private String configName;
 
-    ArcherySource() {
+    CombatSource() {}
 
-    }
-
-    ArcherySource(String configName) {
+    CombatSource(String configName) {
         this.configName = configName;
     }
 
@@ -104,6 +104,7 @@ public enum ArcherySource implements Source {
 
     @Override
     public Skill getSkill() {
-        return Skills.ARCHERY;
+        return Skills.COMBAT;
     }
+
 }

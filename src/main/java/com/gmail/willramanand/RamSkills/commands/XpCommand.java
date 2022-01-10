@@ -1,6 +1,7 @@
 package com.gmail.willramanand.RamSkills.commands;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
+import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.skills.Skills;
 import org.bukkit.entity.Player;
 
@@ -18,11 +19,9 @@ public class XpCommand extends SubCommand {
     @Override
     public void onCommand(Player player, String[] args) {
         if (args[1].equalsIgnoreCase("set")) {
-            player.sendMessage("set working");
-            plugin.getLeveler().setXp(player, Skills.AGILITY, 100.0);
+            plugin.getLeveler().setXp(player, Skills.valueOf(args[2].toUpperCase()), Double.parseDouble(args[3]));
         } else if (args[1].equalsIgnoreCase("give")) {
-            player.sendMessage("give working");
-            plugin.getLeveler().addXp(player, Skills.AGILITY, 10000.0);
+            plugin.getLeveler().addXp(player, Skills.valueOf(args[2].toUpperCase()), Double.parseDouble(args[3]));
         }
     }
 
@@ -51,6 +50,10 @@ public class XpCommand extends SubCommand {
 
     @Override
     public List<String> getSecondaryArguments(String[] args) {
-        return null;
+        List<String> arg = new ArrayList<>();
+        for (Skill skill : Skills.values()) {
+            arg.add(skill.name().toLowerCase());
+        }
+        return arg;
     }
 }

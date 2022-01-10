@@ -130,6 +130,7 @@ public class SkillBossBar implements Listener {
             @Override
             public void run() {
                 Map<Skill, Integer> multiCurrentActions = currentActions.get(player);
+                if (multiCurrentActions == null) return;
                 if (currentAction == multiCurrentActions.get(skill)) {
                     bossBar.setVisible(false);
                     checkCurrentActions.remove(player);

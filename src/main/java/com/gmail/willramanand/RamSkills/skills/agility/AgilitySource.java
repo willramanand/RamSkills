@@ -6,11 +6,8 @@ import com.gmail.willramanand.RamSkills.source.Source;
 
 public enum AgilitySource implements Source {
 
-    JUMP_PER_100,
     FALL_DAMAGE,
-    WALK_PER_METER,
-    SPRINT_PER_METER,
-    SWIM_PER_METER,
+    MOVE_PER_BLOCK,
     ;
 
     @Override
