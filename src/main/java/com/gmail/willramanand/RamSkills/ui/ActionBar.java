@@ -41,7 +41,7 @@ public class ActionBar {
                             , "{max_mana}", getMaxMana(skillPlayer)));
                 }
             }
-        }, 0L, 2L);
+        }, 40L, 2L);
     }
 
     public void sendAbilityActionBar(Player player, String message) {

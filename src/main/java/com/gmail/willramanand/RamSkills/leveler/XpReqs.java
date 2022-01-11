@@ -18,7 +18,7 @@ public class XpReqs {
     private final RamSkills plugin;
     private final List<Integer> defaultXpRequirements;
     private final Map<Skill, List<Integer>> skillXpRequirements;
-    private final int maxLevel = 100;
+    private final int maxLevel = 50;
 
     public XpReqs(RamSkills plugin) {
         this.plugin = plugin;

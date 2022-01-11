@@ -2,3 +2,29 @@ xp_requirements:
   expression: "multiplier * (level - 2) ^ 0.8 + base"
   multiplier: 50.0
   base: 100.0
+
+stat:
+  health:
+    base: 0.0
+    perLvl: 1.0
+    skills: cooking,farming,fishing
+  strength:
+    base: 0.0
+    perLvl: 2.0
+    skills: woodcutting,combat
+  critchance:
+    base: 20.0
+    perLvl: 1.5
+    skills: combat
+  toughness:
+    base: 20.0
+    perLvl: 1.5
+    skills: excavation,defense,mining
+  speed:
+    base: 0.0
+    perLvl: 0.008
+    skills: agility
+  wisdom:
+    base: 100
+    perLvl: 20.0
+    skills: alchemy,sorcery,enchanting

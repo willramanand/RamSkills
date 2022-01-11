@@ -3,6 +3,7 @@ package com.gmail.willramanand.RamSkills.player;
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.skills.Skills;
+import com.gmail.willramanand.RamSkills.stats.Stat;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -16,16 +17,18 @@ public class SkillPlayer {
     private final Player player;
     private final UUID uuid;
 
-    private final double baseMana;
-    private final double manaPerLevel;
+    private final double BASE_MANA = 100;
+    private final double MANA_PER_LEVEL = 20;
     private double currentMana;
 
-    private final double baseManaRegen;
-    private final double manaRegenPerLevel;
+    private final double BASE_MANA_REGEN = 2;
+    private final double MANA_REGEN_PER_LVL = 0.25;
 
     private final Map<Skill, Integer> skillsLvl;
     private final Map<Skill, Double> skillsXp;
     private final Map<Skill, Double> skillsXpModifers;
+
+    private final Map<Stat, Double> statPoints;
 
     private boolean saving;
     private boolean shouldSave;
@@ -39,11 +42,9 @@ public class SkillPlayer {
         this.skillsLvl = new HashMap<>();
         this.skillsXp = new HashMap<>();
         this.skillsXpModifers = new HashMap<>();
-        baseMana = 100;
-        manaPerLevel = 20;
+        this.statPoints = new HashMap<>();
+
         currentMana = 0;
-        baseManaRegen = 2;
-        manaRegenPerLevel = 0.25;
     }
 
     public Player getPlayer() {
@@ -97,11 +98,11 @@ public class SkillPlayer {
     }
 
     public double getXpModifier(Skill skill) {
-        return this.skillsXpModifers.get(skill);
+        return this.skillsXpModifers.getOrDefault(skill, 1.0);
     }
 
     public double getMaxMana() {
-        return baseMana + ((this.skillsLvl.get(Skills.SORCERY) - 1) * manaPerLevel);
+        return getStatPoint(Stat.WISDOM);
     }
 
     public double getMana() {
@@ -114,7 +115,18 @@ public class SkillPlayer {
     }
 
     public double getManaRegen() {
-        return baseManaRegen + ((this.skillsLvl.get(Skills.SORCERY) - 1) * manaRegenPerLevel);
+        return getStatPoint(Stat.WISDOM) / 100;
     }
 
+    public double getStatPoint(Stat stat) {
+        return this.statPoints.getOrDefault(stat, 0.0);
+    }
+
+    public Map<Stat, Double> getStats() {
+        return this.statPoints;
+    }
+
+    public void setStatPoints(Stat stat, double points) {
+        this.statPoints.put(stat, points);
+    }
 }

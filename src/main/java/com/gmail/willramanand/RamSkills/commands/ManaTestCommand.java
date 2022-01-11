@@ -2,6 +2,7 @@ package com.gmail.willramanand.RamSkills.commands;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
+import com.gmail.willramanand.RamSkills.stats.Stat;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -19,8 +20,10 @@ public class ManaTestCommand extends SubCommand {
     @Override
     public void onCommand(Player player, String[] args) {
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
-        skillPlayer.updateMana(-40);
-        plugin.getSorceryLeveler().level(player, 40);
+        for (Stat stat : Stat.values()) {
+            double point = skillPlayer.getStatPoint(stat);
+            player.sendMessage(stat.getDisplayName() + stat.getSymbol() + ": " + point);
+        }
     }
 
     @Override

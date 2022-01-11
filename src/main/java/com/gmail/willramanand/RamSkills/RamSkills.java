@@ -20,6 +20,8 @@ import com.gmail.willramanand.RamSkills.skills.sorcery.SorceryLeveler;
 import com.gmail.willramanand.RamSkills.skills.woodcutting.WoodcuttingLeveler;
 import com.gmail.willramanand.RamSkills.source.SourceManager;
 import com.gmail.willramanand.RamSkills.source.SourceRegistry;
+import com.gmail.willramanand.RamSkills.stats.StatManager;
+import com.gmail.willramanand.RamSkills.stats.StatRegistry;
 import com.gmail.willramanand.RamSkills.ui.ActionBar;
 import com.gmail.willramanand.RamSkills.ui.SkillBossBar;
 import com.gmail.willramanand.RamSkills.utils.ColorUtils;
@@ -48,6 +50,9 @@ public class RamSkills extends JavaPlugin {
     private SourceRegistry sourceRegistry;
     private SourceManager sourceManager;
 
+    private StatRegistry statRegistry;
+    private StatManager statManager;
+
     private Leveler leveler;
     private SorceryLeveler sorceryLeveler;
 
@@ -73,6 +78,8 @@ public class RamSkills extends JavaPlugin {
         commandManager = new CommandManager(this);
         sourceRegistry = new SourceRegistry();
         sourceManager = new SourceManager(this);
+        statRegistry = new StatRegistry(this);
+        statManager = new StatManager(this);
         leveler = new Leveler(this);
         bossBar = new SkillBossBar(this);
         actionBar = new ActionBar(this);
@@ -91,6 +98,7 @@ public class RamSkills extends JavaPlugin {
 
         // Load Modules
         sourceManager.loadSources();
+        statManager.loadStats();
         bossBar.load();
         actionBar.startUpdateActionBar();
         manaManager.regenMana();
@@ -165,6 +173,10 @@ public class RamSkills extends JavaPlugin {
     public SourceRegistry getSourceRegistry() { return sourceRegistry; }
 
     public SourceManager getSourceManager() { return sourceManager; }
+
+    public StatRegistry getStatRegistry() { return statRegistry; }
+
+    public StatManager getStatManager() { return statManager; }
 
     public Leveler getLeveler() { return leveler; }
 
