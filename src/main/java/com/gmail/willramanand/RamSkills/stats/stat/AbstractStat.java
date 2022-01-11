@@ -36,8 +36,6 @@ public abstract class AbstractStat {
         }
 
         double points = base + (skillLvls * pointsPerLevel);
-        player.sendMessage(stat.getDisplayName() + " : " + points);
-        Bukkit.getServer().getConsoleSender().sendMessage(stat.getDisplayName() + " : " + points);
         skillPlayer.setStatPoints(stat, points);
     }
 

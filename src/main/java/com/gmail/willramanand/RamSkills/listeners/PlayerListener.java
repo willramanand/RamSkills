@@ -24,6 +24,7 @@ public class PlayerListener implements Listener {
     private final RamSkills plugin;
     private AttributeModifier healthModifier;
     private AttributeModifier speedModifier;
+    private AttributeModifier swingModifier;
 
     public PlayerListener(RamSkills plugin) {
         this.plugin = plugin;
@@ -74,15 +75,21 @@ public class PlayerListener implements Listener {
     public void applyModifiers(Player player) {
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
         healthModifier = new AttributeModifier(Stat.HEALTH.getModifierName(), skillPlayer.getStatPoint(Stat.HEALTH), AttributeModifier.Operation.ADD_NUMBER);
+        swingModifier = new AttributeModifier(Stat.ATTACK_SPEED.getModifierName(), skillPlayer.getStatPoint(Stat.ATTACK_SPEED), AttributeModifier.Operation.ADD_NUMBER);
         speedModifier = new AttributeModifier(Stat.SPEED.getModifierName(), skillPlayer.getStatPoint(Stat.SPEED), AttributeModifier.Operation.MULTIPLY_SCALAR_1);
+
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).addModifier(healthModifier);
         player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).addModifier(speedModifier);
         player.setHealthScale(20.0);
+
+        player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).addModifier(swingModifier);
+
+        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).addModifier(speedModifier);
     }
 
     public void removeModifiers(Player player) {
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).removeModifier(healthModifier);
         player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).removeModifier(speedModifier);
+        player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).removeModifier(swingModifier);
     }
 }

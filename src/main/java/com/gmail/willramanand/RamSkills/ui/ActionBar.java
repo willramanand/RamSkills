@@ -21,6 +21,7 @@ public class ActionBar {
 
     private final HashMap<Player, Integer> currentAction = new HashMap<>();
     private final HashSet<Player> isPaused = new HashSet<>();
+    private final HashMap<Player, Integer> timer = new HashMap<>();
 
     public ActionBar(RamSkills plugin) {
         this.plugin = plugin;
@@ -32,22 +33,36 @@ public class ActionBar {
                 if (!currentAction.containsKey(player)) {
                     currentAction.put(player, 0);
                 }
-                SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
-                if (skillPlayer != null) {
-                    sendActionBar(player, TextUtil.replace("&c{hp}/{max_hp}❤                &b{mana}/{max_mana}۞"
-                            , "{hp}", getHp(player)
-                            , "{max_hp}", getMaxHp(player)
-                            , "{mana}", getMana(skillPlayer)
-                            , "{max_mana}", getMaxMana(skillPlayer)));
+                if (!isPaused.contains(player)) {
+                    SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
+                    if (skillPlayer != null) {
+                        sendActionBar(player, TextUtil.replace("&c{hp}/{max_hp}❤                &b{mana}/{max_mana}۞"
+                                , "{hp}", getHp(player)
+                                , "{max_hp}", getMaxHp(player)
+                                , "{mana}", getMana(skillPlayer)
+                                , "{max_mana}", getMaxMana(skillPlayer)));
+                    }
                 }
             }
-        }, 40L, 2L);
+        }, 0L, 5L);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    Integer time = timer.get(player);
+                    if (time != null) {
+                        if (time != 0) {
+                            timer.put(player, time - 1);
+                        }
+                    } else {
+                        timer.put(player, 0);
+                    }
+                }
+        }, 0L, 2L);
     }
 
     public void sendAbilityActionBar(Player player, String message) {
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
         if (skillPlayer == null) return;
-        sendActionBar(player, TextUtil.replace("&c{hp}/{max_hp}❤    {message}   &b{mana}/{max_mana}۞",
+        sendActionBar(player, TextUtil.replace("&c{hp}/{max_hp}❤    &6{message}   &b{mana}/{max_mana}۞",
                 "{hp}", getHp(player),
                 "{max_hp}", getMaxHp(player),
                 "{mana}", getMana(skillPlayer),
@@ -105,6 +120,7 @@ public class ActionBar {
     public void resetActionBar(Player player) {
         currentAction.remove(player);
         isPaused.remove(player);
+        timer.clear();
     }
 
 }

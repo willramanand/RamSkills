@@ -27,13 +27,7 @@ public class StatRegistry {
                 AbstractStat object = (AbstractStat) constructor[0].newInstance(plugin);
                 registry.put(stat, object);
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }

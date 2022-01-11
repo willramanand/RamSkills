@@ -34,6 +34,7 @@ com\gmail\willramanand\RamSkills\commands\VersionCommand.class
 com\gmail\willramanand\RamSkills\ui\SkillBossBar.class
 com\gmail\willramanand\RamSkills\mana\ManaManager$1.class
 com\gmail\willramanand\RamSkills\utils\TextUtil.class
+com\gmail\willramanand\RamSkills\stats\stat\CritDamage.class
 com\gmail\willramanand\RamSkills\source\SourceRegistry.class
 com\gmail\willramanand\RamSkills\listeners\PlayerListener.class
 com\gmail\willramanand\RamSkills\events\PlayerDataLoadEvent.class
@@ -55,6 +56,7 @@ com\gmail\willramanand\RamSkills\skills\farming\FarmingLeveler.class
 com\gmail\willramanand\RamSkills\skills\defense\DefenseLeveler.class
 com\gmail\willramanand\RamSkills\events\XpGainEvent.class
 com\gmail\willramanand\RamSkills\skills\excavation\ExcavationSource.class
+com\gmail\willramanand\RamSkills\stats\stat\AttackSpeed.class
 com\gmail\willramanand\RamSkills\utils\BlockUtils.class
 com\gmail\willramanand\RamSkills\RamSkills.class
 com\gmail\willramanand\RamSkills\events\ManaRegenerateEvent.class
@@ -67,5 +69,6 @@ com\gmail\willramanand\RamSkills\utils\BigNumber.class
 com\gmail\willramanand\RamSkills\skills\mining\MiningSource.class
 com\gmail\willramanand\RamSkills\stats\stat\Speed.class
 com\gmail\willramanand\RamSkills\player\PlayerManager.class
+com\gmail\willramanand\RamSkills\listeners\DamageListener.class
 com\gmail\willramanand\RamSkills\skills\agility\AgilityLeveler.class
 com\gmail\willramanand\RamSkills\ui\ActionBar$1.class

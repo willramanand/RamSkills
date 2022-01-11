@@ -10,11 +10,19 @@ stat:
     skills: cooking,farming,fishing
   strength:
     base: 0.0
-    perLvl: 2.0
-    skills: woodcutting,combat
+    perLvl: 2.5
+    skills: woodcutting
   critchance:
-    base: 20.0
-    perLvl: 1.5
+    base: 10.0
+    perLvl: 1.25
+    skills: combat
+  critdamage:
+    base: 50.0
+    perLvl: 1.02
+    skills: combat
+  attackspeed:
+    base: 0.0
+    perLvl: 0.35
     skills: combat
   toughness:
     base: 20.0

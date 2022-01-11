@@ -30,7 +30,7 @@ public class StatManager {
             plugin.getStatRegistry().setPointsPerLvl(stat, perAmount);
             plugin.getStatRegistry().setAssociatedSkills(stat, skills);
         }
-        Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.colorMessage("&2Loaded stats."));
+        Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.colorMessage("[" + plugin.getName() + "] " + "&2Loaded stat configuration."));
 
     }
 

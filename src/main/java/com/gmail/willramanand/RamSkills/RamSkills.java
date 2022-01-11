@@ -2,6 +2,7 @@ package com.gmail.willramanand.RamSkills;
 
 import com.gmail.willramanand.RamSkills.commands.CommandManager;
 import com.gmail.willramanand.RamSkills.leveler.Leveler;
+import com.gmail.willramanand.RamSkills.listeners.DamageListener;
 import com.gmail.willramanand.RamSkills.mana.ManaManager;
 import com.gmail.willramanand.RamSkills.player.PlayerConfiguration;
 import com.gmail.willramanand.RamSkills.listeners.PlayerListener;
@@ -124,6 +125,7 @@ public class RamSkills extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
 
         pm.registerEvents(new PlayerListener(this), this);
+        pm.registerEvents(new DamageListener(this), this);
         pm.registerEvents(bossBar, this);
 
         // Levelers

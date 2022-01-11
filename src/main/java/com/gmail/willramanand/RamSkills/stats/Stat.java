@@ -5,6 +5,8 @@ public enum Stat {
     HEALTH("Health", "Health", "skills_health_points", "❤"),
     STRENGTH("Strength", "Strength", "skills_str_points", "❁"),
     CRIT_CHANCE("CritChance", "Critical Chance", "skills_critchance_points", "☣"),
+    CRIT_DAMAGE("CritDamage", "Critical Damage", "skills_critdamage_points", "❉"),
+    ATTACK_SPEED("AttackSpeed", "Attack Speed", "skills_attackspeed_points", "♦"),
     TOUGHNESS("Toughness", "Toughness", "skills_tough_points", "❈"),
     SPEED("Speed", "Speed", "skills_speed_points", "✦"),
     WISDOM("Wisdom", "Wisdom", "skills_wisdom_points", "❃"),
