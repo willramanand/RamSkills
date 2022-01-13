@@ -1,5 +1,7 @@
 package com.gmail.willramanand.RamSkills.utils;
 
+// Copyright (c) 2020 Archy.
+
 public class TextUtil {
 
     public static String replace(String source, String os, String ns) {

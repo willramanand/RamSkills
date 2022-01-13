@@ -1,5 +1,7 @@
 package com.gmail.willramanand.RamSkills.mana;
 
+// Copyright (c) 2020 Archy.
+
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.events.ManaRegenerateEvent;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;

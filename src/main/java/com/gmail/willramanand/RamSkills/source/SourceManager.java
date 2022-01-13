@@ -13,6 +13,8 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+// Copyright (c) 2020 Archy.
+
 public class SourceManager {
 
     private final RamSkills plugin;

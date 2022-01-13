@@ -1,5 +1,7 @@
 package com.gmail.willramanand.RamSkills.leveler;
 
+// Copyright (c) 2020 Archy.
+
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.skills.Skill;
 import org.bukkit.configuration.ConfigurationSection;

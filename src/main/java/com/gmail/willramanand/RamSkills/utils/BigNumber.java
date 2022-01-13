@@ -1,5 +1,7 @@
 package com.gmail.willramanand.RamSkills.utils;
 
+// Copyright (c) 2020 Archy.
+
 public class BigNumber {
 
     public static String withSuffix(long count) {

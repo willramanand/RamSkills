@@ -1,5 +1,7 @@
 package com.gmail.willramanand.RamSkills.utils;
 
+// Copyright (c) 2020 Archy.
+
 import org.apache.commons.lang.StringUtils;
 
 import java.text.DecimalFormat;
