@@ -26,41 +26,6 @@ public class Leveler {
         xpReqs.loadXpRequirements();
     }
 
-//    public double getMultiplier(Player player, Skill skill) {
-//        double multiplier = 1.0;
-//        if (skill != null && !OptionL.getBoolean(Option.valueOf(skill + "_CHECK_MULTIPLIER_PERMISSIONS"))) { // Disable check option
-//            return multiplier;
-//        }
-//        // Add permission multipliers
-//        for (PermissionAttachmentInfo info : player.getEffectivePermissions()) {
-//            String permission = info.getPermission().toLowerCase(Locale.ROOT);
-//            if (permission.startsWith("aureliumskills.multiplier.")) {
-//                permission = TextUtil.replace(permission, "aureliumskills.multiplier.", "");
-//                if (pattern.matcher(permission).matches()) { // Parse all skills multiplier
-//                    multiplier += Double.parseDouble(permission) / 100;
-//                } else if (skill != null) { // Skill specific multiplier
-//                    String skillName = skill.toString().toLowerCase(Locale.ROOT);
-//                    if (permission.startsWith(skillName)) {
-//                        permission = TextUtil.replace(permission, skillName + ".", "");
-//                        if (pattern.matcher(permission).matches()) {
-//                            multiplier += Double.parseDouble(permission) / 100;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        // Add multiplier modifiers
-//        PlayerData playerData = plugin.getPlayerManager().getPlayerData(player);
-//        if (playerData != null) {
-//            multiplier += playerData.getTotalMultiplier(skill) / 100;
-//        }
-//        return multiplier;
-//    }
-//
-//    public double getMultiplier(Player player) {
-//        return getMultiplier(player, null);
-//    }
-
 
     //Method for adding xp with a defined amount
     public void addXp(Player player, Skill skill, double amount) {
@@ -71,7 +36,6 @@ public class Leveler {
         if (amount == 0) return;
         //Gets xp amount
         double xpAmount = amount;
-        //* getMultiplier(player, skill);
         //Calls event
         XpGainEvent event = new XpGainEvent(player, skill, xpAmount);
         Bukkit.getPluginManager().callEvent(event);
@@ -81,8 +45,6 @@ public class Leveler {
             skillPlayer.addSkillXp(skill, modifier * event.getAmount());
             //Check if player leveled up
             checkLevelUp(player, skill);
-            //Sends action bar message
-            //plugin.getActionBar().sendXpActionBar(player, skill, event.getAmount());
             // Sends boss bar if enabled
             sendBossBar(player, skill, skillPlayer);
 
@@ -100,8 +62,6 @@ public class Leveler {
         skillPlayer.setSkillXp(skill, amount);
         //Check if player leveled up
         checkLevelUp(player, skill);
-        //Sends action bar message
-        //plugin.getActionBar().sendXpActionBar(player, skill, amount - originalAmount);
         // Sends boss bar if enabled
         sendBossBar(player, skill, skillPlayer);
     }
@@ -150,8 +110,6 @@ public class Leveler {
             double multiplier = 5;
             economy.depositPlayer(player, base + (multiplier * level));
         }
-        // Reload items and armor to check for newly met requirements
-        //plugin.getModifierManager().reloadPlayer(player);
         // Calls event
         SkillLevelUpEvent event = new SkillLevelUpEvent(player, skill, level);
         Bukkit.getPluginManager().callEvent(event);

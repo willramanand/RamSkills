@@ -31,7 +31,7 @@ public class SourceManager {
             plugin.saveResource("sources_config.yml", false);
         }
         // Load FileConfigurations
-        FileConfiguration config = updateFile(file, YamlConfiguration.loadConfiguration(file));
+        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         // Load sources
         int sourcesLoaded = 0;
         for (Source source : plugin.getSourceRegistry().values()) {
@@ -56,38 +56,6 @@ public class SourceManager {
         }
         RamSkills.logger().info(ColorUtils.colorMessage("[" + plugin.getName() + "] &eLoaded &d" + sourcesLoaded + "&e sources &d"
                 + (System.currentTimeMillis() - start) + "&ems"));
-    }
-
-    private FileConfiguration updateFile(File file, FileConfiguration config) {
-        if (config.contains("file_version")) {
-            InputStream stream = plugin.getResource("sources_config.yml");
-            if (stream != null) {
-                int currentVersion = config.getInt("file_version");
-                FileConfiguration imbConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(stream));
-                int imbVersion = imbConfig.getInt("file_version");
-                //If versions do not match
-                if (currentVersion != imbVersion) {
-                    try {
-                        ConfigurationSection configSection = imbConfig.getConfigurationSection("");
-                        int keysAdded = 0;
-                        if (configSection != null) {
-                            for (String key : configSection.getKeys(true)) {
-                                if (!config.contains(key)) {
-                                    config.set(key, imbConfig.get(key));
-                                    keysAdded++;
-                                }
-                            }
-                        }
-                        config.set("file_version", imbVersion);
-                        config.save(file);
-                        RamSkills.logger().info("[" + plugin.getName() + "] sources_config.yml was updated to a new file version, " + keysAdded + " new keys were added.");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        return YamlConfiguration.loadConfiguration(file);
     }
 
     public double getXp(Source source) {

@@ -4,6 +4,7 @@ import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.gmail.willramanand.RamSkills.utils.BlockUtils;
+import com.gmail.willramanand.RamSkills.utils.ItemUtils;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -78,7 +79,7 @@ public class FortuneListener implements Listener {
     }
 
     private Material convertOre(Material inputOre, BlockBreakEvent event) {
-        if (event.getPlayer().getInventory().getItemInMainHand().getItemMeta().hasEnchant(Enchantment.SILK_TOUCH)) {
+        if (ItemUtils.hasSilkTouch(event.getPlayer().getInventory().getItemInMainHand())) {
             return inputOre;
         }
         return switch (inputOre) {
