@@ -47,6 +47,7 @@ public class PlayerConfiguration {
                     }
                     String path = "mana.amount";
                     config.set(path, 0.0);
+                    skillPlayer.setMana(0.0);
                     plugin.getPlayerManager().addPlayerData(skillPlayer);
                     try {
                         config.save(file);
@@ -76,7 +77,7 @@ public class PlayerConfiguration {
             }
             String path = "mana.amount";
             double mana = config.getDouble(path);
-            skillPlayer.updateMana(mana);
+            skillPlayer.setMana(mana);
             plugin.getPlayerManager().addPlayerData(skillPlayer);
             PlayerDataLoadEvent playerDataLoadEvent = new PlayerDataLoadEvent(skillPlayer);
             Bukkit.getPluginManager().callEvent(playerDataLoadEvent);

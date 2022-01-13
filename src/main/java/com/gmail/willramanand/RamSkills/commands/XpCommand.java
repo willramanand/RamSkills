@@ -3,6 +3,7 @@ package com.gmail.willramanand.RamSkills.commands;
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.skills.Skills;
+import com.gmail.willramanand.RamSkills.utils.ColorUtils;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -18,10 +19,14 @@ public class XpCommand extends SubCommand {
 
     @Override
     public void onCommand(Player player, String[] args) {
-        if (args[1].equalsIgnoreCase("set")) {
-            plugin.getLeveler().setXp(player, Skills.valueOf(args[2].toUpperCase()), Double.parseDouble(args[3]));
-        } else if (args[1].equalsIgnoreCase("give")) {
-            plugin.getLeveler().addXp(player, Skills.valueOf(args[2].toUpperCase()), Double.parseDouble(args[3]));
+        if (player.hasPermission("skills.xp")) {
+            if (args[1].equalsIgnoreCase("set")) {
+                plugin.getLeveler().setXp(player, Skills.valueOf(args[2].toUpperCase()), Double.parseDouble(args[3]));
+            } else if (args[1].equalsIgnoreCase("give")) {
+                plugin.getLeveler().addXp(player, Skills.valueOf(args[2].toUpperCase()), Double.parseDouble(args[3]));
+            }
+        } else {
+            player.sendMessage(ColorUtils.colorMessage("&4You do not have permission for that command!"));
         }
     }
 

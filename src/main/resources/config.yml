@@ -12,6 +12,10 @@ stat:
     base: 0.0
     perLvl: 2.5
     skills: woodcutting
+  fortune:
+    base: 0.0
+    perLvl: 2.04
+    skills: woodcutting,mining
   critchance:
     base: 10.0
     perLvl: 1.25

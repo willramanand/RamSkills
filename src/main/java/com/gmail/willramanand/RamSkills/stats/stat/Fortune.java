@@ -6,16 +6,15 @@ import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.gmail.willramanand.RamSkills.utils.Formatter;
 import org.bukkit.entity.Player;
 
-public class CritChance extends AbstractStat {
-
-    public CritChance(RamSkills plugin) {
-        super(plugin, Stat.CRIT_CHANCE);
+public class Fortune extends AbstractStat {
+    public Fortune(RamSkills plugin) {
+        super(plugin, Stat.FORTUNE);
     }
 
     @Override
     public String print(Player player) {
         SkillPlayer skillPlayer = RamSkills.getInstance().getPlayerManager().getPlayerData(player);
-        double points = skillPlayer.getStatPoint(Stat.CRIT_CHANCE);
-        return "+ " + Formatter.decimalFormat(points, 1) + "%";
+        double points = skillPlayer.getStatPoint(Stat.FORTUNE);
+        return "+ " + Formatter.decimalFormat(points, 1) + "% Extra Materials";
     }
 }

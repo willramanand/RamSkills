@@ -56,4 +56,5 @@ public abstract class AbstractStat {
         pointsPerLevel = amount;
     }
 
+    public abstract String print(Player player);
 }

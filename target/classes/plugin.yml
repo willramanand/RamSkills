@@ -7,6 +7,8 @@ main: com.gmail.willramanand.RamSkills.RamSkills
 depend:
 softdepend: [Vault]
 commands:
-  rskills:
+  skills:
     description: Base command for RamSkills.
 permissions:
+  skills.xp:
+    default: op

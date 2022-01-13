@@ -123,4 +123,10 @@ public class ActionBar {
         timer.clear();
     }
 
+    public void resetActionBars() {
+        currentAction.clear();
+        isPaused.clear();
+        timer.clear();
+    }
+
 }

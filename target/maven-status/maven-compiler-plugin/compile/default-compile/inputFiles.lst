@@ -1,13 +1,17 @@
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\defense\DefenseLeveler.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\Fortune.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\mana\ManaManager.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\Skills.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\commands\StatsCommand.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\sorcery\SorcerySource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\alchemy\AlchemySource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\utils\BlockUtils.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\alchemy\AlchemyLeveler.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\mining\MiningLeveler.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\listeners\DamageListener.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\Speed.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\events\PlayerDataLoadEvent.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\AttackSpeed.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\farming\FarmingSource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\Skill.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\fishing\FishingLeveler.java
@@ -18,6 +22,7 @@ C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSk
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\CritChance.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\player\SkillPlayer.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\StatManager.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\commands\ListCommand.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\leveler\SkillLeveler.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\events\SkillLevelUpEvent.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\utils\ItemUtils.java
@@ -29,10 +34,10 @@ C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSk
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\fishing\FishingSource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\agility\AgilitySource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\leveler\XpReqs.java
-C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\commands\ManaTestCommand.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\commands\SubCommand.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\ui\SkillBossBar.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\RamSkills.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\CritDamage.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\StatRegistry.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\agility\AgilityLeveler.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\defense\DefenseSource.java

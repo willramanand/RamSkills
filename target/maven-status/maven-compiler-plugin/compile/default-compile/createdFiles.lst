@@ -21,7 +21,7 @@ com\gmail\willramanand\RamSkills\commands\CommandManager.class
 com\gmail\willramanand\RamSkills\leveler\SkillLeveler.class
 com\gmail\willramanand\RamSkills\skills\mining\MiningLeveler.class
 com\gmail\willramanand\RamSkills\skills\alchemy\AlchemySource.class
-com\gmail\willramanand\RamSkills\commands\ManaTestCommand.class
+com\gmail\willramanand\RamSkills\stats\stat\Fortune.class
 com\gmail\willramanand\RamSkills\stats\stat\Strength.class
 com\gmail\willramanand\RamSkills\skills\enchanting\EnchantingLeveler.class
 com\gmail\willramanand\RamSkills\skills\excavation\ExcavationLeveler.class
@@ -29,6 +29,8 @@ com\gmail\willramanand\RamSkills\skills\woodcutting\WoodcuttingLeveler.class
 com\gmail\willramanand\RamSkills\source\SourceManager.class
 com\gmail\willramanand\RamSkills\commands\SubCommand.class
 com\gmail\willramanand\RamSkills\stats\stat\AbstractStat.class
+com\gmail\willramanand\RamSkills\commands\ListCommand.class
+com\gmail\willramanand\RamSkills\commands\StatsCommand.class
 com\gmail\willramanand\RamSkills\stats\stat\Health.class
 com\gmail\willramanand\RamSkills\commands\VersionCommand.class
 com\gmail\willramanand\RamSkills\ui\SkillBossBar.class

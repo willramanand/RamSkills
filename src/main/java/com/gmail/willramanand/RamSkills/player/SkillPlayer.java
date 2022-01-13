@@ -43,8 +43,6 @@ public class SkillPlayer {
         this.skillsXp = new HashMap<>();
         this.skillsXpModifers = new HashMap<>();
         this.statPoints = new HashMap<>();
-
-        currentMana = 0;
     }
 
     public Player getPlayer() {
@@ -108,6 +106,8 @@ public class SkillPlayer {
     public double getMana() {
         return currentMana;
     }
+
+    public void setMana(double amount) { currentMana = amount; }
 
     public double updateMana(double amount) {
         currentMana = Math.min(currentMana + amount, getMaxMana());

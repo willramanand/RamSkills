@@ -9,6 +9,7 @@ import org.bukkit.GameMode;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -34,21 +35,21 @@ public class PlayerListener implements Listener {
     public void join(PlayerJoinEvent event) {
         plugin.getPlayerConfig().load(event.getPlayer());
         plugin.getStatManager().allocateStats(event.getPlayer());
-        applyModifiers(event.getPlayer());
+        applyModifiers(event.getPlayer(), event);
     }
 
     @EventHandler
     public void onLevel(SkillLevelUpEvent event) {
         plugin.getStatManager().allocateStats(event.getPlayer());
         removeModifiers(event.getPlayer());
-        applyModifiers(event.getPlayer());
+        applyModifiers(event.getPlayer(), event);
     }
 
     @EventHandler
     public void worldChange(PlayerChangedWorldEvent event) {
         if (event.getPlayer().getGameMode() != GameMode.SURVIVAL) return;
         removeModifiers(event.getPlayer());
-        applyModifiers(event.getPlayer());
+        applyModifiers(event.getPlayer(), event);
     }
 
     @EventHandler
@@ -72,15 +73,16 @@ public class PlayerListener implements Listener {
         BlockUtils.setPlayerPlace(event.getBlock());
     }
 
-    public void applyModifiers(Player player) {
+    public void applyModifiers(Player player, Event event) {
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
         healthModifier = new AttributeModifier(Stat.HEALTH.getModifierName(), skillPlayer.getStatPoint(Stat.HEALTH), AttributeModifier.Operation.ADD_NUMBER);
         swingModifier = new AttributeModifier(Stat.ATTACK_SPEED.getModifierName(), skillPlayer.getStatPoint(Stat.ATTACK_SPEED), AttributeModifier.Operation.ADD_NUMBER);
         speedModifier = new AttributeModifier(Stat.SPEED.getModifierName(), skillPlayer.getStatPoint(Stat.SPEED), AttributeModifier.Operation.MULTIPLY_SCALAR_1);
 
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).addModifier(healthModifier);
-        player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-        player.setHealthScale(20.0);
+        if (!(event instanceof SkillLevelUpEvent))
+            player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+        player.setHealthScale(40.0);
 
         player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).addModifier(swingModifier);
 
@@ -91,5 +93,6 @@ public class PlayerListener implements Listener {
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).removeModifier(healthModifier);
         player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).removeModifier(speedModifier);
         player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).removeModifier(swingModifier);
+        player.setHealthScale(20.0);
     }
 }

@@ -65,4 +65,13 @@ public class StatRegistry {
             }
         }
     }
+
+    public String print(Stat stat, Player player) {
+        try {
+            return registry.get(stat).print(player);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return "Error in stat registry!";
+    }
 }

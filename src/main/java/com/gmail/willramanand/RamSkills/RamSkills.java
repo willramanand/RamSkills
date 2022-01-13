@@ -45,6 +45,7 @@ public class RamSkills extends JavaPlugin {
 
     private PlayerConfiguration playerConfiguration;
     private PlayerManager playerManager;
+    private PlayerListener playerListener;
 
     private CommandManager commandManager;
 
@@ -76,6 +77,7 @@ public class RamSkills extends JavaPlugin {
 
         playerConfiguration = new PlayerConfiguration(this);
         playerManager = new PlayerManager(this);
+        playerListener = new PlayerListener(this);
         commandManager = new CommandManager(this);
         sourceRegistry = new SourceRegistry();
         sourceManager = new SourceManager(this);
@@ -111,9 +113,11 @@ public class RamSkills extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        for (Player player : Bukkit.getOnlinePlayers())
+        for (Player player : Bukkit.getOnlinePlayers()) {
             playerConfiguration.save(player, true);
+        }
 
+        actionBar.resetActionBars();
         log.info("Disabled");
     }
 
@@ -124,7 +128,7 @@ public class RamSkills extends JavaPlugin {
     public void registerEvents() {
         PluginManager pm = getServer().getPluginManager();
 
-        pm.registerEvents(new PlayerListener(this), this);
+        pm.registerEvents(playerListener, this);
         pm.registerEvents(new DamageListener(this), this);
         pm.registerEvents(bossBar, this);
 

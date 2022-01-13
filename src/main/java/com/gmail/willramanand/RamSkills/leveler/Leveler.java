@@ -5,6 +5,7 @@ import com.gmail.willramanand.RamSkills.events.SkillLevelUpEvent;
 import com.gmail.willramanand.RamSkills.events.XpGainEvent;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.skills.Skill;
+import com.gmail.willramanand.RamSkills.utils.ColorUtils;
 import com.gmail.willramanand.RamSkills.utils.TextUtil;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -157,7 +158,7 @@ public class Leveler {
         // Sends messages
         sendTitle(player, skill, level);
         playSound(player);
-        player.sendMessage(getLevelUpMessage(player, skillPlayer, skill, level));
+        player.sendMessage(getLevelUpMessage(skillPlayer, skill));
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> checkLevelUp(player, skill), 20L);
     }
 
@@ -173,8 +174,8 @@ public class Leveler {
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 1f, 0.5f);
     }
 
-    private String getLevelUpMessage(Player player, SkillPlayer skillPlayer, Skill skill, int level) {
-        return "You have leveled up to " + skillPlayer.getSkillLevel(skill) + " for " + skill.getDisplayName();
+    private String getLevelUpMessage(SkillPlayer skillPlayer, Skill skill) {
+        return ColorUtils.colorMessage( "&eYou have leveled up to &d" + skillPlayer.getSkillLevel(skill) + " &efor &d" + skill.getDisplayName());
     }
 
     public XpReqs getXpRequirements() {

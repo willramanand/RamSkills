@@ -1,39 +1,39 @@
 package com.gmail.willramanand.RamSkills.commands;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
-import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.stats.Stat;
+import com.gmail.willramanand.RamSkills.utils.ColorUtils;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManaTestCommand extends SubCommand {
+public class StatsCommand extends SubCommand {
 
     private final RamSkills plugin;
 
-    public ManaTestCommand(RamSkills plugin) {
+    public StatsCommand(RamSkills plugin) {
         this.plugin = plugin;
     }
 
 
     @Override
     public void onCommand(Player player, String[] args) {
-        SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
+        player.sendMessage(ColorUtils.colorMessage("&6_____________ [ &bStats &6] _____________"));
         for (Stat stat : Stat.values()) {
-            double point = skillPlayer.getStatPoint(stat);
-            player.sendMessage(stat.getDisplayName() + stat.getSymbol() + ": " + point);
+            String point = plugin.getStatRegistry().print(stat, player);
+            player.sendMessage(ColorUtils.colorMessage(stat.getPrefix() + stat.getDisplayName() + " " + stat.getSymbol() + ": " + point));
         }
     }
 
     @Override
     public String name() {
-        return Commands.MANA.getName();
+        return Commands.STATS.getName();
     }
 
     @Override
     public String info() {
-        return null;
+        return "The level of the stats of the player earned through leveling skills.";
     }
 
     @Override

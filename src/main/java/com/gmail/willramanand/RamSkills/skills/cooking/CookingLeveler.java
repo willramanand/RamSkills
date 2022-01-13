@@ -11,7 +11,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.FurnaceExtractEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +43,6 @@ public class CookingLeveler extends SkillLeveler implements Listener {
     }
 
 
-    // Better implementation needed player only gets credit for one item if shift-clicked
-    // Most likely inventory click event will be needed.
     @EventHandler(priority = EventPriority.NORMAL)
     public void craftFood(CraftItemEvent event) {
         if (event.getResult() == null) return;
@@ -49,7 +50,7 @@ public class CookingLeveler extends SkillLeveler implements Listener {
 
         Player player = (Player) event.getWhoClicked();
         if (blockXpGainPlayer(player)) return;
-
+        if (event.isShiftClick()) shiftClick(event);
         plugin.getLeveler().addXp(player, Skills.COOKING, getXp(player, CookingSource.valueOf(event.getInventory().getResult().getType().name())));
     }
 
@@ -62,6 +63,35 @@ public class CookingLeveler extends SkillLeveler implements Listener {
         if (blockXpGainPlayer(player)) return;
 
         plugin.getLeveler().addXp(player, Skills.COOKING, getXp(player, CookingSource.valueOf(event.getItem().getType().name())));
+    }
+
+    public void shiftClick(CraftItemEvent event) {
+        int itemsChecked = 0;
+        int possibleCreations = 1;
+        for (ItemStack item : event.getInventory().getMatrix()) {
+            if (item != null && !item.getType().equals(Material.AIR)) {
+                if (itemsChecked == 0)
+                    possibleCreations = item.getAmount();
+                else
+                    possibleCreations = Math.min(possibleCreations, item.getAmount());
+                itemsChecked++;
+            }
+        }
+        int amountOfItems = event.getRecipe().getResult().getAmount() * possibleCreations;
+        event.getWhoClicked().sendMessage("Items Count: "  + amountOfItems);
+        plugin.getLeveler().addXp((Player) event.getWhoClicked(), Skills.COOKING, amountOfItems * getXp((Player) event.getWhoClicked(), CookingSource.valueOf(event.getInventory().getResult().getType().name())));
+    }
+
+    public int isPossible(CraftItemEvent event, int amountOfItems) {
+        int possibleItems = 0;
+        for (ItemStack item : event.getInventory().getStorageContents()) {
+            if (item == null) {
+                possibleItems += event.getRecipe().getResult().getMaxStackSize();
+            } else {
+                possibleItems = item.getMaxStackSize() - item.getAmount();
+            }
+        }
+        return Math.min(possibleItems, amountOfItems);
     }
 
     private void setValidMats() {

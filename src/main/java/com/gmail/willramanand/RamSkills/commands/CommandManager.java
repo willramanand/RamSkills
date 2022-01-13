@@ -28,7 +28,8 @@ public class CommandManager implements TabExecutor {
         this.commands.add(new HelpCommand(plugin));
         this.commands.add(new VersionCommand(plugin));
         this.commands.add(new XpCommand(plugin));
-        this.commands.add(new ManaTestCommand(plugin));
+        this.commands.add(new StatsCommand(plugin));
+        this.commands.add(new ListCommand(plugin));
     }
 
     @Override
@@ -42,7 +43,7 @@ public class CommandManager implements TabExecutor {
 
         if (command.getName().equalsIgnoreCase(Commands.MAIN.getName())) {
             if (args.length == 0) {
-                player.performCommand("/rskills h");
+                player.performCommand("/skills h");
                 return true;
             }
 
@@ -50,7 +51,7 @@ public class CommandManager implements TabExecutor {
 
             if (target == null) {
                 player.sendMessage(ColorUtils.colorMessage("&eInvalid subcommand!"));
-                player.performCommand("/rskills h");
+                player.performCommand("/skills h");
                 return true;
             }
 
@@ -110,7 +111,7 @@ public class CommandManager implements TabExecutor {
             while (sc.hasNext()) {
                 SubCommand subCommand = sc.next();
 
-                if (subCommand.name().equalsIgnoreCase(args[0]) || subCommand.aliases().contains(args[0])) {
+                if (subCommand.name().equalsIgnoreCase(args[0]) || (subCommand.aliases() != null && subCommand.aliases().contains(args[0]))) {
                     return subCommand.getPrimaryArguments();
                 }
             }
@@ -118,7 +119,7 @@ public class CommandManager implements TabExecutor {
             while (sc.hasNext()) {
                 SubCommand subCommand = sc.next();
 
-                if (subCommand.name().equalsIgnoreCase(args[0]) || subCommand.aliases().contains(args[0])) {
+                if (subCommand.name().equalsIgnoreCase(args[0]) || (subCommand.aliases() != null && subCommand.aliases().contains(args[0]))) {
                     return subCommand.getSecondaryArguments(args);
                 }
             }
