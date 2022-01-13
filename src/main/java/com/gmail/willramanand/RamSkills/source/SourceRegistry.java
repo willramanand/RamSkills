@@ -2,7 +2,6 @@ package com.gmail.willramanand.RamSkills.source;
 
 import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.skills.Skills;
-import com.gmail.willramanand.RamSkills.utils.Formatter;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;

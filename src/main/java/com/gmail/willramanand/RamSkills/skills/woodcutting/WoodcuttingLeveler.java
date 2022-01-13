@@ -3,10 +3,8 @@ package com.gmail.willramanand.RamSkills.skills.woodcutting;
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.leveler.SkillLeveler;
 import com.gmail.willramanand.RamSkills.skills.Skills;
-import com.gmail.willramanand.RamSkills.skills.mining.MiningSource;
 import com.gmail.willramanand.RamSkills.source.Source;
 import com.gmail.willramanand.RamSkills.utils.BlockUtils;
-import com.gmail.willramanand.RamSkills.utils.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -38,7 +36,6 @@ public class WoodcuttingLeveler extends SkillLeveler implements Listener {
         if (BlockUtils.isPlayerPlaced(event.getBlock())) return;
 
         Block block = event.getBlock();
-        player.sendMessage("Valid block: " + block.getType().name().toLowerCase());
         plugin.getLeveler().addXp(player, Skills.WOODCUTTING, getXp(player, WoodcuttingSource.valueOf(block.getType().name())));
 
     }

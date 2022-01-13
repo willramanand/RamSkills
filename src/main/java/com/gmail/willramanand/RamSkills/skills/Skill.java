@@ -4,8 +4,6 @@ import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.boss.BarColor;
 
-import java.util.function.Supplier;
-
 public interface Skill {
 
     String getDescription();

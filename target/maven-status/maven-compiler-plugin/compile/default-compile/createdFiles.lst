@@ -21,6 +21,7 @@ com\gmail\willramanand\RamSkills\commands\CommandManager.class
 com\gmail\willramanand\RamSkills\leveler\SkillLeveler.class
 com\gmail\willramanand\RamSkills\skills\mining\MiningLeveler.class
 com\gmail\willramanand\RamSkills\skills\alchemy\AlchemySource.class
+com\gmail\willramanand\RamSkills\listeners\FortuneListener.class
 com\gmail\willramanand\RamSkills\stats\stat\Fortune.class
 com\gmail\willramanand\RamSkills\stats\stat\Strength.class
 com\gmail\willramanand\RamSkills\skills\enchanting\EnchantingLeveler.class
@@ -34,6 +35,7 @@ com\gmail\willramanand\RamSkills\commands\StatsCommand.class
 com\gmail\willramanand\RamSkills\stats\stat\Health.class
 com\gmail\willramanand\RamSkills\commands\VersionCommand.class
 com\gmail\willramanand\RamSkills\ui\SkillBossBar.class
+com\gmail\willramanand\RamSkills\listeners\FortuneListener$1.class
 com\gmail\willramanand\RamSkills\mana\ManaManager$1.class
 com\gmail\willramanand\RamSkills\utils\TextUtil.class
 com\gmail\willramanand\RamSkills\stats\stat\CritDamage.class

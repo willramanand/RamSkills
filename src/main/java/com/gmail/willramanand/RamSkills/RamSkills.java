@@ -3,18 +3,19 @@ package com.gmail.willramanand.RamSkills;
 import com.gmail.willramanand.RamSkills.commands.CommandManager;
 import com.gmail.willramanand.RamSkills.leveler.Leveler;
 import com.gmail.willramanand.RamSkills.listeners.DamageListener;
+import com.gmail.willramanand.RamSkills.listeners.FortuneListener;
+import com.gmail.willramanand.RamSkills.listeners.PlayerListener;
 import com.gmail.willramanand.RamSkills.mana.ManaManager;
 import com.gmail.willramanand.RamSkills.player.PlayerConfiguration;
-import com.gmail.willramanand.RamSkills.listeners.PlayerListener;
 import com.gmail.willramanand.RamSkills.player.PlayerManager;
 import com.gmail.willramanand.RamSkills.skills.agility.AgilityLeveler;
 import com.gmail.willramanand.RamSkills.skills.alchemy.AlchemyLeveler;
+import com.gmail.willramanand.RamSkills.skills.combat.CombatLeveler;
 import com.gmail.willramanand.RamSkills.skills.cooking.CookingLeveler;
 import com.gmail.willramanand.RamSkills.skills.defense.DefenseLeveler;
 import com.gmail.willramanand.RamSkills.skills.enchanting.EnchantingLeveler;
 import com.gmail.willramanand.RamSkills.skills.excavation.ExcavationLeveler;
 import com.gmail.willramanand.RamSkills.skills.farming.FarmingLeveler;
-import com.gmail.willramanand.RamSkills.skills.combat.CombatLeveler;
 import com.gmail.willramanand.RamSkills.skills.fishing.FishingLeveler;
 import com.gmail.willramanand.RamSkills.skills.mining.MiningLeveler;
 import com.gmail.willramanand.RamSkills.skills.sorcery.SorceryLeveler;
@@ -131,6 +132,7 @@ public class RamSkills extends JavaPlugin {
         pm.registerEvents(playerListener, this);
         pm.registerEvents(new DamageListener(this), this);
         pm.registerEvents(bossBar, this);
+        pm.registerEvents(new FortuneListener(this), this);
 
         // Levelers
         pm.registerEvents(new CombatLeveler(this), this);

@@ -5,9 +5,6 @@ import com.gmail.willramanand.RamSkills.skills.Skill;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import com.udojava.evalex.Expression;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

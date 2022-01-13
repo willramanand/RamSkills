@@ -50,9 +50,7 @@ public class FarmingLeveler extends SkillLeveler implements Listener {
             multiBlock += calculateMultiblock(block.getLocation(), block);
         }
 
-        player.sendMessage("Valid block: " + block.getType().name().toLowerCase());
         if (multiBlock > 1) {
-            player.sendMessage("was multiblock of " + multiBlock);
             plugin.getLeveler().addXp(player, Skills.FARMING, multiBlock * getXp(player, FarmingSource.valueOf(block.getType().name())));
         } else {
             plugin.getLeveler().addXp(player, Skills.FARMING, getXp(player, FarmingSource.valueOf(block.getType().name())));

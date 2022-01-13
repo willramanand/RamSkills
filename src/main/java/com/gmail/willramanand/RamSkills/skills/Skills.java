@@ -4,8 +4,6 @@ import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.boss.BarColor;
 
-import java.util.function.Supplier;
-
 public enum Skills implements Skill {
     AGILITY("Agility", "This skill deals with movement.", BarColor.GREEN, ImmutableList.of(Stat.SPEED)),
     ALCHEMY("Alchemy", "This skill deals with brewing of potions.", BarColor.PURPLE, ImmutableList.of(Stat.WISDOM)),

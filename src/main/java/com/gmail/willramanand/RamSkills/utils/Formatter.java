@@ -7,8 +7,6 @@ import java.text.NumberFormat;
 
 public class Formatter {
 
-    private static NumberFormat numberFormat;
-
     public static String decimalFormat(double input, int maxPlaces) {
         // Creates DecimalFormat pattern based on maxPlaces
         StringBuilder pattern = new StringBuilder("#");
@@ -16,7 +14,7 @@ public class Formatter {
             pattern.append(".");
         }
         pattern.append(StringUtils.repeat("#", maxPlaces));
-        numberFormat = new DecimalFormat(pattern.toString());
+        NumberFormat numberFormat = new DecimalFormat(pattern.toString());
 
         return numberFormat.format(input);
     }

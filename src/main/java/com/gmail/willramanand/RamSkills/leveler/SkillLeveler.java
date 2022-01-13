@@ -7,8 +7,6 @@ import com.gmail.willramanand.RamSkills.source.SourceManager;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
-import java.util.Locale;
-
 public class SkillLeveler {
 
     protected final RamSkills plugin;

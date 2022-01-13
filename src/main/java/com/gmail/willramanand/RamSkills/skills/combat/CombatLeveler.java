@@ -3,7 +3,6 @@ package com.gmail.willramanand.RamSkills.skills.combat;
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.leveler.SkillLeveler;
 import com.gmail.willramanand.RamSkills.skills.Skills;
-import com.gmail.willramanand.RamSkills.utils.ItemUtils;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
