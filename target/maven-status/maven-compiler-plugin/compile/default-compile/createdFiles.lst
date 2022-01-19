@@ -15,8 +15,10 @@ com\gmail\willramanand\RamSkills\events\SkillLevelUpEvent.class
 com\gmail\willramanand\RamSkills\stats\Stat.class
 com\gmail\willramanand\RamSkills\skills\woodcutting\WoodcuttingSource.class
 com\gmail\willramanand\RamSkills\skills\fishing\FishingLeveler.class
+com\gmail\willramanand\RamSkills\perks\FarmingPerks.class
 com\gmail\willramanand\RamSkills\skills\cooking\CookingSource.class
 com\gmail\willramanand\RamSkills\skills\combat\CombatLeveler.class
+com\gmail\willramanand\RamSkills\utils\VBlockFace.class
 com\gmail\willramanand\RamSkills\commands\CommandManager.class
 com\gmail\willramanand\RamSkills\leveler\SkillLeveler.class
 com\gmail\willramanand\RamSkills\skills\mining\MiningLeveler.class
@@ -47,6 +49,7 @@ com\gmail\willramanand\RamSkills\stats\StatRegistry.class
 com\gmail\willramanand\RamSkills\commands\HelpCommand.class
 com\gmail\willramanand\RamSkills\skills\farming\FarmingSource.class
 com\gmail\willramanand\RamSkills\stats\stat\CritChance.class
+com\gmail\willramanand\RamSkills\mana\ManaAbility$1.class
 com\gmail\willramanand\RamSkills\source\Source.class
 com\gmail\willramanand\RamSkills\skills\agility\AgilitySource.class
 com\gmail\willramanand\RamSkills\skills\enchanting\EnchantingSource.class
@@ -58,12 +61,14 @@ com\gmail\willramanand\RamSkills\skills\fishing\FishingSource.class
 com\gmail\willramanand\RamSkills\skills\alchemy\AlchemyLeveler.class
 com\gmail\willramanand\RamSkills\skills\farming\FarmingLeveler.class
 com\gmail\willramanand\RamSkills\skills\defense\DefenseLeveler.class
+com\gmail\willramanand\RamSkills\events\CriticalStrikeEvent.class
 com\gmail\willramanand\RamSkills\events\XpGainEvent.class
 com\gmail\willramanand\RamSkills\skills\excavation\ExcavationSource.class
 com\gmail\willramanand\RamSkills\stats\stat\AttackSpeed.class
 com\gmail\willramanand\RamSkills\utils\BlockUtils.class
 com\gmail\willramanand\RamSkills\RamSkills.class
 com\gmail\willramanand\RamSkills\events\ManaRegenerateEvent.class
+com\gmail\willramanand\RamSkills\mana\ManaAbility.class
 com\gmail\willramanand\RamSkills\mana\ManaManager.class
 com\gmail\willramanand\RamSkills\player\SkillPlayer.class
 com\gmail\willramanand\RamSkills\stats\StatManager.class

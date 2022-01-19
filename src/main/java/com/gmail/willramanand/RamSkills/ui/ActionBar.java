@@ -44,7 +44,7 @@ public class ActionBar {
                     }
                 }
             }
-        }, 0L, 5L);
+        }, 0L, 2L);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     Integer time = timer.get(player);

@@ -5,7 +5,9 @@ import com.gmail.willramanand.RamSkills.leveler.Leveler;
 import com.gmail.willramanand.RamSkills.listeners.DamageListener;
 import com.gmail.willramanand.RamSkills.listeners.FortuneListener;
 import com.gmail.willramanand.RamSkills.listeners.PlayerListener;
+import com.gmail.willramanand.RamSkills.mana.ManaAbility;
 import com.gmail.willramanand.RamSkills.mana.ManaManager;
+import com.gmail.willramanand.RamSkills.perks.FarmingPerks;
 import com.gmail.willramanand.RamSkills.player.PlayerConfiguration;
 import com.gmail.willramanand.RamSkills.player.PlayerManager;
 import com.gmail.willramanand.RamSkills.skills.agility.AgilityLeveler;
@@ -47,7 +49,6 @@ public class RamSkills extends JavaPlugin {
     private PlayerConfiguration playerConfiguration;
     private PlayerManager playerManager;
     private PlayerListener playerListener;
-
     private CommandManager commandManager;
 
     private SourceRegistry sourceRegistry;
@@ -58,6 +59,8 @@ public class RamSkills extends JavaPlugin {
 
     private Leveler leveler;
     private SorceryLeveler sorceryLeveler;
+    private MiningLeveler miningLeveler;
+    private ExcavationLeveler excavationLeveler;
 
     private SkillBossBar bossBar;
     private ActionBar actionBar;
@@ -89,6 +92,8 @@ public class RamSkills extends JavaPlugin {
         actionBar = new ActionBar(this);
         manaManager = new ManaManager(this);
         sorceryLeveler = new SorceryLeveler(this);
+        miningLeveler = new MiningLeveler(this);
+        excavationLeveler = new ExcavationLeveler(this);
 
         // Config
         this.getConfig().options().copyDefaults(true);
@@ -103,9 +108,12 @@ public class RamSkills extends JavaPlugin {
         // Load Modules
         sourceManager.loadSources();
         statManager.loadStats();
+
         bossBar.load();
         actionBar.startUpdateActionBar();
+
         manaManager.regenMana();
+
         leveler.loadLevelReqs();
 
         startTime = System.currentTimeMillis() - startTime;
@@ -136,8 +144,8 @@ public class RamSkills extends JavaPlugin {
 
         // Levelers
         pm.registerEvents(new CombatLeveler(this), this);
-        pm.registerEvents(new MiningLeveler(this), this);
-        pm.registerEvents(new ExcavationLeveler(this), this);
+        pm.registerEvents(miningLeveler, this);
+        pm.registerEvents(excavationLeveler, this);
         pm.registerEvents(new CookingLeveler(this), this);
         pm.registerEvents(new EnchantingLeveler(this), this);
         pm.registerEvents(new WoodcuttingLeveler(this), this);
@@ -146,6 +154,8 @@ public class RamSkills extends JavaPlugin {
         pm.registerEvents(new AgilityLeveler(this), this);
         pm.registerEvents(new FishingLeveler(this), this);
         pm.registerEvents(new AlchemyLeveler(this), this);
+
+        pm.registerEvents(new ManaAbility(this), this);
 
     }
 
@@ -190,7 +200,12 @@ public class RamSkills extends JavaPlugin {
 
     public SorceryLeveler getSorceryLeveler() { return sorceryLeveler; }
 
+    public MiningLeveler getMiningLeveler() { return miningLeveler; }
+
+    public ExcavationLeveler getExcavationLeveler() { return excavationLeveler; }
+
     public SkillBossBar getBossBar() { return bossBar; }
 
     public ActionBar getActionBar() { return actionBar; }
+
 }

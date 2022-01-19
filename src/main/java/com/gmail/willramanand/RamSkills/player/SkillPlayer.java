@@ -16,12 +16,7 @@ public class SkillPlayer {
     private final Player player;
     private final UUID uuid;
 
-    private final double BASE_MANA = 100;
-    private final double MANA_PER_LEVEL = 20;
     private double currentMana;
-
-    private final double BASE_MANA_REGEN = 2;
-    private final double MANA_REGEN_PER_LVL = 0.25;
 
     private final Map<Skill, Integer> skillsLvl;
     private final Map<Skill, Double> skillsXp;
@@ -29,6 +24,7 @@ public class SkillPlayer {
 
     private final Map<Stat, Double> statPoints;
 
+    private boolean weaponReadied;
     private boolean saving;
     private boolean shouldSave;
 
@@ -42,6 +38,7 @@ public class SkillPlayer {
         this.skillsXp = new HashMap<>();
         this.skillsXpModifers = new HashMap<>();
         this.statPoints = new HashMap<>();
+        this.weaponReadied = false;
     }
 
     public Player getPlayer() {
@@ -108,8 +105,14 @@ public class SkillPlayer {
 
     public void setMana(double amount) { currentMana = amount; }
 
-    public double updateMana(double amount) {
+    public double addMana(double amount) {
         currentMana = Math.min(currentMana + amount, getMaxMana());
+        return currentMana;
+    }
+
+    public double removeMana(double amount) {
+        currentMana -= amount;
+        plugin.getSorceryLeveler().level(player, amount);
         return currentMana;
     }
 
@@ -128,4 +131,6 @@ public class SkillPlayer {
     public void setStatPoints(Stat stat, double points) {
         this.statPoints.put(stat, points);
     }
+
+
 }

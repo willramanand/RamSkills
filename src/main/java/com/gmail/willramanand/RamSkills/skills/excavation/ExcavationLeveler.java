@@ -3,6 +3,7 @@ package com.gmail.willramanand.RamSkills.skills.excavation;
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.leveler.SkillLeveler;
 import com.gmail.willramanand.RamSkills.skills.Skills;
+import com.gmail.willramanand.RamSkills.skills.mining.MiningSource;
 import com.gmail.willramanand.RamSkills.utils.BlockUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -37,6 +38,11 @@ public class ExcavationLeveler extends SkillLeveler implements Listener {
         Block block = event.getBlock();
         plugin.getLeveler().addXp(player, Skills.EXCAVATION, getXp(player, ExcavationSource.valueOf(block.getType().name())));
 
+    }
+
+
+    public void level(Player player, Material type, int blocksDug) {
+        plugin.getLeveler().addXp(player, Skills.EXCAVATION, blocksDug * getXp(player, ExcavationSource.valueOf(type.name())));
     }
 
 

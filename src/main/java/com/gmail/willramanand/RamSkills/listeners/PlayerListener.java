@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 
 public class PlayerListener implements Listener {
 
@@ -34,6 +35,7 @@ public class PlayerListener implements Listener {
         plugin.getPlayerConfig().load(event.getPlayer());
         plugin.getStatManager().allocateStats(event.getPlayer());
         applyModifiers(event.getPlayer(), event);
+        event.getPlayer().setMetadata("readied", new FixedMetadataValue(plugin, false));
     }
 
     @EventHandler
@@ -48,6 +50,7 @@ public class PlayerListener implements Listener {
         if (event.getPlayer().getGameMode() != GameMode.SURVIVAL) return;
         removeModifiers(event.getPlayer());
         applyModifiers(event.getPlayer(), event);
+        event.getPlayer().setMetadata("readied", new FixedMetadataValue(plugin, false));
     }
 
     @EventHandler
@@ -64,6 +67,7 @@ public class PlayerListener implements Listener {
         plugin.getPlayerConfig().save(event.getPlayer(), false);
         plugin.getActionBar().resetActionBar(event.getPlayer());
         removeModifiers(event.getPlayer());
+        event.getPlayer().setMetadata("readied", new FixedMetadataValue(plugin, false));
     }
 
     @EventHandler
@@ -80,10 +84,9 @@ public class PlayerListener implements Listener {
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).addModifier(healthModifier);
         if (!(event instanceof SkillLevelUpEvent))
             player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-        player.setHealthScale(40.0);
+        player.setHealthScale(20.0);
 
         player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).addModifier(swingModifier);
-
         player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).addModifier(speedModifier);
     }
 

@@ -1,9 +1,12 @@
 package com.gmail.willramanand.RamSkills.listeners;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
+import com.gmail.willramanand.RamSkills.events.CriticalStrikeEvent;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.stats.Stat;
+import org.bukkit.Bukkit;
 import org.bukkit.enchantments.EnchantmentTarget;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -76,6 +79,10 @@ public class DamageListener implements Listener {
         }
 
         double newDamage = originalDamage * strengthCalc * critDamage;
+        if (critDamage > 1.0) {
+            CriticalStrikeEvent event = new CriticalStrikeEvent(player);
+            Bukkit.getPluginManager().callEvent(event);
+        }
         return newDamage;
     }
 

@@ -6,6 +6,7 @@ C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSk
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\sorcery\SorcerySource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\alchemy\AlchemySource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\utils\BlockUtils.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\events\CriticalStrikeEvent.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\alchemy\AlchemyLeveler.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\mining\MiningLeveler.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\listeners\DamageListener.java
@@ -14,6 +15,8 @@ C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSk
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\AttackSpeed.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\farming\FarmingSource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\Skill.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\mana\ManaAbility.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\perks\FarmingPerks.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\fishing\FishingLeveler.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\enchanting\EnchantingLeveler.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\excavation\ExcavationSource.java
@@ -44,6 +47,7 @@ C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSk
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\player\PlayerManager.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\Health.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\woodcutting\WoodcuttingLeveler.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\listeners\FortuneListener.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\farming\FarmingLeveler.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\utils\Formatter.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\commands\VersionCommand.java

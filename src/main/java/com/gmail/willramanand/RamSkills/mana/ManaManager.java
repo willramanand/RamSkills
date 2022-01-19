@@ -31,7 +31,7 @@ public class ManaManager {
                             ManaRegenerateEvent event = new ManaRegenerateEvent(player, regen);
                             Bukkit.getPluginManager().callEvent(event);
                             if (!event.isCancelled()) {
-                                skillPlayer.updateMana(regen);
+                                skillPlayer.addMana(regen);
                             }
                     }
 
