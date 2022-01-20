@@ -12,3 +12,5 @@ commands:
 permissions:
   skills.xp:
     default: op
+  skills.lvl:
+    default: op

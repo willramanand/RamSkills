@@ -38,5 +38,5 @@ stat:
     skills: agility
   wisdom:
     base: 100
-    perLvl: 20.0
+    perLvl: 40.0
     skills: alchemy,sorcery,enchanting

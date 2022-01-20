@@ -202,7 +202,7 @@ sources:
     tool_per_level: 50
     book_per_level: 50
   sorcery:
-    mana_ability_use: 0.5
+    mana_ability_use: 2.5
   cooking:
     enchanted_golden_apple: 250.0
     golden_apple: 75.0

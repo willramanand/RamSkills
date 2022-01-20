@@ -7,7 +7,6 @@ import com.gmail.willramanand.RamSkills.utils.BlockUtils;
 import com.gmail.willramanand.RamSkills.utils.ItemUtils;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -25,7 +24,7 @@ public class FortuneListener implements Listener {
         this.plugin = plugin;
     }
 
-    private final ImmutableList<Material> nonOreMats = ImmutableList.of(Material.ANCIENT_DEBRIS,Material.OAK_LOG, Material.SPRUCE_LOG, Material.BIRCH_LOG,
+    private final ImmutableList<Material> nonOreMats = ImmutableList.of(Material.ANCIENT_DEBRIS, Material.OAK_LOG, Material.SPRUCE_LOG, Material.BIRCH_LOG,
             Material.ACACIA_LOG, Material.DARK_OAK_LOG);
 
     private ImmutableList<Material> oreMats = ImmutableList.of(Material.COAL_ORE, Material.IRON_ORE, Material.NETHER_QUARTZ_ORE, Material.REDSTONE_ORE,
@@ -79,21 +78,39 @@ public class FortuneListener implements Listener {
     }
 
     private Material convertOre(Material inputOre, BlockBreakEvent event) {
-        if (ItemUtils.hasSilkTouch(event.getPlayer().getInventory().getItemInMainHand())) {
+        if (event.getPlayer().getInventory().getItemInMainHand() != null && ItemUtils.hasSilkTouch(event.getPlayer().getInventory().getItemInMainHand())) {
             return inputOre;
         }
-        return switch (inputOre) {
-            case COAL_ORE, DEEPSLATE_COAL_ORE -> Material.COAL;
-            case COPPER_ORE, DEEPSLATE_COPPER_ORE -> Material.RAW_COPPER;
-            case IRON_ORE, DEEPSLATE_IRON_ORE -> Material.RAW_IRON;
-            case REDSTONE_ORE, DEEPSLATE_REDSTONE_ORE -> Material.REDSTONE;
-            case LAPIS_ORE, DEEPSLATE_LAPIS_ORE -> Material.LAPIS_LAZULI;
-            case GOLD_ORE, DEEPSLATE_GOLD_ORE -> Material.RAW_GOLD;
-            case DIAMOND_ORE, DEEPSLATE_DIAMOND_ORE -> Material.DIAMOND;
-            case EMERALD_ORE, DEEPSLATE_EMERALD_ORE -> Material.EMERALD;
-            case NETHER_QUARTZ_ORE -> Material.QUARTZ;
-            case NETHER_GOLD_ORE -> Material.GOLD_NUGGET;
-            default -> inputOre;
-        };
+        switch (inputOre) {
+            case COAL_ORE:
+            case DEEPSLATE_COAL_ORE:
+                return Material.COAL;
+            case COPPER_ORE:
+            case DEEPSLATE_COPPER_ORE:
+                return Material.RAW_COPPER;
+            case IRON_ORE:
+            case DEEPSLATE_IRON_ORE:
+                return Material.RAW_IRON;
+            case REDSTONE_ORE:
+            case DEEPSLATE_REDSTONE_ORE:
+                return Material.REDSTONE;
+            case LAPIS_ORE:
+            case DEEPSLATE_LAPIS_ORE:
+                return Material.LAPIS_LAZULI;
+            case GOLD_ORE:
+            case DEEPSLATE_GOLD_ORE:
+                return Material.RAW_GOLD;
+            case DIAMOND_ORE:
+            case DEEPSLATE_DIAMOND_ORE:
+                return Material.DIAMOND;
+            case EMERALD_ORE:
+            case DEEPSLATE_EMERALD_ORE:
+                return Material.EMERALD;
+            case NETHER_QUARTZ_ORE:
+                return Material.QUARTZ;
+            case NETHER_GOLD_ORE:
+                return Material.GOLD_NUGGET;
+        }
+        return inputOre;
     }
 }

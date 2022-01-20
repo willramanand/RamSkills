@@ -40,6 +40,11 @@ public class WoodcuttingLeveler extends SkillLeveler implements Listener {
 
     }
 
+    public void level(Player player, Material type, int blocksChopped) {
+        plugin.getLeveler().addXp(player, Skills.WOODCUTTING, blocksChopped * getXp(player, WoodcuttingSource.valueOf(type.name())));
+    }
+
+
 
 
     private void setValidMats() {

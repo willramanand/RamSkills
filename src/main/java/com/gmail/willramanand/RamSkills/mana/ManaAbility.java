@@ -4,6 +4,7 @@ import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.skills.Skills;
 import com.gmail.willramanand.RamSkills.skills.excavation.ExcavationSource;
+import com.gmail.willramanand.RamSkills.skills.woodcutting.WoodcuttingSource;
 import com.gmail.willramanand.RamSkills.utils.ItemUtils;
 import com.gmail.willramanand.RamSkills.utils.VBlockFace;
 import org.bukkit.Material;
@@ -32,11 +33,13 @@ import java.util.*;
 public class ManaAbility implements Listener {
 
     private final RamSkills plugin;
-    private final List<Block> blockBuffer;
+    private final List<Block> veinBuffer;
+    private final List<Block> treeBuffer;
 
     public ManaAbility(RamSkills plugin) {
         this.plugin = plugin;
-        this.blockBuffer = new ArrayList<>();
+        this.veinBuffer = new ArrayList<>();
+        this.treeBuffer = new ArrayList<>();
     }
 
 
@@ -60,11 +63,10 @@ public class ManaAbility implements Listener {
 
     @EventHandler
     public void cancelReady(PlayerItemHeldEvent event) {
-        if (event.getPlayer().hasMetadata("readied"))
-            if (event.getPlayer().getMetadata("readied").get(0).asBoolean()) {
-                event.getPlayer().setMetadata("readied", new FixedMetadataValue(plugin, false));
-                plugin.getActionBar().sendAbilityActionBar(event.getPlayer(), "Weapon unreadied!");
-            }
+        if (event.getPlayer().hasMetadata("readied")) if (event.getPlayer().getMetadata("readied").get(0).asBoolean()) {
+            event.getPlayer().setMetadata("readied", new FixedMetadataValue(plugin, false));
+            plugin.getActionBar().sendAbilityActionBar(event.getPlayer(), "Weapon unreadied!");
+        }
     }
 
     @EventHandler
@@ -98,7 +100,7 @@ public class ManaAbility implements Listener {
         arrow.setKnockbackStrength(bow.getItemMeta().getEnchantLevel(Enchantment.ARROW_KNOCKBACK));
         arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
 
-        consumeDurability(bow);
+        consumeDurability(player, bow);
         plugin.getActionBar().sendAbilityActionBar(player, "Quickshot activated!");
     }
 
@@ -141,7 +143,7 @@ public class ManaAbility implements Listener {
                     Ageable age = (Ageable) block.getBlockData();
                     if (age.getAge() != age.getMaximumAge()) {
                         block.applyBoneMeal(BlockFace.UP);
-                        consumeDurability(player.getInventory().getItemInMainHand());
+                        consumeDurability(player, player.getInventory().getItemInMainHand());
                         skillPlayer.removeMana(manaCost);
                         isSuccessful = true;
                     }
@@ -152,7 +154,7 @@ public class ManaAbility implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void veinMine(BlockBreakEvent event) {
+    public void pickAbility(BlockBreakEvent event) {
         if (!(ItemUtils.isPick(event.getPlayer().getInventory().getItemInMainHand()))) return;
         if (!(validVein(event.getBlock().getType()))) return;
         if (!(event.getPlayer().getMetadata("readied").get(0).asBoolean())) return;
@@ -160,6 +162,8 @@ public class ManaAbility implements Listener {
         Player player = event.getPlayer();
         ItemStack pick = player.getInventory().getItemInMainHand();
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
+
+        Material type = event.getBlock().getType();
 
         int maxVeinSize = 10;
         int manaCost = 10;
@@ -179,10 +183,10 @@ public class ManaAbility implements Listener {
 
         while (veinBlocks.size() < maxVeinSize) {
             Iterator<Block> trackedBlocks = veinBlocks.iterator();
-            while (trackedBlocks.hasNext() && veinBlocks.size() + this.blockBuffer.size() <= maxVeinSize) {
+            while (trackedBlocks.hasNext() && veinBlocks.size() + this.veinBuffer.size() <= maxVeinSize) {
                 Block current = trackedBlocks.next();
                 for (VBlockFace face : VBlockFace.values()) {
-                    if (veinBlocks.size() + this.blockBuffer.size() >= maxVeinSize) {
+                    if (veinBlocks.size() + this.veinBuffer.size() >= maxVeinSize) {
                         break;
                     }
 
@@ -191,16 +195,16 @@ public class ManaAbility implements Listener {
                         continue;
                     }
 
-                    this.blockBuffer.add(nextBlock);
+                    this.veinBuffer.add(nextBlock);
                 }
             }
 
-            if (blockBuffer.isEmpty()) {
+            if (veinBuffer.isEmpty()) {
                 break;
             }
 
-            veinBlocks.addAll(blockBuffer);
-            blockBuffer.clear();
+            veinBlocks.addAll(veinBuffer);
+            veinBuffer.clear();
         }
 
         manaCost *= veinBlocks.size();
@@ -210,11 +214,11 @@ public class ManaAbility implements Listener {
         }
         skillPlayer.removeMana(manaCost);
 
-        plugin.getMiningLeveler().level(player, event.getBlock(), veinBlocks.size());
+        plugin.getMiningLeveler().level(player, type, veinBlocks.size());
 
         for (Block block : veinBlocks) {
             block.breakNaturally(pick, true);
-            consumeDurability(pick);
+            consumeDurability(player, pick);
         }
         plugin.getActionBar().sendAbilityActionBar(player, "Vein Mine activated!");
     }
@@ -261,7 +265,7 @@ public class ManaAbility implements Listener {
                         return;
                     }
                     block.breakNaturally(shovel, true);
-                    consumeDurability(shovel);
+                    consumeDurability(player, shovel);
                     skillPlayer.removeMana(manaCost);
                     isSuccessful = true;
                     blocksBroken++;
@@ -274,18 +278,95 @@ public class ManaAbility implements Listener {
         if (isSuccessful) plugin.getActionBar().sendAbilityActionBar(player, "Excavator activated!");
     }
 
-    public void consumeDurability(ItemStack item) {
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void axeAbility(BlockBreakEvent event) {
+        if (!(ItemUtils.isAxe(event.getPlayer().getInventory().getItemInMainHand()))) return;
+        if (!(validChop(event.getBlock().getType()))) return;
+        if (!(event.getPlayer().getMetadata("readied").get(0).asBoolean())) return;
+
+        Player player = event.getPlayer();
+        ItemStack axe = player.getInventory().getItemInMainHand();
+        SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
+        Material type = event.getBlock().getType();
+
+        int maxTreeSize = 40;
+        int manaCost = 5;
+
+        if (skillPlayer.getSkillLevel(Skills.WOODCUTTING) < 25) {
+            return;
+        } else if (skillPlayer.getSkillLevel(Skills.WOODCUTTING) >= 50) {
+            // Vein mine 20 blocks
+            maxTreeSize *= 2;
+
+            // Reduced mana cost
+            manaCost /= 2;
+        }
+
+        Set<Block> treeBlocks = new HashSet<>();
+        treeBlocks.add(event.getBlock());
+
+        while (treeBlocks.size() < maxTreeSize) {
+            Iterator<Block> trackedBlocks = treeBlocks.iterator();
+            while (trackedBlocks.hasNext() && treeBlocks.size() + this.treeBuffer.size() <= maxTreeSize) {
+                Block current = trackedBlocks.next();
+                for (VBlockFace face : VBlockFace.values()) {
+                    if (treeBlocks.size() + this.treeBuffer.size() >= maxTreeSize) {
+                        break;
+                    }
+
+                    Block nextBlock = face.getConnectedBlock(current);
+                    if (treeBlocks.contains(nextBlock) || nextBlock.getType() != event.getBlock().getType()) {
+                        continue;
+                    }
+
+                    this.treeBuffer.add(nextBlock);
+                }
+            }
+
+            if (treeBuffer.isEmpty()) {
+                break;
+            }
+
+            treeBlocks.addAll(treeBuffer);
+            treeBuffer.clear();
+        }
+
+        manaCost *= treeBlocks.size();
+        if (!(checkMana(skillPlayer, manaCost))) {
+            plugin.getActionBar().sendAbilityActionBar(player, "&4Not enough mana!");
+            return;
+        }
+        skillPlayer.removeMana(manaCost);
+
+        for (Block block : treeBlocks) {
+            block.breakNaturally(axe, true);
+            consumeDurability(player, axe);
+        }
+
+        plugin.getWoodcuttingLeveler().level(player, type, treeBlocks.size());
+        plugin.getActionBar().sendAbilityActionBar(player, "Treecaptitor activated!");
+    }
+
+    public void consumeDurability(Player player, ItemStack item) {
         double breakChance = 1;
         if (item.getItemMeta().hasEnchant(Enchantment.DURABILITY)) {
             int enchantLvl = item.getItemMeta().getEnchantLevel(Enchantment.DURABILITY);
             breakChance /= (enchantLvl + 1);
         }
 
+        if (item.getItemMeta() == null) return;
+
+        Damageable damage = (Damageable) item.getItemMeta();
         double randDouble = new Random().nextDouble(0.01, 1.01);
         if (randDouble < breakChance) {
-            Damageable damage = (Damageable) item.getItemMeta();
             damage.setDamage(damage.getDamage() + 1);
-            item.setItemMeta(damage);
+        }
+
+        item.setItemMeta(damage);
+
+        if (damage.getDamage() > item.getType().getMaxDurability()) {
+            item.setType(Material.AIR);
+            player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1.0f, 1.0f);
         }
     }
 
@@ -317,27 +398,53 @@ public class ManaAbility implements Listener {
 
     public boolean validCrop(Material type) {
         switch (type) {
-            case WHEAT, CARROTS, POTATOES, BEETROOTS, BAMBOO, MELON_STEM, PUMPKIN_STEM -> {
+            case WHEAT:
+            case CARROTS:
+            case POTATOES:
+            case BEETROOTS:
+            case BAMBOO:
+            case MELON_STEM:
+            case PUMPKIN_STEM:
                 return true;
-            }
-            default -> {
+            default:
                 return false;
-            }
         }
     }
 
     public boolean validVein(Material type) {
         switch (type) {
-            case COAL_ORE, DEEPSLATE_COAL_ORE, COPPER_ORE, DEEPSLATE_COPPER_ORE, IRON_ORE, DEEPSLATE_IRON_ORE,
-                    REDSTONE_ORE, DEEPSLATE_REDSTONE_ORE, LAPIS_ORE, DEEPSLATE_LAPIS_ORE, GOLD_ORE, DEEPSLATE_GOLD_ORE,
-                    DIAMOND_ORE, DEEPSLATE_DIAMOND_ORE, EMERALD_ORE, DEEPSLATE_EMERALD_ORE, NETHER_QUARTZ_ORE,
-                    NETHER_GOLD_ORE, ANCIENT_DEBRIS -> {
+            case COAL_ORE:
+            case COPPER_ORE:
+            case DEEPSLATE_COPPER_ORE:
+            case IRON_ORE:
+            case DEEPSLATE_IRON_ORE:
+            case REDSTONE_ORE:
+            case DEEPSLATE_REDSTONE_ORE:
+            case LAPIS_ORE:
+            case DEEPSLATE_LAPIS_ORE:
+            case GOLD_ORE:
+            case DEEPSLATE_GOLD_ORE:
+            case DIAMOND_ORE:
+            case DEEPSLATE_DIAMOND_ORE:
+            case EMERALD_ORE:
+            case DEEPSLATE_EMERALD_ORE:
+            case NETHER_QUARTZ_ORE:
+            case NETHER_GOLD_ORE:
+            case ANCIENT_DEBRIS:
+            case DEEPSLATE_COAL_ORE:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean validChop(Material type) {
+        for (WoodcuttingSource source : WoodcuttingSource.values()) {
+            if (type.name().equalsIgnoreCase(source.toString())) {
                 return true;
             }
-            default -> {
-                return false;
-            }
         }
+        return false;
     }
 
     public boolean validDig(Material type) {

@@ -5,8 +5,10 @@ package com.gmail.willramanand.RamSkills.leveler;
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.events.SkillLevelUpEvent;
 import com.gmail.willramanand.RamSkills.events.XpGainEvent;
+import com.gmail.willramanand.RamSkills.mana.Ability;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.skills.Skill;
+import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.gmail.willramanand.RamSkills.utils.ColorUtils;
 import com.gmail.willramanand.RamSkills.utils.TextUtil;
 import net.milkbowl.vault.economy.Economy;
@@ -118,7 +120,7 @@ public class Leveler {
         // Sends messages
         sendTitle(player, skill, level);
         playSound(player);
-        player.sendMessage(getLevelUpMessage(skillPlayer, skill));
+        getLevelUpMessage(skillPlayer, skill);
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> checkLevelUp(player, skill), 20L);
     }
 
@@ -134,8 +136,23 @@ public class Leveler {
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 1f, 0.5f);
     }
 
-    private String getLevelUpMessage(SkillPlayer skillPlayer, Skill skill) {
-        return ColorUtils.colorMessage( "&eYou have leveled up to &d" + skillPlayer.getSkillLevel(skill) + " &efor &d" + skill.getDisplayName());
+    private void getLevelUpMessage(SkillPlayer skillPlayer, Skill skill) {
+        Player player = skillPlayer.getPlayer();
+        player.sendMessage(ColorUtils.colorMessage("&6________ [&b " + skill.getDisplayName() + " &a" + skillPlayer.getSkillLevel(skill) + " &6] ________"));
+        if (skillPlayer.getSkillLevel(skill) == 25 && skill.getAbility() != null) {
+            for (Ability ability : skill.getAbility()) {
+                player.sendMessage(ColorUtils.colorMessage("&eYou have unlocked the ability &d" + ability.getDisplayName()));
+            }
+        } else if (skillPlayer.getSkillLevel(skill) == 50 && skill.getAbility() != null) {
+            for (Ability ability : skill.getAbility()) {
+                player.sendMessage(ColorUtils.colorMessage("&eYou have upgraded the ability &d" + ability.getDisplayName()));
+            }
+        }
+        for (Stat stat : skill.getStats()) {
+            double statPerLevel = plugin.getStatManager().getStatPerLvl(stat);
+            player.sendMessage(ColorUtils.colorMessage(stat.getPrefix() + stat.getDisplayName() + " " + stat.getSymbol() + "&8: &f+ " + stat.getPrefix() + statPerLevel));
+        }
+        player.sendMessage("");
     }
 
     public XpReqs getXpRequirements() {

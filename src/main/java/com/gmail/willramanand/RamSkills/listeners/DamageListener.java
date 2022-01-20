@@ -3,8 +3,11 @@ package com.gmail.willramanand.RamSkills.listeners;
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.events.CriticalStrikeEvent;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
+import com.gmail.willramanand.RamSkills.skills.Skills;
 import com.gmail.willramanand.RamSkills.stats.Stat;
+import com.gmail.willramanand.RamSkills.utils.ItemUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -13,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Random;
@@ -53,7 +57,8 @@ public class DamageListener implements Listener {
             if (!(EnchantmentTarget.TOOL.includes(playerItem)) && !(EnchantmentTarget.WEAPON.includes(playerItem))) return;
             isValid = true;
 
-        } else if (event.getDamager() instanceof Projectile projectile) {
+        } else if (event.getDamager() instanceof Projectile) {
+            Projectile projectile = (Projectile) event.getDamager();
             if (projectile.getShooter() instanceof Player) {
                 player = (Player) projectile.getShooter();
 
@@ -65,6 +70,11 @@ public class DamageListener implements Listener {
 
         if (!isValid) return;
         double newDamage = calculateDamage(player, damage);
+
+        if (ItemUtils.isSword(player.getInventory().getItemInMainHand())
+                && player.getMetadata("readied").get(0).asBoolean())
+            lifeStealAbility(player, newDamage);
+
         event.setDamage(newDamage);
     }
 
@@ -95,5 +105,36 @@ public class DamageListener implements Listener {
             return true;
         }
         return false;
+    }
+
+    public void lifeStealAbility(Player player, double damage) {
+        SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
+        double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        double baseSteal = 0.1;
+        double manaCost = 0.5;
+        double startHealth = player.getHealth();
+
+        if (skillPlayer.getSkillLevel(Skills.COMBAT) < 25) {
+            return;
+        } else if (skillPlayer.getSkillLevel(Skills.COMBAT) == 50) {
+            baseSteal = 0.25;
+            manaCost = 0.3;
+        }
+
+        double heal = player.getHealth() + (baseSteal * damage);
+
+        manaCost *= heal;
+        if (!(plugin.getManaAbility().checkMana(skillPlayer, manaCost))) {
+            plugin.getActionBar().sendAbilityActionBar(player, "&4Not enough mana!");
+            return;
+        }
+
+        if (heal >= maxHealth) {
+            heal = maxHealth;
+        }
+        player.setHealth(heal);
+        EntityRegainHealthEvent event = new EntityRegainHealthEvent(player, player.getHealth() - startHealth, EntityRegainHealthEvent.RegainReason.CUSTOM);
+        Bukkit.getPluginManager().callEvent(event);
+        plugin.getActionBar().sendAbilityActionBar(player, "Soul Steal Activated!");
     }
 }

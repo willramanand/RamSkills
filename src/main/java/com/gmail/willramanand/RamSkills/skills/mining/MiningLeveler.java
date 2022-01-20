@@ -39,8 +39,8 @@ public class MiningLeveler extends SkillLeveler implements Listener {
 
     }
 
-    public void level(Player player, Block block, int blocksMined) {
-        plugin.getLeveler().addXp(player, Skills.MINING, blocksMined * getXp(player, MiningSource.valueOf(block.getType().name())));
+    public void level(Player player, Material type, int blocksMined) {
+        plugin.getLeveler().addXp(player, Skills.MINING, blocksMined * getXp(player, MiningSource.valueOf(type.name())));
     }
 
 

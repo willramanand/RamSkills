@@ -82,7 +82,7 @@ public class PlayerListener implements Listener {
         speedModifier = new AttributeModifier(Stat.SPEED.getModifierName(), skillPlayer.getStatPoint(Stat.SPEED), AttributeModifier.Operation.MULTIPLY_SCALAR_1);
 
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).addModifier(healthModifier);
-        if (!(event instanceof SkillLevelUpEvent))
+        if (event instanceof PlayerJoinEvent)
             player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
         player.setHealthScale(20.0);
 
