@@ -1,7 +1,6 @@
 package com.gmail.willramanand.RamSkills.utils;
 
 import com.google.common.base.Preconditions;
-
 import org.bukkit.block.Block;
 import org.bukkit.util.Vector;
 

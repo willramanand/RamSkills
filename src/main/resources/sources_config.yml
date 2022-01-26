@@ -1,9 +1,9 @@
 sources:
   farming:
     wheat: 2.0
-    potato: 2.5
-    carrot: 2.7
-    beetroot: 3.0
+    potatoes: 2.5
+    carrots: 2.7
+    beetroots: 3.0
     nether_wart: 3.0
     pumpkin: 3.4
     melon: 3.4

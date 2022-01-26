@@ -5,9 +5,10 @@ import com.gmail.willramanand.RamSkills.events.SkillLevelUpEvent;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.gmail.willramanand.RamSkills.utils.BlockUtils;
+import com.gmail.willramanand.RamSkills.utils.ColorUtils;
+import com.gmail.willramanand.RamSkills.utils.XpModifierUtil;
 import org.bukkit.GameMode;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -22,9 +23,6 @@ import org.bukkit.metadata.FixedMetadataValue;
 public class PlayerListener implements Listener {
 
     private final RamSkills plugin;
-    private AttributeModifier healthModifier;
-    private AttributeModifier speedModifier;
-    private AttributeModifier swingModifier;
 
     public PlayerListener(RamSkills plugin) {
         this.plugin = plugin;
@@ -36,19 +34,19 @@ public class PlayerListener implements Listener {
         plugin.getStatManager().allocateStats(event.getPlayer());
         applyModifiers(event.getPlayer(), event);
         event.getPlayer().setMetadata("readied", new FixedMetadataValue(plugin, false));
+
+        if (XpModifierUtil.getActive()) event.getPlayer().sendMessage(ColorUtils.colorMessage("&d" + XpModifierUtil.getModifier() + "x &eXP event is active!"));
     }
 
     @EventHandler
     public void onLevel(SkillLevelUpEvent event) {
         plugin.getStatManager().allocateStats(event.getPlayer());
-        removeModifiers(event.getPlayer());
         applyModifiers(event.getPlayer(), event);
     }
 
     @EventHandler
     public void worldChange(PlayerChangedWorldEvent event) {
         if (event.getPlayer().getGameMode() != GameMode.SURVIVAL) return;
-        removeModifiers(event.getPlayer());
         applyModifiers(event.getPlayer(), event);
         event.getPlayer().setMetadata("readied", new FixedMetadataValue(plugin, false));
     }
@@ -66,7 +64,6 @@ public class PlayerListener implements Listener {
     public void leave(PlayerQuitEvent event) {
         plugin.getPlayerConfig().save(event.getPlayer(), false);
         plugin.getActionBar().resetActionBar(event.getPlayer());
-        removeModifiers(event.getPlayer());
         event.getPlayer().setMetadata("readied", new FixedMetadataValue(plugin, false));
     }
 
@@ -77,23 +74,19 @@ public class PlayerListener implements Listener {
 
     public void applyModifiers(Player player, Event event) {
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
-        healthModifier = new AttributeModifier(Stat.HEALTH.getModifierName(), skillPlayer.getStatPoint(Stat.HEALTH), AttributeModifier.Operation.ADD_NUMBER);
-        swingModifier = new AttributeModifier(Stat.ATTACK_SPEED.getModifierName(), skillPlayer.getStatPoint(Stat.ATTACK_SPEED), AttributeModifier.Operation.ADD_NUMBER);
-        speedModifier = new AttributeModifier(Stat.SPEED.getModifierName(), skillPlayer.getStatPoint(Stat.SPEED), AttributeModifier.Operation.MULTIPLY_SCALAR_1);
 
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).addModifier(healthModifier);
+        double healthAdd = skillPlayer.getStatPoint(Stat.HEALTH);
+        double moveAdd = 1 + skillPlayer.getStatPoint(Stat.SPEED);
+        double swingAdd = skillPlayer.getStatPoint(Stat.ATTACK_SPEED);
+
+        int baseHealth = 20;
+        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(baseHealth + healthAdd);
+        int baseSwing = 4;
+        player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(baseSwing + swingAdd);
+        double baseSpeed = 0.15;
+        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(baseSpeed * moveAdd);
         if (event instanceof PlayerJoinEvent)
-            player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-        player.setHealthScale(20.0);
-
-        player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).addModifier(swingModifier);
-        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).addModifier(speedModifier);
-    }
-
-    public void removeModifiers(Player player) {
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).removeModifier(healthModifier);
-        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).removeModifier(speedModifier);
-        player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).removeModifier(swingModifier);
+            player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
         player.setHealthScale(20.0);
     }
 }

@@ -5,6 +5,7 @@ import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.skills.Skills;
 import com.gmail.willramanand.RamSkills.utils.BigNumber;
 import com.gmail.willramanand.RamSkills.utils.TextUtil;
+import com.gmail.willramanand.RamSkills.utils.XpModifierUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -61,11 +62,20 @@ public class SkillBossBar implements Listener {
         // If player does not have a boss bar in that skill
         if (bossBar == null) {
             if (!maxed) {
-                bossBar = Bukkit.createBossBar(TextUtil.replace("&6{skill} {level} &7({current_xp}/{level_xp} XP)",
-                        "{skill}", skill.getDisplayName(),
-                        "{level}", String.valueOf(level),
-                        "{current_xp}", String.valueOf((int) currentXp),
-                        "{level_xp}", BigNumber.withSuffix((long) levelXp)), color, style);
+                if (XpModifierUtil.getActive()) {
+                    bossBar = Bukkit.createBossBar(TextUtil.replace("&6{skill} {level} &7({current_xp}/{level_xp} XP) &6{modifier}x",
+                            "{skill}", skill.getDisplayName(),
+                            "{level}", String.valueOf(level),
+                            "{current_xp}", String.valueOf((int) currentXp),
+                            "{level_xp}", BigNumber.withSuffix((long) levelXp),
+                            "{modifier}", String.valueOf(XpModifierUtil.getModifier())), color, style);
+                } else {
+                    bossBar = Bukkit.createBossBar(TextUtil.replace("&6{skill} {level} &7({current_xp}/{level_xp} XP)",
+                            "{skill}", skill.getDisplayName(),
+                            "{level}", String.valueOf(level),
+                            "{current_xp}", String.valueOf((int) currentXp),
+                            "{level_xp}", BigNumber.withSuffix((long) levelXp)), color, style);
+                }
             } else {
                 bossBar = Bukkit.createBossBar(TextUtil.replace("&6{skill} {level} &7(MAXED)",
                         "{skill}", skill.getDisplayName(),
@@ -84,11 +94,20 @@ public class SkillBossBar implements Listener {
         // Use existing one
         else {
             if (!maxed) {
-                bossBar.setTitle(TextUtil.replace("&6{skill} {level} &7({current_xp}/{level_xp} XP)",
-                        "{skill}", skill.getDisplayName(),
-                        "{level}", String.valueOf(level),
-                        "{current_xp}", String.valueOf((int) currentXp),
-                        "{level_xp}", BigNumber.withSuffix((long) levelXp)));
+                if (XpModifierUtil.getActive()) {
+                    bossBar.setTitle(TextUtil.replace("&6{skill} {level} &7({current_xp}/{level_xp} XP) &6{modifier}x",
+                            "{skill}", skill.getDisplayName(),
+                            "{level}", String.valueOf(level),
+                            "{current_xp}", String.valueOf((int) currentXp),
+                            "{level_xp}", BigNumber.withSuffix((long) levelXp),
+                            "{modifier}", String.valueOf(XpModifierUtil.getModifier())));
+                } else {
+                    bossBar.setTitle(TextUtil.replace("&6{skill} {level} &7({current_xp}/{level_xp} XP)",
+                            "{skill}", skill.getDisplayName(),
+                            "{level}", String.valueOf(level),
+                            "{current_xp}", String.valueOf((int) currentXp),
+                            "{level_xp}", BigNumber.withSuffix((long) levelXp)));
+                }
             } else {
                 bossBar.setTitle(TextUtil.replace("&6{skill} {level} &7(MAXED)",
                         "{level}", String.valueOf(level),

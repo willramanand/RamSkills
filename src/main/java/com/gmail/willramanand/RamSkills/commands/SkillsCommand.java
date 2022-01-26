@@ -10,6 +10,7 @@ import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.skills.Skills;
 import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.gmail.willramanand.RamSkills.utils.ColorUtils;
+import com.gmail.willramanand.RamSkills.utils.XpModifierUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -50,11 +51,11 @@ public class SkillsCommand extends BaseCommand {
                     if (skill.getAbility() != null) {
                         player.sendMessage("");
                         for (Ability ability : skill.getAbility()) {
-                            if (skillPlayer.getSkillLevel(skill) < 25) {
+                            if (skillPlayer.getSkillLevel(skill) < ability.getUnlock()) {
                                 player.sendMessage(ColorUtils.colorMessage("&3" + ability.getDisplayName() + "&8: &cUNLOCKS AT LVL 25"));
-                            } else if (skillPlayer.getSkillLevel(skill) >= 25 && skillPlayer.getSkillLevel(skill) < 50) {
+                            } else if (skillPlayer.getSkillLevel(skill) >= ability.getUnlock() && skillPlayer.getSkillLevel(skill) < ability.getUpgrade()) {
                                 player.sendMessage(ColorUtils.colorMessage("&3" + ability.getDisplayName() + "&8: &aUNLOCKED &8| &dUPGRADES AT LVL 50"));
-                            } else if (skillPlayer.getSkillLevel(skill) >= 50) {
+                            } else if (skillPlayer.getSkillLevel(skill) >= ability.getUpgrade()) {
                                 player.sendMessage(ColorUtils.colorMessage("&3" + ability.getDisplayName() + "&8: &dUPGRADED"));
                             }
                         }
@@ -115,6 +116,20 @@ public class SkillsCommand extends BaseCommand {
         sender.sendMessage(ColorUtils.colorMessage("&dAuthor: &eWillRam"));
         sender.sendMessage(ColorUtils.colorMessage("&dVersion: &e" + plugin.getDescription().getVersion()));
         sender.sendMessage(ColorUtils.colorMessage("&e" + plugin.getDescription().getDescription()));
+    }
+
+    @Subcommand("xpevent|xevent")
+    @Description("Set a global xp event")
+    @CommandPermission("skills.xpevent")
+    public void xpEvent(CommandSender sender, int modifier) {
+        if (modifier == 1) {
+            sender.sendMessage(ColorUtils.colorMessage("&cDisabled &exp event!"));
+        } else if (modifier > 1) {
+            sender.sendMessage(ColorUtils.colorMessage("&aEnabled &exp event with modifier of &d" + modifier));
+        } else {
+            return;
+        }
+        XpModifierUtil.setModifier(modifier);
     }
 
     @Subcommand("help|h")

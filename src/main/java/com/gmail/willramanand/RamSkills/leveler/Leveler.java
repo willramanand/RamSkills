@@ -11,6 +11,7 @@ import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.gmail.willramanand.RamSkills.utils.ColorUtils;
 import com.gmail.willramanand.RamSkills.utils.TextUtil;
+import com.gmail.willramanand.RamSkills.utils.XpModifierUtil;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -45,7 +46,7 @@ public class Leveler {
         Bukkit.getPluginManager().callEvent(event);
         if (!event.isCancelled()) {
             //Adds xp
-            double modifier = skillPlayer.getXpModifier(skill);
+            double modifier = skillPlayer.getXpModifier(skill) * XpModifierUtil.getModifier();
             skillPlayer.addSkillXp(skill, modifier * event.getAmount());
             //Check if player leveled up
             checkLevelUp(player, skill);

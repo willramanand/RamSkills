@@ -88,5 +88,4 @@ public class AlchemyLeveler extends SkillLeveler implements Listener {
             }
         }
     }
-
 }

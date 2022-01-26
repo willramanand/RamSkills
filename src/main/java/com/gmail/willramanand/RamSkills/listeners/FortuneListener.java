@@ -1,6 +1,7 @@
 package com.gmail.willramanand.RamSkills.listeners;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
+import com.gmail.willramanand.RamSkills.events.AbilityFortuneEvent;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.gmail.willramanand.RamSkills.utils.BlockUtils;
@@ -25,35 +26,48 @@ public class FortuneListener implements Listener {
     }
 
     private final ImmutableList<Material> nonOreMats = ImmutableList.of(Material.ANCIENT_DEBRIS, Material.OAK_LOG, Material.SPRUCE_LOG, Material.BIRCH_LOG,
-            Material.ACACIA_LOG, Material.DARK_OAK_LOG);
+            Material.ACACIA_LOG, Material.DARK_OAK_LOG, Material.CRIMSON_STEM, Material.WARPED_STEM, Material.STRIPPED_OAK_LOG, Material.STRIPPED_SPRUCE_LOG, Material.STRIPPED_BIRCH_LOG,
+            Material.STRIPPED_ACACIA_LOG, Material.STRIPPED_DARK_OAK_LOG, Material.STRIPPED_CRIMSON_STEM, Material.STRIPPED_WARPED_STEM);
 
     private ImmutableList<Material> oreMats = ImmutableList.of(Material.COAL_ORE, Material.IRON_ORE, Material.NETHER_QUARTZ_ORE, Material.REDSTONE_ORE,
             Material.GOLD_ORE, Material.LAPIS_ORE, Material.DIAMOND_ORE, Material.EMERALD_ORE, Material.NETHER_GOLD_ORE, Material.COPPER_ORE, Material.DEEPSLATE_COAL_ORE,
             Material.DEEPSLATE_COPPER_ORE, Material.DEEPSLATE_IRON_ORE, Material.DEEPSLATE_GOLD_ORE, Material.DEEPSLATE_REDSTONE_ORE, Material.DEEPSLATE_EMERALD_ORE,
             Material.DEEPSLATE_LAPIS_ORE, Material.DEEPSLATE_DIAMOND_ORE);
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void fortune(BlockBreakEvent event) {
-        Material dropMat = Material.AIR;
-        if (oreMats.contains(event.getBlock().getType())) {
-            dropMat = convertOre(event.getBlock().getType(), event);
+        Material dropMat = event.getBlock().getType();
+        if (oreMats.contains(dropMat)) {
+            dropMat = convertOre(event.getBlock().getType(), event.getPlayer());
         } else if (!(nonOreMats.contains(event.getBlock().getType()))) {
             return;
         }
 
         if (BlockUtils.isPlayerPlaced(event.getBlock())) return;
 
-        int fortuneMult = fortuneCalc(event.getPlayer());
-        int dropAmount = 0;
-
-        for (ItemStack item : event.getBlock().getDrops()) {
-            dropAmount += item.getAmount();
-        }
+        int fortuneAdd = fortuneCalc(event.getPlayer());
 
         ItemStack newItem = new ItemStack(dropMat);
-        newItem.setAmount(dropAmount * fortuneMult);
-        if (newItem.getType() == Material.AIR || newItem.getAmount() == 0) return;
-        event.getPlayer().getWorld().dropItemNaturally(event.getBlock().getLocation(), newItem);
+        newItem.setAmount(fortuneAdd);
+        if (dropMat == Material.AIR || newItem.getAmount() == 0) return;
+        event.getPlayer().getWorld().dropItem(event.getBlock().getLocation(), newItem);
+    }
+
+    @EventHandler
+    public void fortuneAbility(AbilityFortuneEvent event) {
+        Material dropMat = event.getType();
+        if (oreMats.contains(dropMat)) {
+            dropMat = convertOre(event.getType(), event.getPlayer());
+        } else if (!(nonOreMats.contains(event.getType()))) {
+            return;
+        }
+
+        int fortuneMult = fortuneCalc(event.getPlayer());
+
+        ItemStack newItem = new ItemStack(dropMat);
+        newItem.setAmount((event.getAmount() - 1)* fortuneMult);
+        if (dropMat == Material.AIR || newItem.getAmount() == 0) return;
+        event.getPlayer().getWorld().dropItem(event.getBlockLocation(), newItem);
     }
 
     private int fortuneCalc(Player player) {
@@ -68,7 +82,6 @@ public class FortuneListener implements Listener {
 
         // Get full 100s
         fortuneMult += fullLevel;
-
         // < 100% Fortune
         if (remainder >= randDouble) {
             fortuneMult++;
@@ -77,8 +90,8 @@ public class FortuneListener implements Listener {
         return fortuneMult;
     }
 
-    private Material convertOre(Material inputOre, BlockBreakEvent event) {
-        if (event.getPlayer().getInventory().getItemInMainHand() != null && ItemUtils.hasSilkTouch(event.getPlayer().getInventory().getItemInMainHand())) {
+    private Material convertOre(Material inputOre, Player player) {
+        if (player.getInventory().getItemInMainHand() != null && ItemUtils.hasSilkTouch(player.getInventory().getItemInMainHand())) {
             return inputOre;
         }
         switch (inputOre) {

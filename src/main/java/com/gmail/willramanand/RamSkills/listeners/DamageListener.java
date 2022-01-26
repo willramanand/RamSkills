@@ -2,6 +2,7 @@ package com.gmail.willramanand.RamSkills.listeners;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.events.CriticalStrikeEvent;
+import com.gmail.willramanand.RamSkills.mana.Ability;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.skills.Skills;
 import com.gmail.willramanand.RamSkills.stats.Stat;
@@ -9,7 +10,6 @@ import com.gmail.willramanand.RamSkills.utils.ItemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.EnchantmentTarget;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -41,7 +41,7 @@ public class DamageListener implements Listener {
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
 
         double damageReduction = 1 - (skillPlayer.getStatPoint(Stat.TOUGHNESS) / (skillPlayer.getStatPoint(Stat.TOUGHNESS) + 100));
-        event.setDamage(damageReduction * event.getFinalDamage());
+        event.setDamage(event.getFinalDamage() * damageReduction);
     }
 
 
@@ -111,12 +111,12 @@ public class DamageListener implements Listener {
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
         double maxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         double baseSteal = 0.1;
-        double manaCost = 0.5;
+        double manaCost = Ability.SOUL_STEAL.getManaCost();
         double startHealth = player.getHealth();
 
-        if (skillPlayer.getSkillLevel(Skills.COMBAT) < 25) {
+        if (skillPlayer.getSkillLevel(Skills.COMBAT) < Ability.SOUL_STEAL.getUnlock()) {
             return;
-        } else if (skillPlayer.getSkillLevel(Skills.COMBAT) == 50) {
+        } else if (skillPlayer.getSkillLevel(Skills.COMBAT) == Ability.SOUL_STEAL.getUpgrade()) {
             baseSteal = 0.25;
             manaCost = 0.3;
         }

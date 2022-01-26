@@ -14,3 +14,5 @@ permissions:
     default: op
   skills.lvl:
     default: op
+  skills.xpevent:
+    default: op

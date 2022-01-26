@@ -1,12 +1,14 @@
 package com.gmail.willramanand.RamSkills.mana;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
+import com.gmail.willramanand.RamSkills.events.AbilityFortuneEvent;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.skills.Skills;
 import com.gmail.willramanand.RamSkills.skills.excavation.ExcavationSource;
 import com.gmail.willramanand.RamSkills.skills.woodcutting.WoodcuttingSource;
 import com.gmail.willramanand.RamSkills.utils.ItemUtils;
 import com.gmail.willramanand.RamSkills.utils.VBlockFace;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -27,6 +29,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
@@ -35,11 +38,13 @@ public class ManaAbility implements Listener {
     private final RamSkills plugin;
     private final List<Block> veinBuffer;
     private final List<Block> treeBuffer;
+    private final Set<Player> bowPaused;
 
     public ManaAbility(RamSkills plugin) {
         this.plugin = plugin;
         this.veinBuffer = new ArrayList<>();
         this.treeBuffer = new ArrayList<>();
+        this.bowPaused = new HashSet<>();
     }
 
 
@@ -71,16 +76,20 @@ public class ManaAbility implements Listener {
 
     @EventHandler
     public void bowAbility(PlayerInteractEvent event) {
-        int manaCost = 15;
+        double manaCost = Ability.QUICKSHOT.getManaCost();
         Player player = event.getPlayer();
 
         if (!(ItemUtils.isBow(player.getInventory().getItemInMainHand()))) return;
         if (!(event.getAction().isLeftClick())) return;
         if (player.isSneaking()) return;
+        if (bowPaused.contains(player)) {
+            plugin.getActionBar().sendAbilityActionBar(player, "&4On Cooldown!");
+            return;
+        }
 
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
-        if (skillPlayer.getSkillLevel(Skills.COMBAT) < 25) return;
-        if (skillPlayer.getSkillLevel(Skills.COMBAT) >= 50) manaCost /= 2;
+        if (skillPlayer.getSkillLevel(Skills.COMBAT) < Ability.QUICKSHOT.getUnlock()) return;
+        if (skillPlayer.getSkillLevel(Skills.COMBAT) >= Ability.QUICKSHOT.getUpgrade()) manaCost /= 2;
         if (checkMana(skillPlayer, manaCost)) {
             skillPlayer.removeMana(manaCost);
         } else {
@@ -102,6 +111,7 @@ public class ManaAbility implements Listener {
 
         consumeDurability(player, bow);
         plugin.getActionBar().sendAbilityActionBar(player, "Quickshot activated!");
+        setBowPaused(player, 10);
     }
 
     @EventHandler
@@ -112,15 +122,15 @@ public class ManaAbility implements Listener {
 
         Player player = event.getPlayer();
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
-        double manaCost = 1.0;
+        double manaCost = Ability.DEMETERS_TOUCH.getManaCost();
 
         // Ability size 5x5
         int startBlock = -2;
         int endBlock = 3;
 
-        if (skillPlayer.getSkillLevel(Skills.FARMING) < 25) {
+        if (skillPlayer.getSkillLevel(Skills.FARMING) < Ability.DEMETERS_TOUCH.getUnlock()) {
             return;
-        } else if (skillPlayer.getSkillLevel(Skills.FARMING) >= 50) {
+        } else if (skillPlayer.getSkillLevel(Skills.FARMING) >= Ability.DEMETERS_TOUCH.getUpgrade()) {
             // Ability size 9x9
             startBlock = -4;
             endBlock = 5;
@@ -166,11 +176,11 @@ public class ManaAbility implements Listener {
         Material type = event.getBlock().getType();
 
         int maxVeinSize = 10;
-        int manaCost = 10;
+        double manaCost = Ability.VEIN_MINER.getManaCost();
 
-        if (skillPlayer.getSkillLevel(Skills.MINING) < 25) {
+        if (skillPlayer.getSkillLevel(Skills.MINING) < Ability.VEIN_MINER.getUnlock()) {
             return;
-        } else if (skillPlayer.getSkillLevel(Skills.MINING) >= 50) {
+        } else if (skillPlayer.getSkillLevel(Skills.MINING) >= Ability.VEIN_MINER.getUpgrade()) {
             // Vein mine 20 blocks
             maxVeinSize *= 2;
 
@@ -220,6 +230,7 @@ public class ManaAbility implements Listener {
             block.breakNaturally(pick, true);
             consumeDurability(player, pick);
         }
+        Bukkit.getPluginManager().callEvent(new AbilityFortuneEvent(player, type, event.getBlock().getLocation(), veinBlocks.size()));
         plugin.getActionBar().sendAbilityActionBar(player, "Vein Mine activated!");
     }
 
@@ -232,15 +243,15 @@ public class ManaAbility implements Listener {
         Player player = event.getPlayer();
         ItemStack shovel = player.getInventory().getItemInMainHand();
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
-        double manaCost = 2.5;
+        double manaCost = Ability.EXCAVATOR.getManaCost();
 
         // Ability size 5x5
         int startBlock = -2;
         int endBlock = 3;
 
-        if (skillPlayer.getSkillLevel(Skills.EXCAVATION) < 25) {
+        if (skillPlayer.getSkillLevel(Skills.EXCAVATION) < Ability.EXCAVATOR.getUnlock()) {
             return;
-        } else if (skillPlayer.getSkillLevel(Skills.EXCAVATION) >= 50) {
+        } else if (skillPlayer.getSkillLevel(Skills.EXCAVATION) >= Ability.EXCAVATOR.getUpgrade()) {
             // Ability size 9x9
             startBlock = -4;
             endBlock = 5;
@@ -290,11 +301,11 @@ public class ManaAbility implements Listener {
         Material type = event.getBlock().getType();
 
         int maxTreeSize = 40;
-        int manaCost = 5;
+        double manaCost = Ability.TREECAPTITOR.getManaCost();
 
-        if (skillPlayer.getSkillLevel(Skills.WOODCUTTING) < 25) {
+        if (skillPlayer.getSkillLevel(Skills.WOODCUTTING) < Ability.TREECAPTITOR.getUnlock()) {
             return;
-        } else if (skillPlayer.getSkillLevel(Skills.WOODCUTTING) >= 50) {
+        } else if (skillPlayer.getSkillLevel(Skills.WOODCUTTING) >= Ability.TREECAPTITOR.getUpgrade()) {
             // Vein mine 20 blocks
             maxTreeSize *= 2;
 
@@ -344,12 +355,13 @@ public class ManaAbility implements Listener {
         }
 
         plugin.getWoodcuttingLeveler().level(player, type, treeBlocks.size());
+        Bukkit.getPluginManager().callEvent(new AbilityFortuneEvent(player, type, event.getBlock().getLocation(), treeBlocks.size()));
         plugin.getActionBar().sendAbilityActionBar(player, "Treecaptitor activated!");
     }
 
     public void consumeDurability(Player player, ItemStack item) {
         double breakChance = 1;
-        if (item.getItemMeta().hasEnchant(Enchantment.DURABILITY)) {
+        if (item.getItemMeta() != null && item.getItemMeta().hasEnchant(Enchantment.DURABILITY)) {
             int enchantLvl = item.getItemMeta().getEnchantLevel(Enchantment.DURABILITY);
             breakChance /= (enchantLvl + 1);
         }
@@ -365,9 +377,19 @@ public class ManaAbility implements Listener {
         item.setItemMeta(damage);
 
         if (damage.getDamage() > item.getType().getMaxDurability()) {
-            item.setType(Material.AIR);
+            player.getInventory().remove(item);
             player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1.0f, 1.0f);
         }
+    }
+
+    public void setBowPaused(Player player, int ticks) {
+        bowPaused.add(player);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                bowPaused.remove(player);
+                }
+        }.runTaskLater(plugin, ticks);
     }
 
     public int checkBowFire(ItemStack bow) {
@@ -405,6 +427,7 @@ public class ManaAbility implements Listener {
             case BAMBOO:
             case MELON_STEM:
             case PUMPKIN_STEM:
+            case SWEET_BERRY_BUSH:
                 return true;
             default:
                 return false;

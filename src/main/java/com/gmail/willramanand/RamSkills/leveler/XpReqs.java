@@ -87,7 +87,7 @@ public class XpReqs {
     private void addDefaultXpRequirements() {
         defaultXpRequirements.clear();
         for (int i = 0; i < maxLevel - 1; i++) {
-            defaultXpRequirements.add((int) ((50.0 * i) + 100));
+            defaultXpRequirements.add((int) ((100.0 * i) + 100));
         }
     }
 

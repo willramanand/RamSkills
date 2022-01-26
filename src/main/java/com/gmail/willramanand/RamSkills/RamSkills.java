@@ -6,6 +6,7 @@ import com.gmail.willramanand.RamSkills.commands.SkillsCommand;
 import com.gmail.willramanand.RamSkills.leveler.Leveler;
 import com.gmail.willramanand.RamSkills.listeners.DamageListener;
 import com.gmail.willramanand.RamSkills.listeners.FortuneListener;
+import com.gmail.willramanand.RamSkills.listeners.GUIListener;
 import com.gmail.willramanand.RamSkills.listeners.PlayerListener;
 import com.gmail.willramanand.RamSkills.mana.ManaAbility;
 import com.gmail.willramanand.RamSkills.mana.ManaManager;
@@ -15,11 +16,15 @@ import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.skills.SkillRegistry;
 import com.gmail.willramanand.RamSkills.skills.Skills;
 import com.gmail.willramanand.RamSkills.skills.agility.AgilityLeveler;
+import com.gmail.willramanand.RamSkills.skills.agility.AgilityPerks;
 import com.gmail.willramanand.RamSkills.skills.alchemy.AlchemyLeveler;
+import com.gmail.willramanand.RamSkills.skills.alchemy.AlchemyPerks;
 import com.gmail.willramanand.RamSkills.skills.combat.CombatLeveler;
 import com.gmail.willramanand.RamSkills.skills.cooking.CookingLeveler;
+import com.gmail.willramanand.RamSkills.skills.cooking.CookingPerks;
 import com.gmail.willramanand.RamSkills.skills.defense.DefenseLeveler;
 import com.gmail.willramanand.RamSkills.skills.enchanting.EnchantingLeveler;
+import com.gmail.willramanand.RamSkills.skills.enchanting.EnchantingPerks;
 import com.gmail.willramanand.RamSkills.skills.excavation.ExcavationLeveler;
 import com.gmail.willramanand.RamSkills.skills.farming.FarmingLeveler;
 import com.gmail.willramanand.RamSkills.skills.fishing.FishingLeveler;
@@ -33,6 +38,7 @@ import com.gmail.willramanand.RamSkills.stats.StatRegistry;
 import com.gmail.willramanand.RamSkills.ui.ActionBar;
 import com.gmail.willramanand.RamSkills.ui.SkillBossBar;
 import com.gmail.willramanand.RamSkills.utils.ColorUtils;
+import com.gmail.willramanand.RamSkills.utils.XpModifierUtil;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -118,6 +124,7 @@ public class RamSkills extends JavaPlugin {
         registerCommands();
 
         // Load Modules
+        XpModifierUtil.load();
         sourceManager.loadSources();
         statManager.loadStats();
 
@@ -137,7 +144,7 @@ public class RamSkills extends JavaPlugin {
         for (Player player : Bukkit.getOnlinePlayers()) {
             playerConfiguration.save(player, true);
         }
-
+        XpModifierUtil.save();
         actionBar.resetActionBars();
         log.info("Disabled");
     }
@@ -179,10 +186,12 @@ public class RamSkills extends JavaPlugin {
     private void registerEvents() {
         PluginManager pm = getServer().getPluginManager();
 
+        // General Listeners
         pm.registerEvents(playerListener, this);
         pm.registerEvents(new DamageListener(this), this);
         pm.registerEvents(bossBar, this);
         pm.registerEvents(new FortuneListener(this), this);
+        pm.registerEvents(new GUIListener(this), this);
 
         // Levelers
         pm.registerEvents(new CombatLeveler(this), this);
@@ -197,6 +206,13 @@ public class RamSkills extends JavaPlugin {
         pm.registerEvents(new FishingLeveler(this), this);
         pm.registerEvents(new AlchemyLeveler(this), this);
 
+        // Perks
+        pm.registerEvents(new AlchemyPerks(this), this);
+        pm.registerEvents(new AgilityPerks(this), this);
+        pm.registerEvents(new CookingPerks(this), this);
+        pm.registerEvents(new EnchantingPerks(this), this);
+
+        // Mana Abilities
         pm.registerEvents(manaAbility, this);
 
     }

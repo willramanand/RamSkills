@@ -35,7 +35,7 @@ public class ItemUtils {
     }
 
     public static boolean hasSilkTouch(ItemStack item) {
-        if (item.getItemMeta().hasEnchant(Enchantment.SILK_TOUCH)) return true;
+        if (item.getItemMeta() != null && item.getItemMeta().hasEnchant(Enchantment.SILK_TOUCH)) return true;
         return false;
     }
 }

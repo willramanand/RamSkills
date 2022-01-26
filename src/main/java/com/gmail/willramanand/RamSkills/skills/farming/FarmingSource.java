@@ -7,9 +7,9 @@ import com.gmail.willramanand.RamSkills.source.Source;
 public enum FarmingSource implements Source {
 
     WHEAT(true, false, false),
-    POTATO(true, false, false),
-    CARROT(true, false, false),
-    BEETROOT(true, false, false),
+    POTATOES(true, false, false),
+    CARROTS(true, false, false),
+    BEETROOTS(true, false, false),
     NETHER_WART(true, false, false),
     PUMPKIN(false, false, false),
     MELON(false, false, false),
