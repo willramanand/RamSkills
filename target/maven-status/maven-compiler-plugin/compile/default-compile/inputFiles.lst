@@ -23,6 +23,7 @@ C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSk
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\events\ManaRegenerateEvent.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\leveler\Leveler.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\CritChance.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\ui\SkillsScreen.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\player\SkillPlayer.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\StatManager.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\leveler\SkillLeveler.java
@@ -31,17 +32,16 @@ C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSk
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\alchemy\AlchemyPerks.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\mining\MiningSource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\woodcutting\WoodcuttingSource.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\api\RamSkillsAPI.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\mana\Ability.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\events\XpGainEvent.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\source\SourceRegistry.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\enchanting\EnchantingSource.java
-C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\ui\StatsInventory.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\fishing\FishingSource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\agility\AgilitySource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\leveler\XpReqs.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\listeners\GUIListener.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\ui\SkillBossBar.java
-C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\ui\SkillsInventory.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\RamSkills.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\CritDamage.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\StatRegistry.java
@@ -50,6 +50,7 @@ C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSk
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\defense\DefenseSource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\player\PlayerManager.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\Health.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\ui\StatsScreen.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\woodcutting\WoodcuttingLeveler.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\listeners\FortuneListener.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\farming\FarmingLeveler.java

@@ -57,6 +57,30 @@ public class Leveler {
         }
     }
 
+    //Method for adding xp with a defined amount
+    public void addUnmodifiedXp(Player player, Skill skill, double amount) {
+        SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
+        //Checks if player has a skill profile for safety
+        if (skillPlayer == null) return;
+        //Checks if xp amount is not zero
+        if (amount == 0) return;
+        //Gets xp amount
+        double xpAmount = amount;
+        //Calls event
+        XpGainEvent event = new XpGainEvent(player, skill, xpAmount);
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            //Adds xp
+            skillPlayer.addSkillXp(skill, event.getAmount());
+            //Check if player leveled up
+            checkLevelUp(player, skill);
+            // Sends boss bar if enabled
+            sendBossBar(player, skill, skillPlayer);
+
+
+        }
+    }
+
     //Method for setting xp with a defined amount
     public void setXp(Player player, Skill skill, double amount) {
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);

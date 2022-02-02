@@ -2,6 +2,7 @@ package com.gmail.willramanand.RamSkills;
 
 import co.aikar.commands.InvalidCommandArgument;
 import co.aikar.commands.PaperCommandManager;
+import com.gmail.willramanand.RamSkills.api.RamSkillsAPI;
 import com.gmail.willramanand.RamSkills.commands.SkillsCommand;
 import com.gmail.willramanand.RamSkills.leveler.Leveler;
 import com.gmail.willramanand.RamSkills.listeners.DamageListener;
@@ -86,6 +87,8 @@ public class RamSkills extends JavaPlugin {
     @Override
     public void onEnable() {
         i = this;
+
+        RamSkillsAPI.setPlugin(this);
 
         long startTime = System.currentTimeMillis();
         log.info(ColorUtils.colorMessage("[" + this.getName() + "] &6===&b ENABLE START &6==="));

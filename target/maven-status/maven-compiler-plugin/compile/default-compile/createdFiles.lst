@@ -29,6 +29,7 @@ com\gmail\willramanand\RamSkills\skills\enchanting\EnchantingLeveler.class
 com\gmail\willramanand\RamSkills\skills\excavation\ExcavationLeveler.class
 com\gmail\willramanand\RamSkills\skills\woodcutting\WoodcuttingLeveler.class
 com\gmail\willramanand\RamSkills\source\SourceManager.class
+com\gmail\willramanand\RamSkills\api\RamSkillsAPI.class
 com\gmail\willramanand\RamSkills\skills\enchanting\EnchantingPerks.class
 com\gmail\willramanand\RamSkills\ui\SkillsScreen.class
 com\gmail\willramanand\RamSkills\stats\stat\AbstractStat.class
