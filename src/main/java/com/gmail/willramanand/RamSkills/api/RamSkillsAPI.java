@@ -7,22 +7,15 @@ import com.gmail.willramanand.RamSkills.stats.Stat;
 import org.bukkit.entity.Player;
 
 public class RamSkillsAPI {
-
-    private static RamSkills plugin;
-
-    public static void setPlugin(RamSkills plugin) {
-        RamSkillsAPI.plugin = plugin;
-    }
-
     /**
      * Get the RamSkills plugin instance
      * @return the instance of RamSkills
      */
     public static RamSkills getPlugin() {
-        if (plugin == null) {
+        if (RamSkills.getInstance() == null) {
             throw new IllegalStateException("The RamSkillsAPI is not loaded yet");
         }
-        return plugin;
+        return RamSkills.getInstance();
     }
 
     /**
@@ -32,7 +25,7 @@ public class RamSkillsAPI {
      * @param amount The amount to add
      */
     public static void addXp(Player player, Skill skill, double amount) {
-        plugin.getLeveler().addXp(player, skill, amount);
+        RamSkills.getInstance().getLeveler().addXp(player, skill, amount);
     }
 
     /**
@@ -42,7 +35,7 @@ public class RamSkillsAPI {
      * @param amount The amount to add
      */
     public static void addUnmodifiedXp(Player player, Skill skill, double amount) {
-        plugin.getLeveler().addUnmodifiedXp(player, skill, amount);
+        RamSkills.getInstance().getLeveler().addUnmodifiedXp(player, skill, amount);
     }
 
     /**
@@ -52,7 +45,7 @@ public class RamSkillsAPI {
      * @return the skill level of a player, or 1 if player does not have a skills profile
      */
     public static int getSkillLevel(Player player, Skill skill) {
-        SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
+        SkillPlayer skillPlayer = RamSkills.getInstance().getPlayerManager().getPlayerData(player);
         if (skillPlayer != null) {
             return skillPlayer.getSkillLevel(skill);
         }
@@ -68,7 +61,7 @@ public class RamSkillsAPI {
      * @return The stat level
      */
     public static double getStatPoints(Player player, Stat stat) {
-        SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
+        SkillPlayer skillPlayer = RamSkills.getInstance().getPlayerManager().getPlayerData(player);
         if (skillPlayer != null) {
             return skillPlayer.getStatPoint(stat);
         }

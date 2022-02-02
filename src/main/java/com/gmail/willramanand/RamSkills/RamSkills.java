@@ -88,8 +88,6 @@ public class RamSkills extends JavaPlugin {
     public void onEnable() {
         i = this;
 
-        RamSkillsAPI.setPlugin(this);
-
         long startTime = System.currentTimeMillis();
         log.info(ColorUtils.colorMessage("[" + this.getName() + "] &6===&b ENABLE START &6==="));
 
