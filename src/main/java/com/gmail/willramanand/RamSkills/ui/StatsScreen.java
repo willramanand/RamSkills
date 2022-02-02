@@ -24,7 +24,7 @@ public class StatsScreen implements InventoryHolder {
         this.plugin = plugin;
         this.player = player;
         this.skillPlayer = plugin.getPlayerManager().getPlayerData(player);
-        this.inventory = Bukkit.createInventory(this, InventoryType.CHEST, Component.text(player.getName() + " Stat's").color(TextColor.color(0, 170, 170)));
+        this.inventory = Bukkit.createInventory(this, InventoryType.CHEST, Component.text(player.getName() + "'s Stats").color(TextColor.color(0, 170, 170)));
         init();
     }
 
