@@ -21,4 +21,5 @@ public interface Skill {
 
     ImmutableList<Ability> getAbility();
 
+    ImmutableList<String> getPerks();
 }

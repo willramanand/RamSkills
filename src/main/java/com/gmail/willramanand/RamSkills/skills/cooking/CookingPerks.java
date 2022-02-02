@@ -36,6 +36,7 @@ public class CookingPerks implements Listener {
         if (event.getCause() != EntityPotionEffectEvent.Cause.FOOD) return;
         Player player = (Player) event.getEntity();
         if (event.getNewEffect() == null) return;
+        if (event.getNewEffect().getType() != PotionEffectType.HUNGER) return;
 
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
 

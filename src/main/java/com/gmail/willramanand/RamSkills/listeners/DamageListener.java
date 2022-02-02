@@ -41,7 +41,7 @@ public class DamageListener implements Listener {
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
 
         double damageReduction = 1 - (skillPlayer.getStatPoint(Stat.TOUGHNESS) / (skillPlayer.getStatPoint(Stat.TOUGHNESS) + 100));
-        event.setDamage(event.getFinalDamage() * damageReduction);
+        event.setDamage(Math.max(event.getFinalDamage() * damageReduction, 1.5));
     }
 
 

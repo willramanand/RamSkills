@@ -5,10 +5,9 @@ import com.gmail.willramanand.RamSkills.events.SkillLevelUpEvent;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.gmail.willramanand.RamSkills.utils.BlockUtils;
-import com.gmail.willramanand.RamSkills.utils.ColorUtils;
-import com.gmail.willramanand.RamSkills.utils.XpModifierUtil;
 import org.bukkit.GameMode;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -19,6 +18,8 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+
+import java.util.UUID;
 
 public class PlayerListener implements Listener {
 
@@ -34,8 +35,6 @@ public class PlayerListener implements Listener {
         plugin.getStatManager().allocateStats(event.getPlayer());
         applyModifiers(event.getPlayer(), event);
         event.getPlayer().setMetadata("readied", new FixedMetadataValue(plugin, false));
-
-        if (XpModifierUtil.getActive()) event.getPlayer().sendMessage(ColorUtils.colorMessage("&d" + XpModifierUtil.getModifier() + "x &eXP event is active!"));
     }
 
     @EventHandler
@@ -76,15 +75,15 @@ public class PlayerListener implements Listener {
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
 
         double healthAdd = skillPlayer.getStatPoint(Stat.HEALTH);
-        double moveAdd = 1 + skillPlayer.getStatPoint(Stat.SPEED);
         double swingAdd = skillPlayer.getStatPoint(Stat.ATTACK_SPEED);
+        double speedAdd = 1 + skillPlayer.getStatPoint(Stat.SPEED);
 
+        float baseMove = 0.2f;
+        player.setWalkSpeed((float) (baseMove * speedAdd));
         int baseHealth = 20;
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(baseHealth + healthAdd);
         int baseSwing = 4;
         player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(baseSwing + swingAdd);
-        double baseSpeed = 0.15;
-        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(baseSpeed * moveAdd);
         if (event instanceof PlayerJoinEvent)
             player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
         player.setHealthScale(20.0);

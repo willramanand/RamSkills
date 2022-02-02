@@ -76,7 +76,6 @@ public class CookingLeveler extends SkillLeveler implements Listener {
             }
         }
         int amountOfItems = event.getRecipe().getResult().getAmount() * possibleCreations;
-        event.getWhoClicked().sendMessage("Items Count: "  + amountOfItems);
         plugin.getLeveler().addXp((Player) event.getWhoClicked(), Skills.COOKING, amountOfItems * getXp((Player) event.getWhoClicked(), CookingSource.valueOf(event.getInventory().getResult().getType().name())));
     }
 

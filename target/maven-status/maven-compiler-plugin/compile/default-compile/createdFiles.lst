@@ -25,14 +25,14 @@ com\gmail\willramanand\RamSkills\listeners\FortuneListener.class
 com\gmail\willramanand\RamSkills\stats\stat\Fortune.class
 com\gmail\willramanand\RamSkills\commands\SkillsCommand.class
 com\gmail\willramanand\RamSkills\stats\stat\Strength.class
-com\gmail\willramanand\RamSkills\ui\MainMenuInventory.class
 com\gmail\willramanand\RamSkills\skills\enchanting\EnchantingLeveler.class
-com\gmail\willramanand\RamSkills\ui\StatsInventory.class
 com\gmail\willramanand\RamSkills\skills\excavation\ExcavationLeveler.class
 com\gmail\willramanand\RamSkills\skills\woodcutting\WoodcuttingLeveler.class
 com\gmail\willramanand\RamSkills\source\SourceManager.class
 com\gmail\willramanand\RamSkills\skills\enchanting\EnchantingPerks.class
+com\gmail\willramanand\RamSkills\ui\SkillsScreen.class
 com\gmail\willramanand\RamSkills\stats\stat\AbstractStat.class
+com\gmail\willramanand\RamSkills\ui\uiitems\InventoryItem.class
 com\gmail\willramanand\RamSkills\skills\cooking\CookingPerks$1.class
 com\gmail\willramanand\RamSkills\stats\stat\Health.class
 com\gmail\willramanand\RamSkills\skills\cooking\CookingPerks.class
@@ -60,6 +60,7 @@ com\gmail\willramanand\RamSkills\skills\fishing\FishingSource.class
 com\gmail\willramanand\RamSkills\skills\alchemy\AlchemyLeveler.class
 com\gmail\willramanand\RamSkills\skills\farming\FarmingLeveler.class
 com\gmail\willramanand\RamSkills\skills\defense\DefenseLeveler.class
+com\gmail\willramanand\RamSkills\ui\StatsScreen.class
 com\gmail\willramanand\RamSkills\events\CriticalStrikeEvent.class
 com\gmail\willramanand\RamSkills\events\XpGainEvent.class
 com\gmail\willramanand\RamSkills\skills\excavation\ExcavationSource.class
@@ -73,7 +74,6 @@ com\gmail\willramanand\RamSkills\events\ManaRegenerateEvent.class
 com\gmail\willramanand\RamSkills\mana\ManaAbility.class
 com\gmail\willramanand\RamSkills\listeners\GUIListener.class
 com\gmail\willramanand\RamSkills\mana\ManaManager.class
-com\gmail\willramanand\RamSkills\ui\SkillsInventory.class
 com\gmail\willramanand\RamSkills\mana\Ability.class
 com\gmail\willramanand\RamSkills\player\SkillPlayer.class
 com\gmail\willramanand\RamSkills\stats\StatManager.class
@@ -82,7 +82,6 @@ com\gmail\willramanand\RamSkills\stats\stat\Wisdom.class
 com\gmail\willramanand\RamSkills\utils\BigNumber.class
 com\gmail\willramanand\RamSkills\skills\mining\MiningSource.class
 com\gmail\willramanand\RamSkills\stats\stat\Speed.class
-com\gmail\willramanand\RamSkills\ui\uiitems\BaseUIItem.class
 com\gmail\willramanand\RamSkills\utils\XpModifierUtil.class
 com\gmail\willramanand\RamSkills\player\PlayerManager.class
 com\gmail\willramanand\RamSkills\listeners\DamageListener.class

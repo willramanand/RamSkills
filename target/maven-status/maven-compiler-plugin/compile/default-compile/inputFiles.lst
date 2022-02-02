@@ -14,8 +14,8 @@ C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSk
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\events\PlayerDataLoadEvent.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\AttackSpeed.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\farming\FarmingSource.java
-C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\ui\uiitems\BaseUIItem.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\Skill.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\ui\uiitems\InventoryItem.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\mana\ManaAbility.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\fishing\FishingLeveler.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\enchanting\EnchantingLeveler.java
@@ -39,7 +39,6 @@ C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSk
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\fishing\FishingSource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\agility\AgilitySource.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\leveler\XpReqs.java
-C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\ui\MainMenuInventory.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\listeners\GUIListener.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\ui\SkillBossBar.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\ui\SkillsInventory.java
@@ -77,5 +76,6 @@ C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSk
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\utils\TextUtil.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\utils\BigNumber.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\commands\SkillsCommand.java
+C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\enchanting\EnchantingPerks.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\stats\stat\AbstractStat.java
 C:\Users\willr\IdeaProjects\RamSkills\src\main\java\com\gmail\willramanand\RamSkills\skills\SkillRegistry.java

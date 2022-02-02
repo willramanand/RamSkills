@@ -25,10 +25,8 @@ public class EnchantingPerks implements Listener {
 
         double xpIncrease = 1 + ((skillPlayer.getSkillLevel(Skills.ENCHANTING) * 2.0) / 100.0);
         ExperienceOrb orb = event.getExperienceOrb();
-        player.sendMessage("" + orb.getExperience());
 
         int newExperience = (int) (orb.getExperience() * xpIncrease);
         orb.setExperience(newExperience);
-        player.sendMessage("" + orb.getExperience());
     }
 }
