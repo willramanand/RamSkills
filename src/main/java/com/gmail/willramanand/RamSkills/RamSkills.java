@@ -160,7 +160,7 @@ public class RamSkills extends JavaPlugin {
         commandManager.enableUnstableAPI("help");
 
         for (Skill skill : Skills.values()) {
-            skillRegistry.register(skill.getDisplayName(), skill);
+            skillRegistry.register(skill.getDisplayName().toLowerCase(), skill);
         }
 
         commandManager.getCommandContexts().registerContext(Skill.class, c -> {

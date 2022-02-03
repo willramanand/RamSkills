@@ -1,7 +1,52 @@
 xp_requirements:
-  expression: "multiplier * (level - 2) ^ 0.8 + base"
-  multiplier: 50.0
-  base: 100.0
+  agility:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
+  alchemy:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
+  combat:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
+  cooking:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
+  defense:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
+  enchanting:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
+  excavation:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
+  farming:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
+  fishing:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
+  mining:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
+  sorcery:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
+  woodcutting:
+    max_lvl: 50
+    multiplier: 100.0
+    base: 100.0
 
 xp_event:
   modifier: 1.0

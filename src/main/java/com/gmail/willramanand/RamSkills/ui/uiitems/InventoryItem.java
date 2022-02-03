@@ -8,10 +8,7 @@ import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.gmail.willramanand.RamSkills.utils.ColorUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -25,7 +22,6 @@ import java.util.List;
 public class InventoryItem {
 
     public static ItemStack getStatItem(Stat stat, Material material, Player player) {
-        SkillPlayer skillPlayer = RamSkills.getInstance().getPlayerManager().getPlayerData(player);
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         meta.displayName(Component.text(ColorUtils.colorMessage(stat.getPrefix() + stat.getDisplayName() + " " + stat.getSymbol())));
@@ -45,7 +41,18 @@ public class InventoryItem {
         meta.displayName(Component.text(ColorUtils.colorMessage("&r&b" + skill.getDisplayName())));
         List<Component> lore = new ArrayList<>();
         lore.add(Component.empty());
-        lore.add(Component.text(ColorUtils.colorMessage("&r&6LVL: &d" + skillPlayer.getSkillLevel(skill))));
+        int lvl = skillPlayer.getSkillLevel(skill);
+        lore.add(Component.text(ColorUtils.colorMessage("&r&6LVL: &d" + lvl)));
+        if (lvl < RamSkills.getInstance().getLeveler().getXpRequirements().getMaxLevel(skill)) {
+            lore.add(Component.text(ColorUtils.colorMessage("&r&6["
+                    + getProgressBar(skillPlayer.getSkillXp(skill).intValue(), RamSkills.getInstance().getLeveler().getXpRequirements().getXpRequired(skill, lvl + 1), 20, '=')
+                    + "&6]")));
+        } else {
+            lore.add(Component.text(ColorUtils.colorMessage("&r&6["
+                    + getProgressBar(1, 1, 20, '=')
+                    + "&6]")));
+        }
+        lore.add(Component.empty());
         lore.add(Component.text(ColorUtils.colorMessage("&r&e" + skill.getDescription())));
         lore.add(Component.empty());
         lore.add(Component.text(ColorUtils.colorMessage("&r&6Stats:")));
@@ -125,5 +132,22 @@ public class InventoryItem {
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(meta);
         return item;
+    }
+
+    public static String getProgressBar(int current, int max, int totalBars, char symbol) {
+        float percent = (float) current / max;
+        int progressBars = (int) (totalBars * percent);
+        String completedBars = ColorUtils.colorMessage("&a");
+
+        for (int i = 0; i < progressBars; i++) {
+            completedBars = completedBars.concat(String.valueOf(symbol));
+        }
+
+        String incompletedBars = ColorUtils.colorMessage("&c");
+        for (int i = 0; i < Math.max(totalBars - progressBars, 0); i++) {
+            incompletedBars = incompletedBars.concat(String.valueOf(symbol));
+        }
+
+        return completedBars + incompletedBars;
     }
 }

@@ -101,7 +101,7 @@ public class Leveler {
         int currentAction = plugin.getBossBar().getCurrentAction(player, skill);
         if (currentAction != -1) {
             int level = skillPlayer.getSkillLevel(skill);
-            boolean notMaxed = xpReqs.getListSize(skill) > skillPlayer.getSkillLevel(skill) - 1 && level < xpReqs.getMaxLevel();
+            boolean notMaxed = xpReqs.getListSize(skill) > skillPlayer.getSkillLevel(skill) - 1 && level < xpReqs.getMaxLevel(skill);
             if (notMaxed) {
                 plugin.getBossBar().sendBossBar(player, skill, skillPlayer.getSkillXp(skill), xpReqs.getXpRequired(skill, level + 1), level, false);
             } else {
@@ -115,7 +115,7 @@ public class Leveler {
         if (skillPlayer == null) return;
         int currentLevel = skillPlayer.getSkillLevel(skill);
         double currentXp = skillPlayer.getSkillXp(skill);
-        if (currentLevel < xpReqs.getMaxLevel()) { //Check max level options
+        if (currentLevel < xpReqs.getMaxLevel(skill)) { //Check max level options
             if (xpReqs.getListSize(skill) > currentLevel - 1) {
                 if (currentXp >= xpReqs.getXpRequired(skill, currentLevel + 1)) {
                     levelUpSkill(skillPlayer, skill);

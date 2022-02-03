@@ -1,9 +1,8 @@
 package com.gmail.willramanand.RamSkills.leveler;
 
-// Copyright (c) 2020 Archy.
-
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.skills.Skill;
+import com.gmail.willramanand.RamSkills.skills.Skills;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -15,18 +14,46 @@ import java.util.Map;
 public class XpReqs {
 
     private final RamSkills plugin;
-    private final List<Integer> defaultXpRequirements;
     private final Map<Skill, List<Integer>> skillXpRequirements;
-    private final int maxLevel = 50;
+    private final Map<Skill, Integer> skillXpBase;
+    private final Map<Skill, Integer> skillXpMultiplier;
+    private final Map<Skill, Integer> skillMaxLvls;
 
     public XpReqs(RamSkills plugin) {
         this.plugin = plugin;
-        this.defaultXpRequirements = new ArrayList<>();
+        this.skillMaxLvls = new HashMap<>();
         this.skillXpRequirements = new HashMap<>();
+        this.skillXpBase = new HashMap<>();
+        this.skillXpMultiplier = new HashMap<>();
+    }
+
+    public void loadXpRequirements() {
+        FileConfiguration config = plugin.getConfig();
+        ConfigurationSection section = config.getConfigurationSection("xp_requirements");
+        for (Skill skill : Skills.values()) {
+            int lvl = section.getInt(skill.name().toLowerCase() + ".max_lvl");
+            int mult = section.getInt(skill.name().toLowerCase() + ".multiplier");
+            int base = section.getInt(skill.name().toLowerCase() + ".base");
+            skillMaxLvls.put(skill, lvl);
+            skillXpBase.put(skill, base);
+            skillXpMultiplier.put(skill, mult);
+        }
+        addXpRequirements();
+    }
+
+    private void addXpRequirements() {
+        for (Skill skill : Skills.values()) {
+            List<Integer> skillList = new ArrayList<>();
+            int base = skillXpBase.getOrDefault(skill, 100);
+            int mult = skillXpMultiplier.getOrDefault(skill, 100);
+            for (int i = 0; i < skillMaxLvls.get(skill) - 1; i++) {
+                skillList.add(calculateXpforLevel(i, base, mult));
+            }
+            skillXpRequirements.put(skill, skillList);
+        }
     }
 
     public int getXpRequired(Skill skill, int level) {
-        // Use skill specific xp requirements if exists
         List<Integer> skillList = skillXpRequirements.get(skill);
         if (skillList != null) {
             if (skillList.size() > level - 2) {
@@ -35,12 +62,7 @@ public class XpReqs {
                 return 0;
             }
         }
-        // Else use default
-        if (defaultXpRequirements.size() > level - 2) {
-            return defaultXpRequirements.get(level - 2);
-        } else {
-            return 0;
-        }
+        return 0;
     }
 
     public int getListSize(Skill skill) {
@@ -48,51 +70,15 @@ public class XpReqs {
         if (skillList != null) {
             return skillList.size();
         }
-        return defaultXpRequirements.size();
+        return 0;
     }
 
-    public void loadXpRequirements() {
-        FileConfiguration config = plugin.getConfig();
-        loadDefaultSection(config);
+    public int calculateXpforLevel(int lvl, int base, int mult) {
+        return (base * lvl) + mult;
     }
 
-    private void loadDefaultSection(FileConfiguration config) {
-        ConfigurationSection section = config.getConfigurationSection("xp_requirements");
-//        if (section != null) {
-//            Expression expression = getXpExpression(section);
-//            // Add xp requirement for each level
-//            defaultXpRequirements.clear();
-//            for (int i = 0; i < maxLevel; i++) {
-//                expression.setVariable("level", BigDecimal.valueOf(i + 2));
-//                defaultXpRequirements.add((int) Math.round(expression.eval().doubleValue()));
-//            }
-//        } else {
-//            addDefaultXpRequirements();
-//        }
-        addDefaultXpRequirements();
-    }
-
-//    private Expression getXpExpression(ConfigurationSection section) {
-//        String expressionString = section.getString("expression");
-//        Expression expression = new Expression(expressionString);
-//        // Set variables
-//        for (String variable : section.getKeys(false)) {
-//            if (variable.equals("expression")) continue;
-//            double variableValue = section.getDouble(variable);
-//            expression.setVariable(variable, BigDecimal.valueOf(variableValue));
-//        }
-//        return expression;
-//    }
-
-    private void addDefaultXpRequirements() {
-        defaultXpRequirements.clear();
-        for (int i = 0; i < maxLevel - 1; i++) {
-            defaultXpRequirements.add((int) ((100.0 * i) + 100));
-        }
-    }
-
-    public int getMaxLevel() {
-        return maxLevel;
+    public int getMaxLevel(Skill skill) {
+        return skillMaxLvls.get(skill);
     }
 
 }
