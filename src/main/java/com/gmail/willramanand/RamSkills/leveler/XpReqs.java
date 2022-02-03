@@ -74,7 +74,7 @@ public class XpReqs {
     }
 
     public int calculateXpforLevel(int lvl, int base, int mult) {
-        return (base * lvl) + mult;
+        return (mult * lvl) + base;
     }
 
     public int getMaxLevel(Skill skill) {
