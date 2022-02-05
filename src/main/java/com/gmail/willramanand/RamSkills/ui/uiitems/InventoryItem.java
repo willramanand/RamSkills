@@ -9,6 +9,7 @@ import com.gmail.willramanand.RamSkills.utils.ColorUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.*;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -38,9 +39,15 @@ public class InventoryItem {
         SkillPlayer skillPlayer = RamSkills.getInstance().getPlayerManager().getPlayerData(player);
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
+
+        // Set display name
         meta.displayName(Component.text(ColorUtils.colorMessage("&r&b" + skill.getDisplayName())));
+
+        // Begin adding lore
         List<Component> lore = new ArrayList<>();
         lore.add(Component.empty());
+
+        // Progress Section
         int lvl = skillPlayer.getSkillLevel(skill);
         lore.add(Component.text(ColorUtils.colorMessage("&r&6LVL: &d" + lvl)));
         if (lvl < RamSkills.getInstance().getLeveler().getXpRequirements().getMaxLevel(skill)) {
@@ -51,27 +58,38 @@ public class InventoryItem {
             lore.add(Component.text(ColorUtils.colorMessage("&r&6["
                     + getProgressBar(1, 1, 20, '=')
                     + "&6]")));
+
+            // Enchant item to indicate max level
+            meta.addEnchant(Enchantment.MENDING, 1, true);
         }
         lore.add(Component.empty());
+
+        // Description Section
         lore.add(Component.text(ColorUtils.colorMessage("&r&e" + skill.getDescription())));
         lore.add(Component.empty());
+
+        // Stats section
         lore.add(Component.text(ColorUtils.colorMessage("&r&6Stats:")));
         for (Stat stat : skill.getStats()) {
             lore.add(Component.text(ColorUtils.colorMessage(stat.getPrefix() + stat.getDisplayName() + " " + stat.getSymbol())));
         }
         lore.add(Component.empty());
+
+        // Ability section
         if (skill.getAbility() != null) {
             lore.add(Component.text(ColorUtils.colorMessage("&r&6Abilities:")));
             for (Ability ability : skill.getAbility()) {
-                if (skillPlayer.getSkillLevel(skill) < ability.getUnlock()) {
-                    lore.add(Component.text(ColorUtils.colorMessage("&r&3" + ability.getDisplayName() + "&8: &cUNLOCKS AT LVL 25")));
-                } else if (skillPlayer.getSkillLevel(skill) >= ability.getUnlock() && skillPlayer.getSkillLevel(skill) < ability.getUpgrade()) {
-                    lore.add(Component.text(ColorUtils.colorMessage("&r&3" + ability.getDisplayName() + "&8: &aUNLOCKED &8| &dUPGRADES AT LVL 50")));
-                } else if (skillPlayer.getSkillLevel(skill) >= ability.getUpgrade()) {
+                if (lvl < ability.getUnlock()) {
+                    lore.add(Component.text(ColorUtils.colorMessage("&r&3" + ability.getDisplayName() + "&8: &cUNLOCKS AT LVL " + ability.getUnlock())));
+                } else if (lvl < ability.getUpgrade()) {
+                    lore.add(Component.text(ColorUtils.colorMessage("&r&3" + ability.getDisplayName() + "&8: &aUNLOCKED &8| &dUPGRADES AT LVL " + ability.getUpgrade())));
+                } else {
                     lore.add(Component.text(ColorUtils.colorMessage("&r&3" + ability.getDisplayName() + "&8: &dUPGRADED")));
                 }
             }
         }
+
+        // Perks Section
         if (skill.getPerks() != null) {
             lore.add(Component.text(ColorUtils.colorMessage("&r&6Perks:")));
             for (String string : skill.getPerks()) {
@@ -79,7 +97,7 @@ public class InventoryItem {
             }
         }
         meta.lore(lore);
-        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_POTION_EFFECTS);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
         return item;
     }
