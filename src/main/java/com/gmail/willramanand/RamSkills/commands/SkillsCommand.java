@@ -30,6 +30,7 @@ public class SkillsCommand extends BaseCommand {
         player.openInventory(skillsScreen.getInventory());
     }
 
+    @CommandAlias("stats")
     @Subcommand("stats")
     @Description("Show player stats")
     public void stats(Player player) {
