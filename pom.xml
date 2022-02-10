@@ -6,7 +6,7 @@
 
     <groupId>com.gmail.willramanand</groupId>
     <artifactId>RamSkills</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>RamSkills</name>
     <description>This plugin adds skills and abilities to your Spigot server.</description>
 

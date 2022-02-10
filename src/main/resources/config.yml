@@ -1,15 +1,15 @@
 xp_requirements:
   agility:
     max_lvl: 50
-    multiplier: 100.0
+    multiplier: 1000.0
     base: 100.0
   alchemy:
     max_lvl: 50
-    multiplier: 100.0
-    base: 100.0
+    multiplier: 50.0
+    base: 50.0
   combat:
     max_lvl: 50
-    multiplier: 100.0
+    multiplier: 500.0
     base: 100.0
   cooking:
     max_lvl: 50
@@ -17,15 +17,15 @@ xp_requirements:
     base: 100.0
   defense:
     max_lvl: 50
-    multiplier: 100.0
+    multiplier: 500.0
     base: 100.0
   enchanting:
     max_lvl: 50
-    multiplier: 100.0
-    base: 100.0
+    multiplier: 50.0
+    base: 50.0
   excavation:
     max_lvl: 50
-    multiplier: 100.0
+    multiplier: 500.0
     base: 100.0
   farming:
     max_lvl: 50
@@ -33,19 +33,19 @@ xp_requirements:
     base: 100.0
   fishing:
     max_lvl: 50
-    multiplier: 100.0
+    multiplier: 250.0
     base: 100.0
   mining:
     max_lvl: 50
-    multiplier: 100.0
+    multiplier: 500.0
     base: 100.0
   sorcery:
     max_lvl: 50
-    multiplier: 100.0
+    multiplier: 1000.0
     base: 100.0
   woodcutting:
     max_lvl: 50
-    multiplier: 100.0
+    multiplier: 500.0
     base: 100.0
 
 xp_event:

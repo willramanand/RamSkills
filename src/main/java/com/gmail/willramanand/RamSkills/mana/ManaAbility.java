@@ -6,6 +6,7 @@ import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.skills.Skills;
 import com.gmail.willramanand.RamSkills.skills.excavation.ExcavationSource;
 import com.gmail.willramanand.RamSkills.skills.woodcutting.WoodcuttingSource;
+import com.gmail.willramanand.RamSkills.utils.BlockUtils;
 import com.gmail.willramanand.RamSkills.utils.ItemUtils;
 import com.gmail.willramanand.RamSkills.utils.VBlockFace;
 import org.bukkit.Bukkit;
@@ -201,7 +202,7 @@ public class ManaAbility implements Listener {
                     }
 
                     Block nextBlock = face.getConnectedBlock(current);
-                    if (veinBlocks.contains(nextBlock) || nextBlock.getType() != event.getBlock().getType()) {
+                    if (veinBlocks.contains(nextBlock) || nextBlock.getType() != event.getBlock().getType() || BlockUtils.isPlayerPlaced(event.getBlock())) {
                         continue;
                     }
 
@@ -326,7 +327,7 @@ public class ManaAbility implements Listener {
                     }
 
                     Block nextBlock = face.getConnectedBlock(current);
-                    if (treeBlocks.contains(nextBlock) || nextBlock.getType() != event.getBlock().getType()) {
+                    if (treeBlocks.contains(nextBlock) || nextBlock.getType() != event.getBlock().getType() || BlockUtils.isPlayerPlaced(event.getBlock())) {
                         continue;
                     }
 
