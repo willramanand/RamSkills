@@ -34,6 +34,7 @@ public class CombatLeveler extends SkillLeveler implements Listener {
         } else if (ee.getDamager() instanceof Projectile) {
             EntityType type = e.getType();
             Projectile projectile = (Projectile) ee.getDamager();
+            if (!(projectile.getShooter() instanceof Player)) return;
             Player p = (Player) projectile.getShooter();
             if (blockXpGainPlayer(p)) return;
             if (e.equals(p)) return;
