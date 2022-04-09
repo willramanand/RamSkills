@@ -15,18 +15,18 @@ public class XpModifierUtil {
         boolean active = section.getBoolean("active");
 
         if (modifier < 1) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.colorMessage("&cInvalid modifier in config. Setting to defaults."));
+            Bukkit.getServer().getConsoleSender().sendMessage(Txt.parse("&cInvalid modifier in config. Setting to defaults."));
             section.set("modifier", 1);
             section.set("active", false);
             RamSkills.getInstance().saveConfig();
         } else if (modifier == 1 && xpModifierActive) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.colorMessage("&cXP modifier active even though modifier is 1. Setting to false."));
+            Bukkit.getServer().getConsoleSender().sendMessage(Txt.parse("&cXP modifier active even though modifier is 1. Setting to false."));
             section.set("active", false);
             RamSkills.getInstance().saveConfig();
         } else {
             globalXpModifier = modifier;
             xpModifierActive = active;
-            RamSkills.getInstance().getLogger().info(ColorUtils.colorMessage("&eGlobal XP modifier set to: &d" + modifier));
+            RamSkills.getInstance().getLogger().info(Txt.parse("&eGlobal XP modifier set to: &d" + modifier));
         }
     }
 

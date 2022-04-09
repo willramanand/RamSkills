@@ -11,6 +11,7 @@ import com.gmail.willramanand.RamSkills.utils.ItemUtils;
 import com.gmail.willramanand.RamSkills.utils.VBlockFace;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -56,7 +57,7 @@ public class ManaAbility implements Listener {
         if (event.getHand() != EquipmentSlot.HAND) return;
 
         Player player = event.getPlayer();
-        if (!(validWeapon(player.getInventory().getItemInMainHand()))) return;
+        if (!(validWeapon(player.getInventory().getItemInMainHand())) && !(player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "vein_miner_applicable")))) return;
 
         if (player.getMetadata("readied").get(0).asBoolean()) {
             plugin.getActionBar().sendAbilityActionBar(player, "Weapon unreadied!");
@@ -166,7 +167,7 @@ public class ManaAbility implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void pickAbility(BlockBreakEvent event) {
-        if (!(ItemUtils.isPick(event.getPlayer().getInventory().getItemInMainHand()))) return;
+        if (!(ItemUtils.isPick(event.getPlayer().getInventory().getItemInMainHand())) && !(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "vein_miner_applicable")))) return;
         if (!(validVein(event.getBlock().getType()))) return;
         if (!(event.getPlayer().getMetadata("readied").get(0).asBoolean())) return;
 
@@ -361,6 +362,7 @@ public class ManaAbility implements Listener {
     }
 
     public void consumeDurability(Player player, ItemStack item) {
+        if (!(validWeapon(item))) return;
         double breakChance = 1;
         if (item.getItemMeta() != null && item.getItemMeta().hasEnchant(Enchantment.DURABILITY)) {
             int enchantLvl = item.getItemMeta().getEnchantLevel(Enchantment.DURABILITY);
@@ -402,64 +404,30 @@ public class ManaAbility implements Listener {
         if (!(bow.getItemMeta().hasEnchant(Enchantment.ARROW_DAMAGE))) return damage;
         int enchantLvl = bow.getItemMeta().getEnchantLevel(Enchantment.ARROW_DAMAGE);
 
-        double newDamage = damage + ((damage * 0.5) * (enchantLvl + 1));
-
-        return newDamage;
+        return damage + ((damage * 0.5) * (enchantLvl + 1));
     }
 
     public boolean checkMana(SkillPlayer skillPlayer, double manaCost) {
         double currentMana = skillPlayer.getMana();
-        if (currentMana < manaCost) return false;
-        return true;
+        return !(currentMana < manaCost);
     }
 
     public boolean validWeapon(ItemStack item) {
-        if (ItemUtils.isShovel(item) || ItemUtils.isPick(item) || ItemUtils.isAxe(item) || ItemUtils.isSword(item))
-            return true;
-        return false;
+        return ItemUtils.isShovel(item) || ItemUtils.isPick(item) || ItemUtils.isAxe(item) || ItemUtils.isSword(item);
     }
 
     public boolean validCrop(Material type) {
-        switch (type) {
-            case WHEAT:
-            case CARROTS:
-            case POTATOES:
-            case BEETROOTS:
-            case BAMBOO:
-            case MELON_STEM:
-            case PUMPKIN_STEM:
-            case SWEET_BERRY_BUSH:
-                return true;
-            default:
-                return false;
-        }
+        return switch (type) {
+            case WHEAT, CARROTS, POTATOES, BEETROOTS, BAMBOO, MELON_STEM, PUMPKIN_STEM, SWEET_BERRY_BUSH -> true;
+            default -> false;
+        };
     }
 
     public boolean validVein(Material type) {
-        switch (type) {
-            case COAL_ORE:
-            case COPPER_ORE:
-            case DEEPSLATE_COPPER_ORE:
-            case IRON_ORE:
-            case DEEPSLATE_IRON_ORE:
-            case REDSTONE_ORE:
-            case DEEPSLATE_REDSTONE_ORE:
-            case LAPIS_ORE:
-            case DEEPSLATE_LAPIS_ORE:
-            case GOLD_ORE:
-            case DEEPSLATE_GOLD_ORE:
-            case DIAMOND_ORE:
-            case DEEPSLATE_DIAMOND_ORE:
-            case EMERALD_ORE:
-            case DEEPSLATE_EMERALD_ORE:
-            case NETHER_QUARTZ_ORE:
-            case NETHER_GOLD_ORE:
-            case ANCIENT_DEBRIS:
-            case DEEPSLATE_COAL_ORE:
-                return true;
-            default:
-                return false;
-        }
+        return switch (type) {
+            case COAL_ORE, COPPER_ORE, DEEPSLATE_COPPER_ORE, IRON_ORE, DEEPSLATE_IRON_ORE, REDSTONE_ORE, DEEPSLATE_REDSTONE_ORE, LAPIS_ORE, DEEPSLATE_LAPIS_ORE, GOLD_ORE, DEEPSLATE_GOLD_ORE, DIAMOND_ORE, DEEPSLATE_DIAMOND_ORE, EMERALD_ORE, DEEPSLATE_EMERALD_ORE, NETHER_QUARTZ_ORE, NETHER_GOLD_ORE, ANCIENT_DEBRIS, DEEPSLATE_COAL_ORE -> true;
+            default -> false;
+        };
     }
 
     public boolean validChop(Material type) {

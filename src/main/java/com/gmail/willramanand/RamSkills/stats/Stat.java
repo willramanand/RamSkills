@@ -14,11 +14,11 @@ public enum Stat {
 
     ;
 
-    private String clazzName;
-    private String displayName;
-    private String modifierName;
-    private String symbol;
-    private String prefix;
+    private final String clazzName;
+    private final String displayName;
+    private final String modifierName;
+    private final String symbol;
+    private final String prefix;
 
     Stat(String clazzName, String displayName , String modifierName, String symbol, String prefix) {
         this.clazzName = clazzName;

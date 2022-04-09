@@ -9,8 +9,8 @@ import com.gmail.willramanand.RamSkills.mana.Ability;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.stats.Stat;
-import com.gmail.willramanand.RamSkills.utils.ColorUtils;
 import com.gmail.willramanand.RamSkills.utils.TextUtil;
+import com.gmail.willramanand.RamSkills.utils.Txt;
 import com.gmail.willramanand.RamSkills.utils.XpModifierUtil;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -163,19 +163,19 @@ public class Leveler {
 
     private void getLevelUpMessage(SkillPlayer skillPlayer, Skill skill) {
         Player player = skillPlayer.getPlayer();
-        player.sendMessage(ColorUtils.colorMessage("&6________ [&b " + skill.getDisplayName() + " &a" + skillPlayer.getSkillLevel(skill) + " &6] ________"));
+        player.sendMessage(Txt.parse("&6________ [&b " + skill.getDisplayName() + " &a" + skillPlayer.getSkillLevel(skill) + " &6] ________"));
         if (skillPlayer.getSkillLevel(skill) == 25 && skill.getAbility() != null) {
             for (Ability ability : skill.getAbility()) {
-                player.sendMessage(ColorUtils.colorMessage("&eYou have unlocked the ability &d" + ability.getDisplayName()));
+                player.sendMessage(Txt.parse("&eYou have unlocked the ability &d" + ability.getDisplayName()));
             }
         } else if (skillPlayer.getSkillLevel(skill) == 50 && skill.getAbility() != null) {
             for (Ability ability : skill.getAbility()) {
-                player.sendMessage(ColorUtils.colorMessage("&eYou have upgraded the ability &d" + ability.getDisplayName()));
+                player.sendMessage(Txt.parse("&eYou have upgraded the ability &d" + ability.getDisplayName()));
             }
         }
         for (Stat stat : skill.getStats()) {
             double statPerLevel = plugin.getStatManager().getStatPerLvl(stat);
-            player.sendMessage(ColorUtils.colorMessage(stat.getPrefix() + stat.getDisplayName() + " " + stat.getSymbol() + "&8: &f+ " + stat.getPrefix() + statPerLevel));
+            player.sendMessage(Txt.parse(stat.getPrefix() + stat.getDisplayName() + " " + stat.getSymbol() + "&8: &f+ " + stat.getPrefix() + statPerLevel));
         }
         player.sendMessage("");
     }

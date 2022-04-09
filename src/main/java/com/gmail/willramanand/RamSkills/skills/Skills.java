@@ -26,12 +26,12 @@ public enum Skills implements Skill {
 
     ;
 
-    private String displayName;
-    private String desc;
-    private BarColor barColor;
-    private ImmutableList<Stat> stats;
-    private ImmutableList<Ability> ability;
-    private ImmutableList<String> perks;
+    private final String displayName;
+    private final String desc;
+    private final BarColor barColor;
+    private final ImmutableList<Stat> stats;
+    private final ImmutableList<Ability> ability;
+    private final ImmutableList<String> perks;
 
     Skills(String displayName, String desc, BarColor barColor, ImmutableList<Stat> stats, ImmutableList<Ability> ability, ImmutableList<String> perks) {
         this.displayName = displayName;

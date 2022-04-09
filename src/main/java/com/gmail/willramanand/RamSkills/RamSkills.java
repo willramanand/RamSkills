@@ -1,9 +1,6 @@
 package com.gmail.willramanand.RamSkills;
 
-import co.aikar.commands.InvalidCommandArgument;
-import co.aikar.commands.PaperCommandManager;
-import com.gmail.willramanand.RamSkills.api.RamSkillsAPI;
-import com.gmail.willramanand.RamSkills.commands.SkillsCommand;
+import com.gmail.willramanand.RamSkills.commands.CmdSkillsRoot;
 import com.gmail.willramanand.RamSkills.leveler.Leveler;
 import com.gmail.willramanand.RamSkills.listeners.DamageListener;
 import com.gmail.willramanand.RamSkills.listeners.FortuneListener;
@@ -13,9 +10,7 @@ import com.gmail.willramanand.RamSkills.mana.ManaAbility;
 import com.gmail.willramanand.RamSkills.mana.ManaManager;
 import com.gmail.willramanand.RamSkills.player.PlayerConfiguration;
 import com.gmail.willramanand.RamSkills.player.PlayerManager;
-import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.skills.SkillRegistry;
-import com.gmail.willramanand.RamSkills.skills.Skills;
 import com.gmail.willramanand.RamSkills.skills.agility.AgilityLeveler;
 import com.gmail.willramanand.RamSkills.skills.agility.AgilityPerks;
 import com.gmail.willramanand.RamSkills.skills.alchemy.AlchemyLeveler;
@@ -38,7 +33,7 @@ import com.gmail.willramanand.RamSkills.stats.StatManager;
 import com.gmail.willramanand.RamSkills.stats.StatRegistry;
 import com.gmail.willramanand.RamSkills.ui.ActionBar;
 import com.gmail.willramanand.RamSkills.ui.SkillBossBar;
-import com.gmail.willramanand.RamSkills.utils.ColorUtils;
+import com.gmail.willramanand.RamSkills.utils.Txt;
 import com.gmail.willramanand.RamSkills.utils.XpModifierUtil;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -47,22 +42,16 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class RamSkills extends JavaPlugin {
 
     private static RamSkills i;
-
-    private static Logger log = Logger.getLogger("Minecraft");
-
     private static Economy econ = null;
 
     private PlayerConfiguration playerConfiguration;
     private PlayerManager playerManager;
     private PlayerListener playerListener;
-    private PaperCommandManager commandManager;
 
     private SourceRegistry sourceRegistry;
     private SourceManager sourceManager;
@@ -89,10 +78,10 @@ public class RamSkills extends JavaPlugin {
         i = this;
 
         long startTime = System.currentTimeMillis();
-        log.info(ColorUtils.colorMessage("[" + this.getName() + "] &6===&b ENABLE START &6==="));
+        logger().info(Txt.parse("[" + this.getName() + "] &6===&b ENABLE START &6==="));
 
         if (isVaultActive()) {
-            log.info(ColorUtils.colorMessage("[" + this.getName() + "] &2Enabling Vault integration."));
+            logger().info(Txt.parse("[" + this.getName() + "] &2Enabling Vault integration."));
             setupEconomy();
         }
 
@@ -137,7 +126,7 @@ public class RamSkills extends JavaPlugin {
         leveler.loadLevelReqs();
 
         startTime = System.currentTimeMillis() - startTime;
-        log.info(ColorUtils.colorMessage("[" + this.getName() + "] &6=== &bENABLE &2COMPLETE &6(&eTook &d" + startTime +"ms&6) ==="));
+        logger().info(Txt.parse("[" + this.getName() + "] &6=== &bENABLE &2COMPLETE &6(&eTook &d" + startTime +"ms&6) ==="));
     }
 
     @Override
@@ -147,41 +136,15 @@ public class RamSkills extends JavaPlugin {
         }
         XpModifierUtil.save();
         actionBar.resetActionBars();
-        log.info("Disabled");
+        logger().info("Disabled");
     }
 
     public static RamSkills getInstance() { return i; }
 
-    public static Logger logger() { return log; }
+    public static Logger logger() { return Logger.getLogger("RamSkills"); }
 
     private void registerCommands() {
-        commandManager = new PaperCommandManager(this);
-
-        commandManager.enableUnstableAPI("help");
-
-        for (Skill skill : Skills.values()) {
-            skillRegistry.register(skill.getDisplayName().toLowerCase(), skill);
-        }
-
-        commandManager.getCommandContexts().registerContext(Skill.class, c -> {
-            String input = c.popFirstArg();
-            Skill skill = skillRegistry.getSkill(input);
-            if (skill != null) {
-                return skill;
-            } else {
-                throw new InvalidCommandArgument("Skill " + input + " not found!");
-            }
-        });
-
-        commandManager.getCommandCompletions().registerAsyncCompletion("skills", context -> {
-           List<String> values = new ArrayList<>();
-           for (Skill skill : Skills.values()) {
-               values.add(skill.toString().toLowerCase());
-           }
-           return values;
-        });
-
-        commandManager.registerCommand(new SkillsCommand(this));
+    this.getCommand("skills").setExecutor(new CmdSkillsRoot(this));
     }
 
     private void registerEvents() {
@@ -220,7 +183,7 @@ public class RamSkills extends JavaPlugin {
 
     public boolean isVaultActive() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            log.warning("Vault is not installed, disabling Vault integration!");
+            logger().warning("Vault is not installed, disabling Vault integration!");
             return false;
         }
         return true;
@@ -244,8 +207,6 @@ public class RamSkills extends JavaPlugin {
     public PlayerManager getPlayerManager() {
         return playerManager;
     }
-
-    public PaperCommandManager getCommandManager() { return commandManager; }
 
     public SourceRegistry getSourceRegistry() { return sourceRegistry; }
 

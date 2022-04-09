@@ -7,7 +7,6 @@ import com.gmail.willramanand.RamSkills.stats.Stat;
 import com.gmail.willramanand.RamSkills.utils.BlockUtils;
 import org.bukkit.GameMode;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -18,8 +17,6 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
-
-import java.util.UUID;
 
 public class PlayerListener implements Listener {
 
@@ -52,9 +49,8 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void regenEvent(EntityRegainHealthEvent event) {
-        if (!(event.getEntity() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player player)) return;
 
-        Player player = (Player) event.getEntity();
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
         event.setAmount(event.getAmount() + (skillPlayer.getStatPoint(Stat.HEALTH) / 100));
     }

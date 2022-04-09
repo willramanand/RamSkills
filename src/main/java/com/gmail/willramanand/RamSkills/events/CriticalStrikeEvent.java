@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 public class CriticalStrikeEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
-    private Player player;
+    private final Player player;
     private boolean isCancelled;
 
     public CriticalStrikeEvent(Player player) {

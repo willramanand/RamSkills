@@ -36,8 +36,7 @@ public class DamageListener implements Listener {
     }
 
     public void checkToughness(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player)) return;
-        Player player = (Player) event.getEntity();
+        if (!(event.getEntity() instanceof Player player)) return;
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
 
         double damageReduction = 1 - (skillPlayer.getStatPoint(Stat.TOUGHNESS) / (skillPlayer.getStatPoint(Stat.TOUGHNESS) + 100));
@@ -57,8 +56,7 @@ public class DamageListener implements Listener {
             if (!(EnchantmentTarget.TOOL.includes(playerItem)) && !(EnchantmentTarget.WEAPON.includes(playerItem))) return;
             isValid = true;
 
-        } else if (event.getDamager() instanceof Projectile) {
-            Projectile projectile = (Projectile) event.getDamager();
+        } else if (event.getDamager() instanceof Projectile projectile) {
             if (projectile.getShooter() instanceof Player) {
                 player = (Player) projectile.getShooter();
 

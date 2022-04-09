@@ -3,14 +3,11 @@ package com.gmail.willramanand.RamSkills.listeners;
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.ui.SkillsScreen;
 import com.gmail.willramanand.RamSkills.ui.StatsScreen;
-import com.gmail.willramanand.RamSkills.ui.uiitems.InventoryItem;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.checkerframework.checker.units.qual.N;
 
 public class GUIListener implements Listener {
 

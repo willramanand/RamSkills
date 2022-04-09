@@ -40,7 +40,7 @@ public enum VBlockFace {
     SOUTH_EAST_DOWN(new Vector(1, -1, 1)),
     SOUTH_WEST_DOWN(new Vector(-1, -1, 1));
 
-    private Vector direction;
+    private final Vector direction;
 
     VBlockFace(Vector direction) {
         this.direction = direction;

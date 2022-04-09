@@ -6,36 +6,29 @@ import org.bukkit.inventory.ItemStack;
 public class ItemUtils {
 
     public static boolean isSword(ItemStack item) {
-        if (item.getType().name().contains("SWORD")) return true;
-        return false;
+        return item.getType().name().contains("SWORD");
     }
 
     public static boolean isShovel(ItemStack item) {
-        if (item.getType().name().contains("SHOVEL")) return true;
-        return false;
+        return item.getType().name().contains("SHOVEL");
     }
 
     public static boolean isAxe(ItemStack item) {
-        if (item.getType().name().contains("_AXE")) return true;
-        return false;
+        return item.getType().name().contains("_AXE");
     }
     public static boolean isPick(ItemStack item) {
-        if (item.getType().name().contains("PICKAXE")) return true;
-        return false;
+        return item.getType().name().contains("PICKAXE");
     }
 
     public static boolean isHoe(ItemStack item) {
-        if (item.getType().name().contains("HOE")) return true;
-        return false;
+        return item.getType().name().contains("HOE");
     }
 
     public static boolean isBow(ItemStack item) {
-        if (item.getType().name().contains("BOW") && !(item.getType().name().contains("BOWL"))) return true;
-        return false;
+        return item.getType().name().contains("BOW") && !(item.getType().name().contains("BOWL"));
     }
 
     public static boolean hasSilkTouch(ItemStack item) {
-        if (item.getItemMeta() != null && item.getItemMeta().hasEnchant(Enchantment.SILK_TOUCH)) return true;
-        return false;
+        return item.getItemMeta() != null && item.getItemMeta().hasEnchant(Enchantment.SILK_TOUCH);
     }
 }

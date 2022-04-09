@@ -18,7 +18,7 @@ public class AgilityPerks implements Listener {
 
     @EventHandler
     public void marathon(EntityExhaustionEvent event) {
-        if (!(event.getEntity() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player player)) return;
         if (event.getExhaustionReason() != EntityExhaustionEvent.ExhaustionReason.JUMP
                 && event.getExhaustionReason() != EntityExhaustionEvent.ExhaustionReason.JUMP_SPRINT
                 && event.getExhaustionReason() != EntityExhaustionEvent.ExhaustionReason.CROUCH
@@ -26,7 +26,6 @@ public class AgilityPerks implements Listener {
                 && event.getExhaustionReason() != EntityExhaustionEvent.ExhaustionReason.WALK_ON_WATER
                 && event.getExhaustionReason() != EntityExhaustionEvent.ExhaustionReason.WALK) return;
 
-        Player player = (Player) event.getEntity();
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
 
         float exhaustionReduction = 1.0f - ((float) skillPlayer.getSkillLevel(Skills.AGILITY) / 100.0f);

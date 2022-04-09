@@ -4,11 +4,11 @@ description: ${project.description}
 author: ${project.author}
 api-version: '1.18'
 main: com.gmail.willramanand.RamSkills.RamSkills
-depend:
 softdepend: [Vault]
 commands:
   skills:
     description: Base command for RamSkills.
+    aliases: [sk]
 permissions:
   skills.xp:
     default: op

@@ -4,7 +4,7 @@ import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.events.PlayerDataLoadEvent;
 import com.gmail.willramanand.RamSkills.skills.Skill;
 import com.gmail.willramanand.RamSkills.skills.Skills;
-import com.gmail.willramanand.RamSkills.utils.ColorUtils;
+import com.gmail.willramanand.RamSkills.utils.Txt;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -31,7 +31,7 @@ public class PlayerConfiguration {
         if (!file.exists()) {
             try {
                 file.createNewFile();
-                Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.colorMessage("&2Created player config for UUID: " + player.getUniqueId()));
+                Bukkit.getServer().getConsoleSender().sendMessage(Txt.parse("&2Created player config for UUID: " + player.getUniqueId()));
 
                 FileConfiguration config = YamlConfiguration.loadConfiguration(file);
                 SkillPlayer skillPlayer = new SkillPlayer(plugin, player);
@@ -52,11 +52,11 @@ public class PlayerConfiguration {
                     try {
                         config.save(file);
                     } catch (IOException e) {
-                        Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.colorMessage("&4Could not save player config for UUID: " + player.getUniqueId()));
+                        Bukkit.getServer().getConsoleSender().sendMessage(Txt.parse("&4Could not save player config for UUID: " + player.getUniqueId()));
                     }
                 }
             } catch (IOException e) {
-                Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.colorMessage("&4Could not create player config for UUID: " + player.getUniqueId()));
+                Bukkit.getServer().getConsoleSender().sendMessage(Txt.parse("&4Could not create player config for UUID: " + player.getUniqueId()));
             }
         }
     }
@@ -82,7 +82,7 @@ public class PlayerConfiguration {
             PlayerDataLoadEvent playerDataLoadEvent = new PlayerDataLoadEvent(skillPlayer);
             Bukkit.getPluginManager().callEvent(playerDataLoadEvent);
         } else {
-            Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.colorMessage("&bCould not load player config for UUID: " + player.getUniqueId()));
+            Bukkit.getServer().getConsoleSender().sendMessage(Txt.parse("&bCould not load player config for UUID: " + player.getUniqueId()));
             setup(player);
         }
     }
@@ -111,10 +111,10 @@ public class PlayerConfiguration {
                     plugin.getPlayerManager().removePlayerData(player.getUniqueId());
                 }
             } catch (IOException e) {
-                Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.colorMessage("&bCould not save player config for UUID: " + player.getUniqueId()));
+                Bukkit.getServer().getConsoleSender().sendMessage(Txt.parse("&bCould not save player config for UUID: " + player.getUniqueId()));
             }
         } else {
-            Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.colorMessage("&bCould not save player config for UUID: " + player.getUniqueId() + " because it does not exist!"));
+            Bukkit.getServer().getConsoleSender().sendMessage(Txt.parse("&bCould not save player config for UUID: " + player.getUniqueId() + " because it does not exist!"));
         }
         skillPlayer.setSaving(false);
     }

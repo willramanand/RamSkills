@@ -1,7 +1,7 @@
 package com.gmail.willramanand.RamSkills.stats;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
-import com.gmail.willramanand.RamSkills.utils.ColorUtils;
+import com.gmail.willramanand.RamSkills.utils.Txt;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -40,7 +40,7 @@ public class StatManager {
             statBase.put(stat, baseAmount);
             statPerLvl.put(stat, perAmount);
         }
-        Bukkit.getServer().getConsoleSender().sendMessage(ColorUtils.colorMessage("[" + plugin.getName() + "] " + "&2Loaded stat configuration."));
+        Bukkit.getServer().getConsoleSender().sendMessage(Txt.parse("[" + plugin.getName() + "] " + "&2Loaded stat configuration."));
 
     }
 

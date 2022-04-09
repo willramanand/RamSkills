@@ -29,7 +29,7 @@ public class FortuneListener implements Listener {
             Material.ACACIA_LOG, Material.DARK_OAK_LOG, Material.CRIMSON_STEM, Material.WARPED_STEM, Material.STRIPPED_OAK_LOG, Material.STRIPPED_SPRUCE_LOG, Material.STRIPPED_BIRCH_LOG,
             Material.STRIPPED_ACACIA_LOG, Material.STRIPPED_DARK_OAK_LOG, Material.STRIPPED_CRIMSON_STEM, Material.STRIPPED_WARPED_STEM);
 
-    private ImmutableList<Material> oreMats = ImmutableList.of(Material.COAL_ORE, Material.IRON_ORE, Material.NETHER_QUARTZ_ORE, Material.REDSTONE_ORE,
+    private final ImmutableList<Material> oreMats = ImmutableList.of(Material.COAL_ORE, Material.IRON_ORE, Material.NETHER_QUARTZ_ORE, Material.REDSTONE_ORE,
             Material.GOLD_ORE, Material.LAPIS_ORE, Material.DIAMOND_ORE, Material.EMERALD_ORE, Material.NETHER_GOLD_ORE, Material.COPPER_ORE, Material.DEEPSLATE_COAL_ORE,
             Material.DEEPSLATE_COPPER_ORE, Material.DEEPSLATE_IRON_ORE, Material.DEEPSLATE_GOLD_ORE, Material.DEEPSLATE_REDSTONE_ORE, Material.DEEPSLATE_EMERALD_ORE,
             Material.DEEPSLATE_LAPIS_ORE, Material.DEEPSLATE_DIAMOND_ORE);

@@ -27,7 +27,7 @@ public class TextUtil {
             source = buf.toString();
             buf.setLength(0);
         }
-        return ColorUtils.colorMessage(source);
+        return Txt.parse(source);
     }
 
     public static String replace(String source, String os1, String ns1, String os2, String ns2) {

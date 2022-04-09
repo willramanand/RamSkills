@@ -21,9 +21,8 @@ public class AlchemyPerks implements Listener {
     @EventHandler
     public void increaseDuration(EntityPotionEffectEvent event) {
         if (event.getCause() != EntityPotionEffectEvent.Cause.POTION_DRINK && event.getCause() != EntityPotionEffectEvent.Cause.POTION_SPLASH) return;
-        if (!(event.getEntity() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player player)) return;
         if (event.getNewEffect() == null) return;
-        Player player = (Player) event.getEntity();
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
 
         double increase = 1 + ((skillPlayer.getSkillLevel(Skills.ALCHEMY) * 2.0 )/ 100.0);

@@ -21,9 +21,8 @@ public class AgilityLeveler extends SkillLeveler implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onFall(EntityDamageEvent event) {
         if (event.getCause() != EntityDamageEvent.DamageCause.FALL) return;
-        if (!(event.getEntity() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player player)) return;
 
-        Player player = (Player) event.getEntity();
         if (blockXpGainPlayer(player)) return;
         if (event.getFinalDamage() > player.getHealth()) return;
         plugin.getLeveler().addXp(player, Skills.AGILITY, event.getOriginalDamage(EntityDamageEvent.DamageModifier.BASE) * getXp(player, AgilitySource.FALL_DAMAGE));

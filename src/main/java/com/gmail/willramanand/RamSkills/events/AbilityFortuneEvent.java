@@ -10,10 +10,10 @@ import org.jetbrains.annotations.NotNull;
 public class AbilityFortuneEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
-    private Player player;
-    private Material type;
-    private Location blockLoc;
-    private int blocksBroken;
+    private final Player player;
+    private final Material type;
+    private final Location blockLoc;
+    private final int blocksBroken;
     private boolean isCancelled;
 
     public AbilityFortuneEvent(Player player, Material type, Location blockLoc, int blocksBroken) {

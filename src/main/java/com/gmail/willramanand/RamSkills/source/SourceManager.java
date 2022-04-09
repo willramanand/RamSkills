@@ -1,7 +1,7 @@
 package com.gmail.willramanand.RamSkills.source;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
-import com.gmail.willramanand.RamSkills.utils.ColorUtils;
+import com.gmail.willramanand.RamSkills.utils.Txt;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -47,13 +47,13 @@ public class SourceManager {
                 config.set("sources." + path, 5.0);
                 try {
                     config.save(file);
-                    plugin.logger().info(ColorUtils.colorMessage("&2Added the new source!"));
+                    RamSkills.logger().info(Txt.parse("&2Added the new source!"));
                 } catch (IOException exception) {
-                    plugin.logger().info(ColorUtils.colorMessage("&4Failed to add new source!"));
+                    RamSkills.logger().info(Txt.parse("&4Failed to add new source!"));
                 }
             }
         }
-        RamSkills.logger().info(ColorUtils.colorMessage("[" + plugin.getName() + "] &eLoaded &d" + sourcesLoaded + "&e sources &d"
+        RamSkills.logger().info(Txt.parse("[" + plugin.getName() + "] &eLoaded &d" + sourcesLoaded + "&e sources &d"
                 + (System.currentTimeMillis() - start) + "&ems"));
     }
 

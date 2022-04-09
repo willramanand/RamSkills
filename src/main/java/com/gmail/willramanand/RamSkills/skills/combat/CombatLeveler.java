@@ -22,20 +22,16 @@ public class CombatLeveler extends SkillLeveler implements Listener {
         LivingEntity e = event.getEntity();
 
         if (e.getKiller() == null) return;
-        if (!(e.getLastDamageCause() instanceof EntityDamageByEntityEvent)) return;
+        if (!(e.getLastDamageCause() instanceof EntityDamageByEntityEvent ee)) return;
 
-        EntityDamageByEntityEvent ee = (EntityDamageByEntityEvent) e.getLastDamageCause();
-        if (ee.getDamager() instanceof Player) {
+        if (ee.getDamager() instanceof Player p) {
             EntityType type = e.getType();
-            Player p = (Player) ee.getDamager();
             if (blockXpGainPlayer(p)) return;
             if (e.equals(p)) return;
             plugin.getLeveler().addXp(p, Skills.COMBAT, getXp(p, CombatSource.valueOf(type.toString())));
-        } else if (ee.getDamager() instanceof Projectile) {
+        } else if (ee.getDamager() instanceof Projectile projectile) {
             EntityType type = e.getType();
-            Projectile projectile = (Projectile) ee.getDamager();
-            if (!(projectile.getShooter() instanceof Player)) return;
-            Player p = (Player) projectile.getShooter();
+            if (!(projectile.getShooter() instanceof Player p)) return;
             if (blockXpGainPlayer(p)) return;
             if (e.equals(p)) return;
             plugin.getLeveler().addXp(p, Skills.COMBAT, getXp(p, CombatSource.valueOf(type.toString())));
@@ -49,9 +45,8 @@ public class CombatLeveler extends SkillLeveler implements Listener {
         Player player = null;
         if (event.getDamager() instanceof Player) {
             player = (Player) event.getDamager();
-        } if (event.getDamager() instanceof Projectile
+        } if (event.getDamager() instanceof Projectile projectile
                 && ((Projectile) event.getDamager()).getShooter() instanceof Player) {
-            Projectile projectile = (Projectile) event.getDamager();
             player = (Player) projectile.getShooter();
         }
 
@@ -60,8 +55,7 @@ public class CombatLeveler extends SkillLeveler implements Listener {
         if (event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK && event.getCause() != EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK
                 && event.getCause() != EntityDamageEvent.DamageCause.PROJECTILE)
             return;
-        if (event.getEntity() instanceof LivingEntity) {
-            LivingEntity entity = (LivingEntity) event.getEntity();
+        if (event.getEntity() instanceof LivingEntity entity) {
             EntityType type = entity.getType();
             if (blockXpGainPlayer(player)) return;
             if (entity.equals(player)) return;

@@ -3,7 +3,7 @@ package com.gmail.willramanand.RamSkills.skills.cooking;
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.skills.Skills;
-import com.gmail.willramanand.RamSkills.utils.ColorUtils;
+import com.gmail.willramanand.RamSkills.utils.Txt;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,16 +32,15 @@ public class CookingPerks implements Listener {
 
     @EventHandler
     public void ironStomach(EntityPotionEffectEvent event) {
-        if (!(event.getEntity() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player player)) return;
         if (event.getCause() != EntityPotionEffectEvent.Cause.FOOD) return;
-        Player player = (Player) event.getEntity();
         if (event.getNewEffect() == null) return;
         if (event.getNewEffect().getType() != PotionEffectType.HUNGER) return;
 
         SkillPlayer skillPlayer = plugin.getPlayerManager().getPlayerData(player);
 
         if (skillPlayer.getSkillLevel(Skills.COOKING) < 25) return;
-        player.sendMessage(ColorUtils.colorMessage("&dIron Stomach &eprotects you!"));
+        player.sendMessage(Txt.parse("&dIron Stomach &eprotects you!"));
 
         new BukkitRunnable() {
             @Override
