@@ -17,7 +17,9 @@ public enum ExcavationSource implements Source {
     PODZOL,
     SOUL_SOIL,
     RED_SAND,
-    ROOTED_DIRT;
+    ROOTED_DIRT,
+    MUD
+    ;
 
     @Override
     public Skill getSkill() {

@@ -52,6 +52,10 @@ public enum MiningSource implements Source {
     ICE(true),
     PACKED_ICE(true),
     BLUE_ICE(true),
+    SCULK,
+    SCULK_VEIN,
+    SCULK_CATALYST,
+    SCULK_SHRIEKER
     ;
 
     private final boolean requiresSilkTouch;

@@ -18,12 +18,16 @@ sources:
     sweet_berry_bush: 2.5
     glow_berries: 4.5
   woodcutting:
+    mangrove_log: 10.0
+    mangrove_root: 10.0
+    muddy_mangrove_root: 10.0
     oak_log: 10.0
     spruce_log: 10.0
     birch_log: 10.0
     jungle_log: 10.0
     acacia_log: 10.0
     dark_oak_log: 10.0
+    mangrove_leaves: 10.0
     oak_leaves: 1.0
     spruce_leaves: 1.0
     birch_leaves: 1.0
@@ -41,6 +45,10 @@ sources:
     azalea_leaves: 1.5
     flowering_azalea_leaves: 2.0
   mining:
+    sculk: 5.0
+    sculk_vein: 10.0
+    sculk_catalyst: 20.0
+    sculk_shrieker: 100.0
     stone: 2.0
     cobblestone: 2.0
     andesite: 2.5
@@ -98,6 +106,7 @@ sources:
     rare: 500.0
     epic: 1000.0
   excavation:
+    mud: 3.0
     dirt: 3.0
     grass_block: 7.0
     sand: 4.0
@@ -114,6 +123,10 @@ sources:
     mob_damage: 5
     player_damage: 10
   combat:
+    frog: 2.0
+    allay: 5.0
+    tadpole: 0.2
+    warden: 10000.0
     player: 50.0
     bat: 1.0
     cat: 1.0

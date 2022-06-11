@@ -5,6 +5,8 @@ import com.gmail.willramanand.RamSkills.skills.Skills;
 import com.gmail.willramanand.RamSkills.source.Source;
 
 public enum CombatSource implements Source {
+    ALLAY,
+    FROG,
     PLAYER,
     BAT,
     CAT,
@@ -66,8 +68,10 @@ public enum CombatSource implements Source {
     SKELETON,
     SLIME,
     STRAY,
+    TADPOLE,
     VEX,
     VINDICATOR,
+    WARDEN,
     WITCH,
     WITHER_SKELETON,
     ZOGLIN,

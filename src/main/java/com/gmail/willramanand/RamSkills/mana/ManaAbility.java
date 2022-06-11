@@ -167,7 +167,7 @@ public class ManaAbility implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void pickAbility(BlockBreakEvent event) {
-        if (!(ItemUtils.isPick(event.getPlayer().getInventory().getItemInMainHand())) && !(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(new NamespacedKey(plugin, "vein_miner_applicable")))) return;
+        if (!(ItemUtils.isPick(event.getPlayer().getInventory().getItemInMainHand()))) return;
         if (!(validVein(event.getBlock().getType()))) return;
         if (!(event.getPlayer().getMetadata("readied").get(0).asBoolean())) return;
 

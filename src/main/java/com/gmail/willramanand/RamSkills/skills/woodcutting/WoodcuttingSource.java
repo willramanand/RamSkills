@@ -27,6 +27,10 @@ public enum WoodcuttingSource implements Source {
     FLOWERING_AZALEA,
     AZALEA_LEAVES,
     FLOWERING_AZALEA_LEAVES,
+    MANGROVE_LOG,
+    MANGROVE_ROOTS,
+    MUDDY_MANGROVE_ROOTS,
+    MANGROVE_LEAVES
     ;
     @Override
     public Skill getSkill() {
