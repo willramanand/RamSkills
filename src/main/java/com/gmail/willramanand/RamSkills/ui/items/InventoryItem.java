@@ -1,4 +1,4 @@
-package com.gmail.willramanand.RamSkills.ui.uiitems;
+package com.gmail.willramanand.RamSkills.ui.items;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.mana.Ability;

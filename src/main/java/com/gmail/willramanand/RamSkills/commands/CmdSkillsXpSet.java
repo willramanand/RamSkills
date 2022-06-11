@@ -14,6 +14,7 @@ public class CmdSkillsXpSet extends SkillCommand {
     public CmdSkillsXpSet(RamSkills plugin) {
         super(plugin, true, false, "skills.xp", 3, 3);
         this.aliases.addAll(Arrays.asList("xpset", "setxp"));
+        this.helpText = "Allows admins to set the xp of players for certain skills.";
     }
 
     @Override

@@ -16,6 +16,7 @@ public class CmdSkillsHelp extends SkillCommand {
         super(plugin, true, false, 0, 0);
         this.root = root;
         this.aliases.addAll(Arrays.asList("help", "h"));
+        this.helpText = "Display the helps for commands related to RamSkills.";
     }
 
     @Override

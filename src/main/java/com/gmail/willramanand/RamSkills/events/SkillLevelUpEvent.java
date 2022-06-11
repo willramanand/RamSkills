@@ -14,7 +14,6 @@ public class SkillLevelUpEvent extends Event {
     private final Skill skill;
     private final int skillLvl;
 
-
     public SkillLevelUpEvent(Player player, Skill skill, int skillLvl) {
         this.player = player;
         this.skill = skill;
@@ -32,7 +31,6 @@ public class SkillLevelUpEvent extends Event {
     public int getSkillLvl() {
         return skillLvl;
     }
-
 
     @Override
     public @NotNull HandlerList getHandlers() {

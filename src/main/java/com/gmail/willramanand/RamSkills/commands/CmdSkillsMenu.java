@@ -13,6 +13,7 @@ public class CmdSkillsMenu extends SkillCommand {
     public CmdSkillsMenu(RamSkills plugin) {
         super(plugin, true, true, 0, 0);
         this.aliases.addAll(Arrays.asList("menu", "m"));
+        this.helpText = "Display a menu showing the information on your skills.";
     }
 
     @Override

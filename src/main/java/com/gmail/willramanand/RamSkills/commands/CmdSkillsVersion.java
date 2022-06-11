@@ -13,6 +13,7 @@ public class CmdSkillsVersion extends SkillCommand {
     public CmdSkillsVersion(RamSkills plugin) {
         super(plugin, true, false, 0, 0);
         this.aliases.addAll(Arrays.asList("version", "v"));
+        this.helpText = "Displays the version information for the RamSkills plugin.";
     }
 
     @Override

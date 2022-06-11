@@ -3,7 +3,7 @@ package com.gmail.willramanand.RamSkills.ui;
 import com.gmail.willramanand.RamSkills.RamSkills;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.stats.Stat;
-import com.gmail.willramanand.RamSkills.ui.uiitems.InventoryItem;
+import com.gmail.willramanand.RamSkills.ui.items.InventoryItem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;

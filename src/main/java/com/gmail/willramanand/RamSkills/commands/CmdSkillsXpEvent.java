@@ -14,6 +14,7 @@ public class CmdSkillsXpEvent extends SkillCommand {
     public CmdSkillsXpEvent(RamSkills plugin) {
         super(plugin, true, false, "skills.xpevent", 1, 1);
         this.aliases.addAll(Collections.singletonList("xpevent"));
+        this.helpText = "Allows admins to create xp events.";
     }
 
     @Override

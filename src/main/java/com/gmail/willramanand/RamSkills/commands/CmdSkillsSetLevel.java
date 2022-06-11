@@ -1,6 +1,7 @@
 package com.gmail.willramanand.RamSkills.commands;
 
 import com.gmail.willramanand.RamSkills.RamSkills;
+import com.gmail.willramanand.RamSkills.events.SkillLevelUpEvent;
 import com.gmail.willramanand.RamSkills.player.SkillPlayer;
 import com.gmail.willramanand.RamSkills.skills.Skill;
 import org.bukkit.command.CommandSender;
@@ -14,6 +15,7 @@ public class CmdSkillsSetLevel extends SkillCommand {
     public CmdSkillsSetLevel(RamSkills plugin) {
         super(plugin, true, false, "skills.lvl", 3, 3);
         this.aliases.add("setlevel");
+        this.helpText = "Allows admins to set the level of skills for players.";
     }
 
     @Override

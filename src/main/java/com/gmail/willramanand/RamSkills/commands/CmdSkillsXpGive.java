@@ -14,6 +14,7 @@ public class CmdSkillsXpGive extends SkillCommand {
     public CmdSkillsXpGive(RamSkills plugin) {
         super(plugin, true, false, "skills.xp", 3, 3);
         this.aliases.addAll(Arrays.asList("xpgive", "givexp"));
+        this.helpText = "Allows admins to give players xp to certain skills.";
     }
 
     @Override

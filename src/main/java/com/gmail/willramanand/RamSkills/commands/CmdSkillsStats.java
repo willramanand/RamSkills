@@ -13,6 +13,7 @@ public class CmdSkillsStats extends SkillCommand {
     public CmdSkillsStats(RamSkills plugin) {
         super(plugin, true, true, 0, 0);
         this.aliases.addAll(Collections.singletonList("stats"));
+        this.helpText = "Displays a menu which shows information on your stats.";
     }
 
     @Override
